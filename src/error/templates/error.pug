@@ -1,0 +1,10 @@
+.error
+	link(href='https://fonts.googleapis.com/css?family=Muli:400', rel='stylesheet')
+	link(href='https://fonts.googleapis.com/css?family=Passion+One', rel='stylesheet')
+	.error-bg
+	.error-content
+		.error-code
+			h1 {{ errorCode }}
+		h2 Oops! {{ errorMsg }}
+		a(href='/', (click)='tryAgain()')
+			| Back To Homepage

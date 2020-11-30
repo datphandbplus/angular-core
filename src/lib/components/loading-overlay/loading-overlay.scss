@@ -1,0 +1,40 @@
+@import '../../scss/partials/variable';
+@import '../../scss/partials/mixin';
+
+.loading-overlay {
+	position: relative;
+
+	&__visible {
+		min-height: 170px;
+
+		.loading-overlay__overlay {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		background-color: rgba($white, .4);
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		visibility: hidden;
+		opacity: 0;
+
+		.loading-overlay__icon {
+			&:not(.loading-overlay__top) {
+				@include middle();
+			}
+
+			&.loading-overlay__top {
+				@include middle();
+				top: 50px !important;
+			}
+		}
+	}
+}

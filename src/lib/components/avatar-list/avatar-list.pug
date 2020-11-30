@@ -1,0 +1,28 @@
+.avatar-list(
+	*ngIf='items?.length || alwaysVisible',
+	[ngClass]='defaultOptions?.componentClass',
+	[class.avatar-list__board]='board',
+	[style.minHeight]='board && boardHeight ? boardHeight + "px" : "inherit"')
+	.layout-row.layout-wrap.layout-fixer-5
+		.p-5.layout-colum.layout-align-center-center.pos-relative(
+			*ngFor='let item of handledItems',
+			[matTooltip]='item?.full_name || "N/A"')
+			.avatar-list__count-box(
+				*ngIf='item?.is_count_item',
+				[style.width]='size + "px"',
+				[style.maxWidth]='size + "px"',
+				[style.minWidth]='size + "px"',
+				[style.height]='size + "px"',
+				[style.maxHeight]='size + "px"',
+				[style.minHeight]='size + "px"',
+				[style.fontSize]='( size / 2.5 ) + "px"')
+				| {{ ( ( item?.count || 0 ) | commas ) + "+" }}
+			avatar-box(
+				*ngIf='!item?.is_count_item',
+				[size]='size',
+				[unique]='item?.id',
+				[source]='item?.avatar',
+				[title]='item?.full_name',
+				[lazy]='lazy')
+			.avatar-list__disabled-box(*ngIf='item?.is_disabled')
+				i.fas.fa-ban.text-warn([style.fontSize]='( size / 1.5 ) + "px"')

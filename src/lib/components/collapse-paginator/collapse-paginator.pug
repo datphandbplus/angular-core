@@ -1,0 +1,17 @@
+.collapse-paginator.layout-row.layout-align-end-center(
+	[ngClass]='defaultOptions?.componentClass')
+	mat-paginator(
+		[ngClass]='defaultOptions?.paginatorClass',
+		[pageIndex]='pageIndex',
+		[pageSize]='pageSize',
+		[pageSizeOptions]='pageSizeOptions',
+		(page)='onPageChange( $event )',
+		[showFirstLastButtons]='showFirstLastButtons')
+	mat-paginator(
+		#__paginator,
+		hidePageSize='true',
+		[ngClass]='defaultOptions?.paginatorClass',
+		[pageIndex]='pageIndex',
+		[pageSize]='pageSize * 2',
+		[pageSizeOptions]='realPageSizeOptions',
+		[showFirstLastButtons]='showFirstLastButtons')

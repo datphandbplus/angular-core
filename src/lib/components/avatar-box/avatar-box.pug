@@ -1,0 +1,25 @@
+.avatar-box(
+	[ngClass]='defaultOptions?.componentClass',
+	[style.width]='size + "px"',
+	[style.maxWidth]='size + "px"',
+	[style.minWidth]='size + "px"',
+	[style.height]='size + "px"',
+	[style.maxHeight]='size + "px"',
+	[style.minHeight]='size + "px"',
+	[class.no-avatar]='!displayAvatar',
+	[style.backgroundColor]='avatarBackground')
+	ng-template([ngIf]='displayAvatar')
+		img(
+			*ngIf='lazy',
+			[defaultImage]='defaultAvatar',
+			[errorImage]='defaultAvatar',
+			[lazyLoad]='displayAvatar')
+		img(
+			*ngIf='!lazy',
+			[src]='displayAvatar')
+	span(
+		*ngIf='!displayAvatar',
+		[style.fontSize]='( size / 2 ) + "px"',
+		[style.lineHeight]='( size / 2 ) + "px"')
+		| {{ title?.trim()?.substring( 0, 1 ) | uppercase }}
+

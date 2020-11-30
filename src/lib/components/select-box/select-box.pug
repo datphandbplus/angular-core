@@ -1,0 +1,124 @@
+mixin option
+	.layout-row.layout-align-start-center
+		avatar-box.mr-5(
+			*ngIf='fieldImage',
+			size='28',
+			[source]='item[ fieldImage ]',
+			[defaultAvatar]='defaultImage',
+			[title]='item[ fieldName ]')
+		ng-template([ngIf]='!translated')
+			.line-height-14
+				| {{ item?.__name || item[ fieldName ] || "N/A" }}&nbsp;
+				.font-size-10(*ngIf='fieldSubName')
+					| {{ item[ fieldSubName ] || "N/A" }}
+		ng-template([ngIf]='translated')
+			.line-height-14
+				| {{ item?.__name || ( item[ fieldName ] | translate ) || "N/A" }}&nbsp;
+				.font-size-10(*ngIf='fieldSubName')
+					| {{ item[ fieldSubName ] | translate }}
+
+mixin field
+	mat-label(*ngIf='label')
+		| {{ label }}
+	ng-template([ngIf]='readonly')
+		input(
+			matInput,
+			[disableControl]='disableControl || disabled',
+			[value]='displayValue || ""',
+			[placeholder]='isEmptySelected ? emptyLabel : placeholder',
+			[formControl]='formControl',
+			[required]='required',
+			ngDefaultControl,
+			readonly)
+	ng-template([ngIf]='!readonly')
+		mat-select(
+			matInput,
+			[panelClass]='[ panelClass, "select-box__panel" ]',
+			[multiple]='multiple',
+			[disableControl]='disableControl || disabled',
+			[(ngModel)]='ngModel',
+			(ngModelChange)='ngModelChange?.emit( ngModel )',
+			(selectionChange)='optionChange( $event )',
+			[placeholder]='isEmptySelected ? emptyLabel : placeholder',
+			[formControl]='formControl',
+			(openedChange)='$event && !loaded && loadData(); openedChange?.emit( $event );',
+			[required]='required',
+			ngDefaultControl)
+			ngx-mat-select-search.select-box__search(
+				[placeholderLabel]='"GENERAL.PLACEHOLDERS.SEARCH" | translate',
+				[noEntriesFoundLabel]='"GENERAL.LABELS.NOT_FOUND" | translate',
+				[formControl]='filterCtrl')
+			mat-select-trigger
+				ng-template([ngIf]='displayImage')
+					.select-box__display-image
+						avatar-box(
+							size='24',
+							[lazy]='false',
+							[source]='displayImage',
+							[title]='displayValue',
+							[defaultAvatar]='defaultImage')
+						| {{ displayValue }}
+				ng-template([ngIf]='!displayImage')
+					| {{ displayValue }}
+			loading-overlay([visible]='!loaded')
+				mat-checkbox.select-box__checkbox(
+					matRipple,
+					matRippleColor='rgba(0, 0, 0, .7)',
+					*ngIf='multiple && handledItems?.length && !filterCtrl?.value?.length',
+					color='primary',
+					[(ngModel)]='isSelectAll',
+					[checked]='handledItems?.length === ngModel?.length',
+					(change)='toggleSelectAll()')
+					| {{ "GENERAL.LABELS.SELECT_ALL" | translate }}
+					| ({{ ( handledItems?.length || 0 ) | commas }} {{ "GENERAL.LABELS.ITEMS" | translate }})
+				mat-option(
+					empty,
+					*ngIf='!loaded || emptyLabel',
+					[value]='emptyValue')
+					.layout-row.layout-align-start-center
+						avatar-box.mr-5(
+							*ngIf='emptyImage',
+							size='28',
+							[source]='emptyImage',
+							[defaultAvatar]='defaultImage')
+						| {{ emptyLabel }}
+				ng-template([ngIf]='groups')
+					mat-option(
+						*ngFor='let item of handledGroupItems?.no_groups',
+						[class.hide]='isHiddenItem( item )',
+						[disabled]='isDisabledItem( item )',
+						[value]='item[ fieldKey ]')
+						+option
+					mat-optgroup(
+						*ngFor='let group of groups',
+						[label]='group?.name || "N/A"')
+						mat-option(
+							*ngFor='let item of handledGroupItems?.groups[ group?.id ]',
+							[class.hide]='isHiddenItem( item )',
+							[disabled]='isDisabledItem( item )',
+							[value]='item[ fieldKey ]')
+							+option
+				ng-template([ngIf]='!groups')
+					mat-option(
+						*ngFor='let item of filtered',
+						[class.hide]='isHiddenItem( item )',
+						[disabled]='isDisabledItem( item )',
+						[value]='item[ fieldKey ]')
+						+option
+
+.select-box.layout-column.flex-noshirnk([ngClass]='defaultOptions?.componentClass')
+	ng-template([ngIf]='noFormField')
+		+field
+
+	ng-template([ngIf]='!noFormField')
+		mat-form-field(
+			[class.select-box__empty-selected]='isEmptySelected',
+			[class.select-box__no-error-spacing]='noErrorSpacing',
+			[floatLabel]='floatLabel',
+			[appearance]='appearance',
+			[ngClass]='formFieldClass')
+			+field
+			mat-error
+				error-message(
+					[label]='label',
+					[control]='formControl')

@@ -1,0 +1,39 @@
+.ngx-popover {
+	@include transition;
+	position: absolute;
+	visibility: hidden;
+	z-index: 999;
+	background-color: $white;
+	min-width: 50px;
+	max-width: 500px;
+	opacity: 0;
+	box-shadow: 2px 2px 10px 0 rgba($black, .3);
+	border-radius: 5px;
+}
+
+.mat-dialog {
+	overflow-y: auto;
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba($black, .5);
+	}
+
+	.mat-dialog-container {
+		z-index: 1;
+	}
+
+	.mat-dialog-actions {
+		min-height: 68px;
+	}
+}
+
+.mat-tooltip {
+	white-space: pre-line;
+	line-height: 15px;
+}

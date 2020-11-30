@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+        "@ngx-translate/core": "core$1",
+        "ngx-toastr": "ngxToastr",
+        "jquery": "_$",
+        "ngx-cookie": "ngxCookie",
+        "crypto-js": "cryptoJs",
+        "underscore": "_",
+        "moment-timezone": "moment",
+        "socket.io-client": "io",
+        "ngx-mat-select-search": "ngxMatSelectSearch",
+        "ng-lazyload-image": "ngLazyloadImage",
+        "saturn-datepicker": "saturnDatepicker",
+        "ngx-perfect-scrollbar": "ngxPerfectScrollbar"
+    }
+  },
+  "whitelistedNonPeerDependencies": ["."]
+}

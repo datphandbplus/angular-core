@@ -1,0 +1,15 @@
+.collapse-paginator {
+	.mat-paginator {
+		&:first-child .mat-paginator-range-actions {
+			display: none;
+		}
+
+		&:first-child .mat-paginator-container {
+			padding-right: 0;
+		}
+
+		&:last-child .mat-paginator-container {
+			padding-left: 0;
+		}
+	}
+}

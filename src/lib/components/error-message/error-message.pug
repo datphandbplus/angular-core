@@ -1,0 +1,4 @@
+mat-error.error-message(
+	*ngFor='let error of getFieldErrors()',
+	[ngClass]='defaultOptions?.componentClass',
+	[innerHTML]='error')

@@ -1,0 +1,15 @@
+export const CONSTANTS = {
+    LOCALE: 'en-gb',
+    ALLOW_FILE_SIZE: 2097152,
+    ALLOW_IMAGE_FILES: ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'],
+    ALLOW_DOCUMENT_FILES: [
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/ms-excel',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/pdf',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    ],
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RhbnRzLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1jb3JlLyIsInNvdXJjZXMiOlsibGliL3Jlc291cmNlcy9jb25zdGFudHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE1BQU0sU0FBUyxHQUFRO0lBQzdCLE1BQU0sRUFBTSxPQUFPO0lBQ25CLGVBQWUsRUFBSSxPQUFPO0lBQzFCLGlCQUFpQixFQUFHLENBQUUsV0FBVyxFQUFFLFlBQVksRUFBRSxXQUFXLEVBQUUsV0FBVyxDQUFFO0lBQzNFLG9CQUFvQixFQUFFO1FBQ3JCLG9CQUFvQjtRQUNwQix5RUFBeUU7UUFDekUsc0JBQXNCO1FBQ3RCLG1FQUFtRTtRQUNuRSxpQkFBaUI7UUFDakIsK0JBQStCO1FBQy9CLDJFQUEyRTtLQUMzRTtDQUNELENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgQ09OU1RBTlRTOiBhbnkgPSB7XG5cdExPQ0FMRVx0XHRcdFx0OiAnZW4tZ2InLFxuXHRBTExPV19GSUxFX1NJWkVcdFx0OiAyMDk3MTUyLCAvLyAyIG1iXG5cdEFMTE9XX0lNQUdFX0ZJTEVTXHQ6IFsgJ2ltYWdlL2pwZycsICdpbWFnZS9qcGVnJywgJ2ltYWdlL2dpZicsICdpbWFnZS9wbmcnIF0sXG5cdEFMTE9XX0RPQ1VNRU5UX0ZJTEVTOiBbXG5cdFx0J2FwcGxpY2F0aW9uL21zd29yZCcsIC8vIGRvY1xuXHRcdCdhcHBsaWNhdGlvbi92bmQub3BlbnhtbGZvcm1hdHMtb2ZmaWNlZG9jdW1lbnQud29yZHByb2Nlc3NpbmdtbC5kb2N1bWVudCcsIC8vIGRvY3Ncblx0XHQnYXBwbGljYXRpb24vbXMtZXhjZWwnLCAvLyB4bHNcblx0XHQnYXBwbGljYXRpb24vdm5kLm9wZW54bWxmb3JtYXRzLW9mZmljZWRvY3VtZW50LnNwcmVhZHNoZWV0bWwuc2hlZXQnLCAvLyB4bHN4XG5cdFx0J2FwcGxpY2F0aW9uL3BkZicsIC8vIHBkZlxuXHRcdCdhcHBsaWNhdGlvbi92bmQubXMtcG93ZXJwb2ludCcsIC8vIHBwdFxuXHRcdCdhcHBsaWNhdGlvbi92bmQub3BlbnhtbGZvcm1hdHMtb2ZmaWNlZG9jdW1lbnQucHJlc2VudGF0aW9ubWwucHJlc2VudGF0aW9uJywgLy8gcHB0eFxuXHRdLFxufTtcbiJdfQ==

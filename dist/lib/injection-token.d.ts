@@ -1,0 +1,12 @@
+import { InjectionToken } from '@angular/core';
+export declare const DEFAULT_EXPIRE_DAYS: InjectionToken<number>;
+export declare const DEFAULT_STORAGE_HASH_KEY: InjectionToken<string>;
+export declare const DEFAULT_AUTHORIZED_KEY: InjectionToken<string>;
+export declare const DEFAULT_FCM_PUBLIC_KEY: InjectionToken<string>;
+export declare const DEFAULT_SERVER_API_URL: InjectionToken<string>;
+export declare const DEFAULT_SERVER_WEBSOCKET_URL: InjectionToken<string>;
+export declare const DEFAULT_APP_NAME: InjectionToken<string>;
+export declare const DEFAULT_APP_LOGO: InjectionToken<string>;
+export declare const DEFAULT_APP_URL: InjectionToken<string>;
+export declare const DEFAULT_TIMEZONE: InjectionToken<string>;
+export declare const DEFAULT_LOCALE: InjectionToken<string>;

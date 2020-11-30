@@ -1,0 +1,27 @@
+.dialog-confirm([ngClass]='defaultOptions?.componentClass')
+	h1(
+		matDialogTitle,
+		[innerHtml]='data?.title')
+	div(
+		matDialogContent,
+		[innerHtml]='data?.content')
+	div(
+		matDialogActions,
+		align='end')
+		button(
+			mat-raised-button,
+			[color]='data?.actions?.no?.color',
+			(click)='onNoClick()')
+			| {{ data?.actions?.no?.name || ( "GENERAL.LABELS.NO_THANKS" | translate ) }}
+		button(
+			mat-raised-button,
+			*ngIf='data?.actions?.other',
+			[color]='data?.actions?.other?.color || "accent"',
+			(click)='onOtherClick()')
+			| {{ data?.actions?.other?.name || ( "GENERAL.LABELS.OTHER" | translate ) }}
+		button(
+			mat-raised-button,
+			[color]='data?.actions?.yes?.color || "primary"',
+			(click)='onYesClick()',
+			cdkFocusInitial)
+			| {{ data?.actions?.yes?.name || ( "GENERAL.LABELS.OK" | translate ) }}

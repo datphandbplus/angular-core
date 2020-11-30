@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of tvmaze
+ */
+export * from './error/index';
+export * from './lib/index';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2FuZ3VsYXItY29yZS8iLCJzb3VyY2VzIjpbInB1YmxpY19hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLGVBQWUsQ0FBQztBQUM5QixjQUFjLGFBQWEsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgdHZtYXplXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9lcnJvci9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9pbmRleCc7XG4iXX0=

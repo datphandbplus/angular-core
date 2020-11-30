@@ -1,0 +1,26 @@
+mat-form-field.auto-complete(
+	[ngClass]='defaultOptions?.componentClass',
+	[floatLabel]='floatLabel',
+	[appearance]='appearance')
+	mat-label(*ngIf='label')
+		| {{ label }}
+	input(
+		matInput,
+		[matAutocomplete]='auto',
+		[(ngModel)]='ngModel',
+		[placeholder]='emptyLabel || placeholder',
+		[disableControl]='disableControl || disabled',
+		(ngModelChange)='ngModelChange?.emit( ngModel )',
+		[formControl]='formControl',
+		[readonly]='readonly',
+		[required]='required',
+		ngDefaultControl)
+	mat-autocomplete(#auto='matAutocomplete')
+		mat-option(
+			*ngFor='let item of filteredData | async',
+			[value]='item[ fieldKey ]')
+			| {{ item[ fieldName ] }}
+	mat-error
+		error-message(
+			[label]='label',
+			[control]='formControl')

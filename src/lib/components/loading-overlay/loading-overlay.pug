@@ -1,0 +1,7 @@
+.loading-overlay(
+	[ngClass]='defaultOptions?.componentClass',
+	[class.loading-overlay__visible]='visible')
+	.loading-overlay__overlay
+		.loading-overlay__icon([class.loading-overlay__top]='iconOnTop')
+			mat-spinner([diameter]='iconSize')
+	ng-content
