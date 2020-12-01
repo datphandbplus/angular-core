@@ -8,11 +8,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { LazyLoadImageModule, intersectionObserverPreset } from 'ng-lazyload-image';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { Ng5SliderModule } from 'ng5-slider';
 import {
 	NgModule, APP_INITIALIZER,
 	Injector, ModuleWithProviders
 } from '@angular/core';
-import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
+import {
+	TranslateModule, TranslateLoader,
+	MissingTranslationHandler, TranslateService
+} from '@ngx-translate/core';
 import {
 	DateAdapter, MAT_DATE_FORMATS,
 	MAT_DATE_LOCALE, MAT_DIALOG_DEFAULT_OPTIONS
@@ -31,18 +35,23 @@ import { CustomMissingTranslationHandler } from './loaders/custom-missing-transl
 import { MultiTranslateHttpLoader } from './loaders/multi-translate-http-loader';
 
 /* Component Inject (Do not remove) */
+import { ActionBoxComponent, ActionButtonComponent } from './components/action-box/action-box.component';
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { AvatarBoxComponent } from './components/avatar-box/avatar-box.component';
 import { AvatarListComponent } from './components/avatar-list/avatar-list.component';
 import { CollapsePaginatorComponent } from './components/collapse-paginator/collapse-paginator.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { FilterBoxComponent } from './components/filter-box/filter-box.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { SelectBoxComponent } from './components/select-box/select-box.component';
+import { SideBarComponent, SideBarItemComponent } from './components/sidebar/sidebar.component';
+import { StatusBoxComponent } from './components/status-box/status-box.component';
 /* End Component Inject (Do not remove) */
 
 /* Directive Inject (Do not remove) */
 import { AdjustFontsizeDirective } from './directives/adjust-fontsize.directive';
+import { DetectScrollDirective } from './directives/detect-scroll.directive';
 import { DisableControlDirective } from './directives/disable-control.directive';
 import { EqualValidatorDirective } from './directives/equal-validator.directive';
 import { FullscreenDirective } from './directives/fullscreen.directive';
@@ -57,7 +66,9 @@ import { UploadFileDirective } from './directives/upload-file.directive';
 /* Pipe Inject (Do not remove) */
 import { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
 import { CommasPipe } from './pipes/commas.pipe';
+import { FileSizeFormatterPipe } from './pipes/file-size-formatter.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ImagePipe } from './pipes/image.pipe';
 import { ItemObjectPipe } from './pipes/item-object.pipe';
 import { KFormatterPipe } from './pipes/k-formatter.pipe';
 import { MaxPipe } from './pipes/max.pipe';
@@ -80,20 +91,12 @@ import { NumberService } from './services/number.service';
 import { PageService } from './services/page.service';
 import { ServiceWorkerService } from './services/service-worker.service';
 import { SharedService } from './services/shared.service';
+import { SnackBarService } from './services/snack-bar.service';
 import { StoreService } from './services/store.service';
 import { UtilitiesService } from './services/utilities.service';
 import { WebNotificationService } from './services/web-notification.service';
 import { WebSocketService } from './services/web-socket.service';
 /* End Service Inject (Do not remove) */
-
-export function translateLoader( http: HttpClient ) {
-	return new MultiTranslateHttpLoader(
-		http,
-		[
-			{ prefix: 'assets/i18n/', suffix: '.json' },
-		]
-	);
-}
 
 _.mixin({
 	get: ( obj: any, key: any ) => {
@@ -118,6 +121,16 @@ _.mixin({
 	},
 });
 
+export function translateLoader( http: HttpClient ) {
+	return new MultiTranslateHttpLoader(
+		http,
+		[
+			{ prefix: 'assets/i18n/', suffix: '.json' },
+		]
+	);
+}
+
+export const TOOLTIP_PANEL_CLASS: string = 'plugin-tooltip';
 export const lazyLoadImageModuleForRoot: ModuleWithProviders<any> = LazyLoadImageModule
 .forRoot( { preset: intersectionObserverPreset } );
 export const reactiveFormsModuleWithConfig: ModuleWithProviders<any> = ReactiveFormsModule
@@ -142,28 +155,31 @@ export const translateModuleForRoot: ModuleWithProviders<any> = TranslateModule
 		BrowserModule, FormsModule, HttpClientModule,
 		RouterModule, BrowserAnimationsModule, SatDatepickerModule,
 		MaterialModule, PerfectScrollbarModule, lazyLoadImageModuleForRoot,
-		cookieModuleForRoot, toastrModuleForRoot,
+		cookieModuleForRoot, toastrModuleForRoot, Ng5SliderModule,
 		translateModuleForRoot, reactiveFormsModuleWithConfig,
 	],
 	declarations: [
 		/* Component Inject (Do not remove) */
-		AutoCompleteComponent, AvatarBoxComponent, AvatarListComponent,
-		CollapsePaginatorComponent, DialogConfirmComponent, ErrorMessageComponent,
-		LoadingOverlayComponent, SelectBoxComponent,
+		ActionBoxComponent, ActionButtonComponent, AutoCompleteComponent,
+		AvatarBoxComponent, AvatarListComponent, CollapsePaginatorComponent,
+		DialogConfirmComponent, ErrorMessageComponent, FilterBoxComponent,
+		LoadingOverlayComponent, SelectBoxComponent, SideBarComponent,
+		SideBarItemComponent, StatusBoxComponent,
 		/* End Component Inject (Do not remove) */
 
 		/* Directive Inject (Do not remove) */
-		AdjustFontsizeDirective, DisableControlDirective, EqualValidatorDirective,
-		FullscreenDirective, MaxLessThanDirective, MinGreaterThanDirective,
-		NgInitDirective, OdometerDirective,
+		AdjustFontsizeDirective, DetectScrollDirective, DisableControlDirective,
+		EqualValidatorDirective, FullscreenDirective, MaxLessThanDirective,
+		MinGreaterThanDirective, NgInitDirective, OdometerDirective,
 		PopoverDirective, UploadFileDirective,
 		/* End Directive Inject (Do not remove) */
 
 		/* Pipe Inject (Do not remove) */
-		CapitalizeFirstPipe, CommasPipe, FilterPipe,
-		ItemObjectPipe, KFormatterPipe, MaxPipe,
-		MinPipe, MomentDateFormatPipe, OrderByPipe,
-		PadNumberPipe, PartitionPipe, SafeHtmlPipe,
+		CapitalizeFirstPipe, CommasPipe, FileSizeFormatterPipe,
+		FilterPipe, ImagePipe, ItemObjectPipe,
+		KFormatterPipe, MaxPipe, MinPipe,
+		MomentDateFormatPipe, OrderByPipe, PadNumberPipe,
+		PartitionPipe, SafeHtmlPipe,
 		/* End Pipe Inject (Do not remove) */
 	],
 	exports: [
@@ -174,23 +190,26 @@ export const translateModuleForRoot: ModuleWithProviders<any> = TranslateModule
 		SatDatepickerModule, MaterialModule,
 
 		/* Component Inject (Do not remove) */
-		AutoCompleteComponent, AvatarBoxComponent, AvatarListComponent,
-		CollapsePaginatorComponent, DialogConfirmComponent, ErrorMessageComponent,
-		LoadingOverlayComponent, SelectBoxComponent,
+		ActionBoxComponent, ActionButtonComponent, AutoCompleteComponent,
+		AvatarBoxComponent, AvatarListComponent, CollapsePaginatorComponent,
+		DialogConfirmComponent, ErrorMessageComponent, FilterBoxComponent,
+		LoadingOverlayComponent, SelectBoxComponent, SideBarComponent,
+		SideBarItemComponent, StatusBoxComponent,
 		/* End Component Inject (Do not remove) */
 
 		/* Directive Inject (Do not remove) */
-		AdjustFontsizeDirective, DisableControlDirective, EqualValidatorDirective,
-		FullscreenDirective, MaxLessThanDirective, MinGreaterThanDirective,
-		NgInitDirective, OdometerDirective,
+		AdjustFontsizeDirective, DetectScrollDirective, DisableControlDirective,
+		EqualValidatorDirective, FullscreenDirective, MaxLessThanDirective,
+		MinGreaterThanDirective, NgInitDirective, OdometerDirective,
 		PopoverDirective, UploadFileDirective,
 		/* End Directive Inject (Do not remove) */
 
 		/* Pipe Inject (Do not remove) */
-		CapitalizeFirstPipe, CommasPipe, FilterPipe,
-		ItemObjectPipe, KFormatterPipe, MaxPipe,
-		MinPipe, MomentDateFormatPipe, OrderByPipe,
-		PadNumberPipe, PartitionPipe, SafeHtmlPipe,
+		CapitalizeFirstPipe, CommasPipe, FileSizeFormatterPipe,
+		FilterPipe, ImagePipe, ItemObjectPipe,
+		KFormatterPipe, MaxPipe, MinPipe,
+		MomentDateFormatPipe, OrderByPipe, PadNumberPipe,
+		PartitionPipe, SafeHtmlPipe,
 		/* End Pipe Inject (Do not remove) */
 	],
 	entryComponents: [
@@ -202,12 +221,12 @@ export const translateModuleForRoot: ModuleWithProviders<any> = TranslateModule
 		{
 			provide		: APP_INITIALIZER,
 			useFactory	: appInitializerFactory,
-			deps		: [ LocaleService, Injector ],
+			deps		: [ TranslateService, LocaleService, Injector ],
 			multi		: true,
 		},
 		{
 			provide	: MAT_DIALOG_DEFAULT_OPTIONS,
-			useValue: { panelClass: 'mat-dialog', disableClose: true },
+			useValue: { disableClose: true, hasBackdrop: true },
 		},
 		{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
 		{ provide: SATURN_MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
@@ -220,8 +239,8 @@ export const translateModuleForRoot: ModuleWithProviders<any> = TranslateModule
 		ApiService, FormService, LocaleService,
 		LoopService, MediaService, MomentUtcDateAdapter,
 		NumberService, PageService, ServiceWorkerService,
-		SharedService, StoreService, UtilitiesService,
-		WebNotificationService, WebSocketService,
+		SharedService, SnackBarService, StoreService,
+		UtilitiesService, WebNotificationService, WebSocketService,
 		/* End Service Inject (Do not remove) */
 	],
 })

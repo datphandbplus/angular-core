@@ -1,8 +1,8 @@
 import {
 	Input, Component, Output,
-	EventEmitter, OnChanges, ViewEncapsulation,
-	OnInit, SimpleChanges, ChangeDetectorRef,
-	Optional, Inject, InjectionToken
+	EventEmitter, OnChanges, OnInit,
+	SimpleChanges, ChangeDetectorRef, Optional,
+	Inject, InjectionToken
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -16,11 +16,9 @@ import { NumberService } from '../../services/number.service';
 export const SELECT_BOX_DEFAULT_OPTIONS: InjectionToken<any> = new InjectionToken<any>( 'defaultOptions' );
 
 @Component({
-	selector		: 'select-box',
-	templateUrl		: './select-box.pug',
-	styleUrls		: [ './select-box.scss' ],
-	host			: { class: 'flex-noshrink layout-column' },
-	encapsulation	: ViewEncapsulation.None,
+	selector	: 'select-box',
+	templateUrl	: './select-box.pug',
+	host		: { class: 'flex-noshrink layout-column' },
 })
 export class SelectBoxComponent implements OnInit, OnChanges {
 
@@ -51,12 +49,15 @@ export class SelectBoxComponent implements OnInit, OnChanges {
 	@Input() public panelClass: string = ( this.defaultOptions || {} ).panelClass || '';
 	@Input() public floatLabel: string = ( this.defaultOptions || {} ).floatLabel || 'always';
 	@Input() public appearance: string = ( this.defaultOptions || {} ).appearance || 'outline';
-	@Input() public sort: boolean = true;
 	@Input() public formControl: FormControl = new FormControl();
-	@Input() public fieldKey: string = 'id';
-	@Input() public fieldParentKey: string = 'parent_id';
-	@Input() public fieldName: string = 'name';
-	@Input() public placeholder: string = this.translateService.instant( 'GENERAL.PLACEHOLDERS.CHOOSE' );
+	@Input() public fieldKey: string = ( this.defaultOptions || {} ).fieldKey || 'id';
+	@Input() public fieldParentKey: string = ( this.defaultOptions || {} ).fieldParentKey || 'parent_id';
+	@Input() public fieldName: string = ( this.defaultOptions || {} ).fieldName || 'name';
+	@Input() public sort: boolean = ( this.defaultOptions || {} ).sort !== undefined
+		? ( this.defaultOptions || {} ).sort
+		: true;
+	@Input() public placeholder: string = ( this.defaultOptions || {} ).placeholder
+		|| this.translateService.instant( 'GENERAL.PLACEHOLDERS.CHOOSE' );
 
 	@Output() public ngModelChange: EventEmitter<any> = new EventEmitter<any>();
 	@Output() public selectionChange: EventEmitter<any> = new EventEmitter<any>();
@@ -230,6 +231,10 @@ export class SelectBoxComponent implements OnInit, OnChanges {
 				? _.filter( this.handledItems, ( item: any ) => _.contains( ev.value, item[ this.fieldKey ] ) )
 				: _.find( this.handledItems, ( item: any ) => value === item[ this.fieldKey ] )
 		);
+		this.isSelectAll = this.multiple
+			&& this.handledItems
+			&& this.ngModel
+			&& this.handledItems.length === this.ngModel.length;
 	}
 
 	/**

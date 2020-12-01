@@ -10,7 +10,6 @@ export const AVATAR_LIST_DEFAULT_OPTIONS: InjectionToken<any> = new InjectionTok
 @Component({
 	selector	: 'avatar-list',
 	templateUrl	: './avatar-list.pug',
-	styleUrls	: [ './avatar-list.scss' ],
 })
 export class AvatarListComponent implements OnChanges {
 
@@ -20,7 +19,12 @@ export class AvatarListComponent implements OnChanges {
 	@Input() public size: number = ( this.defaultOptions || {} ).size || 40;
 	@Input() public boardHeight: number = ( this.defaultOptions || {} ).boardHeight || 40;
 	@Input() public maximum: number = ( this.defaultOptions || {} ).maximum || 9;
-	@Input() public lazy: boolean = ( this.defaultOptions || {} ).lazy || true;
+	@Input() public rounded: boolean = ( this.defaultOptions || {} ).rounded !== undefined
+		? ( this.defaultOptions || {} ).rounded
+		: false;
+	@Input() public lazy: boolean = ( this.defaultOptions || {} ).lazy !== undefined
+		? ( this.defaultOptions || {} ).lazy
+		: true;
 
 	public handledItems: Array<any>;
 

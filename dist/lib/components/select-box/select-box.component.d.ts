@@ -34,11 +34,11 @@ export declare class SelectBoxComponent implements OnInit, OnChanges {
     panelClass: string;
     floatLabel: string;
     appearance: string;
-    sort: boolean;
     formControl: FormControl;
     fieldKey: string;
     fieldParentKey: string;
     fieldName: string;
+    sort: boolean;
     placeholder: string;
     ngModelChange: EventEmitter<any>;
     selectionChange: EventEmitter<any>;

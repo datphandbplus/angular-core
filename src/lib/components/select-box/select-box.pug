@@ -3,6 +3,7 @@ mixin option
 		avatar-box.mr-5(
 			*ngIf='fieldImage',
 			size='28',
+			[lazy]='false',
 			[source]='item[ fieldImage ]',
 			[defaultAvatar]='defaultImage',
 			[title]='item[ fieldName ]')
@@ -67,7 +68,6 @@ mixin field
 					*ngIf='multiple && handledItems?.length && !filterCtrl?.value?.length',
 					color='primary',
 					[(ngModel)]='isSelectAll',
-					[checked]='handledItems?.length === ngModel?.length',
 					(change)='toggleSelectAll()')
 					| {{ "GENERAL.LABELS.SELECT_ALL" | translate }}
 					| ({{ ( handledItems?.length || 0 ) | commas }} {{ "GENERAL.LABELS.ITEMS" | translate }})
@@ -79,6 +79,7 @@ mixin field
 						avatar-box.mr-5(
 							*ngIf='emptyImage',
 							size='28',
+							[lazy]='false',
 							[source]='emptyImage',
 							[defaultAvatar]='defaultImage')
 						| {{ emptyLabel }}

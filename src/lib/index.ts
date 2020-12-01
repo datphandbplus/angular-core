@@ -8,16 +8,17 @@ export {
 } from './components/collapse-paginator/collapse-paginator.component';
 export { DialogConfirmComponent, DIALOG_CONFIRM_DEFAULT_OPTIONS } from './components/dialog-confirm/dialog-confirm.component';
 export { ErrorMessageComponent, ERROR_MESSAGE_DEFAULT_OPTIONS } from './components/error-message/error-message.component';
+export { FilterBoxComponent, FILTER_BOX_DEFAULT_OPTIONS } from './components/filter-box/filter-box.component';
 export { LoadingOverlayComponent, LOADING_OVERLAY_DEFAULT_OPTIONS } from './components/loading-overlay/loading-overlay.component';
 export { SelectBoxComponent, SELECT_BOX_DEFAULT_OPTIONS } from './components/select-box/select-box.component';
+export { StatusBoxComponent, STATUS_BOX_DEFAULT_OPTIONS } from './components/status-box/status-box.component';
 
 // Directive export
 export { AdjustFontsizeDirective } from './directives/adjust-fontsize.directive';
+export { DetectScrollDirective } from './directives/detect-scroll.directive';
 export { DisableControlDirective } from './directives/disable-control.directive';
 export { EqualValidatorDirective } from './directives/equal-validator.directive';
 export { FullscreenDirective } from './directives/fullscreen.directive';
-export { MaxLessThanDirective } from './directives/max-less-than.directive';
-export { MinGreaterThanDirective } from './directives/min-greater-than.directive';
 export { NgInitDirective } from './directives/nginit.directive';
 export { OdometerDirective } from './directives/odometer.directive';
 export { PopoverDirective } from './directives/popover.directive';
@@ -31,6 +32,7 @@ export { MultiTranslateHttpLoader } from './loaders/multi-translate-http-loader'
 // Pipe export
 export { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
 export { CommasPipe } from './pipes/commas.pipe';
+export { FileSizeFormatterPipe } from './pipes/file-size-formatter.pipe';
 export { FilterPipe } from './pipes/filter.pipe';
 export { ItemObjectPipe } from './pipes/item-object.pipe';
 export { KFormatterPipe } from './pipes/k-formatter.pipe';
@@ -53,6 +55,7 @@ export { NumberService } from './services/number.service';
 export { PageService } from './services/page.service';
 export { ServiceWorkerService } from './services/service-worker.service';
 export { SharedService } from './services/shared.service';
+export { SnackBarService } from './services/snack-bar.service';
 export { StoreService } from './services/store.service';
 export { UtilitiesService } from './services/utilities.service';
 export { WebNotificationService, PushNotification } from './services/web-notification.service';

@@ -1,28 +1,29 @@
-import { InjectionToken, SimpleChanges, OnChanges } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 export declare const AVATAR_BOX_DEFAULT_OPTIONS: InjectionToken<any>;
-export declare class AvatarBoxComponent implements OnChanges {
+export declare class AvatarBoxComponent {
     readonly defaultOptions: any;
     source: string;
     unique: number;
     title: string;
     defaultAvatar: string;
-    lazy: boolean;
+    titleLength: number;
     size: number;
-    background: string;
-    displayAvatar: string;
+    rounded: boolean;
+    lazy: boolean;
+    private _background;
     /**
     * @constructor
     * @param {any} defaultOptions
     */
     constructor(defaultOptions: any);
     /**
-    * @constructor
-    * @param {SimpleChanges} changes
-    */
-    ngOnChanges(changes: SimpleChanges): void;
-    /**
     * Get avatar background
     * @return {string}
     */
     readonly avatarBackground: string;
+    /**
+    * Get avatar title
+    * @return {string}
+    */
+    readonly avatarTitle: string;
 }

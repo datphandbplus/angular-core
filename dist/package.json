@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Angular Core",
   "license": "MIT",
-  "authors": "Revolve Team",
+  "authors": "Climax Technology",
   "private": true,
   "dependencies": {
     "@angular/animations": "7.1.4",
@@ -29,6 +29,7 @@
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.14",
     "ng-lazyload-image": "^6.1.0",
+    "ng5-slider": "^1.2.4",
     "ngx-build-plus": "^7.5.4",
     "ngx-cookie": "^2.0.1",
     "ngx-mat-select-search": "^1.0.2",

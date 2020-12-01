@@ -14,7 +14,9 @@
         "ngx-mat-select-search": "ngxMatSelectSearch",
         "ng-lazyload-image": "ngLazyloadImage",
         "saturn-datepicker": "saturnDatepicker",
-        "ngx-perfect-scrollbar": "ngxPerfectScrollbar"
+        "ngx-perfect-scrollbar": "ngxPerfectScrollbar",
+        "ng5-slider": "ng5Slider",
+        "moment/locale/vi": "moment/locale/vi"
     }
   },
   "whitelistedNonPeerDependencies": ["."]

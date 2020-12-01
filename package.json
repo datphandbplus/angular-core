@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "description": "Angular Core",
   "license": "MIT",
-  "authors": "Revolve Team",
+  "authors": "Climax Technology",
   "private": true,
   "scripts": {
     "ng": "ng",
     "lint": "ng lint --type-check",
     "build": "ng-packagr -p ng-package.json && node ./cli/copy-files.js",
-    "release": "git push origin `git subtree split --prefix dist master`:releases --force",
+    "release": "git push origin `git subtree split --prefix dist version_0.1`:releases --force",
     "postinstall": "node ./cli/add-pug-loader.js"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.14",
     "ng-lazyload-image": "^6.1.0",
+    "ng5-slider": "^1.2.4",
     "ngx-build-plus": "^7.5.4",
     "ngx-cookie": "^2.0.1",
     "ngx-mat-select-search": "^1.0.2",

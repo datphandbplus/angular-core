@@ -150,6 +150,27 @@ table {
 	}
 }
 
+// Text color helpers
+.text-primary {
+	color: $primary;
+}
+
+.text-accent {
+	color: $accent;
+}
+
+.text-warn {
+	color: $warn;
+}
+
+.text-success {
+	color: $success;
+}
+
+.text-warning {
+	color: $warning;
+}
+
 // Text format helpers
 .text-italic {
 	font-style: italic;

@@ -4,6 +4,7 @@
 	opacity: .5;
 }
 
+// Reset styles
 .no-decoration {
 	text-decoration: none;
 
@@ -31,6 +32,32 @@
 
 .clearfix {
 	clear: both;
+}
+
+// Background
+.bg-primary {
+	background-color: $primary;
+	color: $white !important;
+}
+
+.bg-accent {
+	background-color: $accent;
+	color: $white !important;
+}
+
+.bg-warn {
+	background-color: $warn;
+	color: $white !important;
+}
+
+.bg-success {
+	background-color: $success;
+	color: $white !important;
+}
+
+.bg-warning {
+	background-color: $warning;
+	color: $white !important;
 }
 
 // Float
@@ -139,6 +166,10 @@ img {
 	}
 }
 
+.cursor {
+	cursor: pointer;
+}
+
 // Scrollable
 .scrollable {
 	display: block;
@@ -233,6 +264,10 @@ img {
 }
 
 // Padding helpers
+.padding-auto {
+	padding: auto;
+}
+
 // Multiples of 5, max:100
 @for $i from 0 through 20 {
 	.padding-#{$i * 5},
@@ -316,6 +351,10 @@ img {
 }
 
 // Margin helpers
+.margin-auto {
+	margin: auto;
+}
+
 // Multiples of 5, max:100
 @for $i from 0 through 20 {
 	.margin-#{$i * 5},
@@ -437,7 +476,7 @@ img {
 }
 
 // Border helpers
-$border-style: 1px solid $gray;
+$border-style: 1px solid $border;
 
 .border,
 .b {

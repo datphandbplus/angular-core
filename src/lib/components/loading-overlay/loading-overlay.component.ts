@@ -8,13 +8,14 @@ export const LOADING_OVERLAY_DEFAULT_OPTIONS: InjectionToken<any> = new Injectio
 @Component({
 	selector	: 'loading-overlay',
 	templateUrl	: './loading-overlay.pug',
-	styleUrls	: [ './loading-overlay.scss' ],
 })
 export class LoadingOverlayComponent {
 
 	@Input() public iconOnTop: boolean = ( this.defaultOptions || {} ).iconOnTop;
 	@Input() public iconSize: number = ( this.defaultOptions || {} ).iconSize || 30;
-	@Input() public visible: boolean = true;
+	@Input() public visible: boolean = ( this.defaultOptions || {} ).visible !== undefined
+		? ( this.defaultOptions || {} ).visible
+		: true;
 
 	/**
 	* @constructor

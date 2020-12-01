@@ -58,7 +58,7 @@ export class PopoverDirective implements AfterViewInit, OnDestroy {
 		if ( this.popoverEle.length ) return;
 
 		// Append popover element
-		this.popoverEle = $( '<div></div>' ).addClass( 'ngx-popover' );
+		this.popoverEle = $( '<div></div>' ).addClass( 'plugin-popover' );
 		body.append( this.popoverEle );
 	}
 

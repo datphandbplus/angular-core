@@ -80,6 +80,7 @@ export class DataTableComponent {
 
 				flag = UtilitiesService.stripVietnameseSymbol(
 					( _.get( data, key ) || '' )
+					.toString()
 					.toLowerCase()
 					.replace( / /g, '' )
 				)

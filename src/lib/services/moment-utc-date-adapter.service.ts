@@ -6,13 +6,11 @@ import moment, { Moment } from 'moment-timezone';
 @Injectable()
 export class MomentUtcDateAdapter extends MomentDateAdapter {
 
-	public timezone: string;
-
 	/**
 	* @constructor
 	* @param {string} dateLocale
 	*/
-	constructor( @Optional() @Inject( MAT_DATE_LOCALE ) dateLocale: string) {
+	constructor( @Optional() @Inject( MAT_DATE_LOCALE ) dateLocale: string ) {
 		super( dateLocale );
 	}
 
@@ -35,14 +33,7 @@ export class MomentUtcDateAdapter extends MomentDateAdapter {
 			throw Error( `Invalid date "${date}". Date has to be greater than 0.` );
 		}
 
-		const result: any = moment()
-		.year( year )
-		.month( month )
-		.date( date )
-		.hour( 0 )
-		.minute( 0 )
-		.second( 0 )
-		.locale( this.locale );
+		const result: any = moment.utc( { year, month, date } ).locale( this.locale );
 
 		// If the result isn't valid, the date must have been out of bounds for this month.
 		if ( !result.isValid() ) {

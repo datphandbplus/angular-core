@@ -21,9 +21,4 @@ export declare class LocaleService {
     * @return {string}
     */
     locale: string;
-    /**
-    * Init locale
-    * @return {void}
-    */
-    initLocale(): void;
 }

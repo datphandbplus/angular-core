@@ -1,0 +1,9 @@
+.status-box.layout-column.layout-align-center
+	mat-chip-list
+		mat-chip(
+			selected,
+			[style.backgroundColor]='color',
+			[matTooltip]='status | uppercase')
+			div
+				| {{ status | uppercase }}
+				ng-content

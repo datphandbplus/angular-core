@@ -1,8 +1,8 @@
 import {
 	Component, Output, EventEmitter,
 	Input, ViewChild, OnDestroy,
-	AfterContentInit, AfterViewInit, ViewEncapsulation,
-	Optional, Inject, InjectionToken
+	AfterContentInit, AfterViewInit, Optional,
+	Inject, InjectionToken
 } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material';
 import _ from 'underscore';
@@ -10,19 +10,19 @@ import _ from 'underscore';
 export const COLLAPSE_PAGINATOR_DEFAULT_OPTIONS: InjectionToken<any> = new InjectionToken<any>( 'defaultOptions' );
 
 @Component({
-	selector		: 'collapse-paginator',
-	templateUrl		: './collapse-paginator.pug',
-	styleUrls		: [ './collapse-paginator.scss' ],
-	encapsulation	: ViewEncapsulation.None,
+	selector	: 'collapse-paginator',
+	templateUrl	: './collapse-paginator.pug',
 })
 export class CollapsePaginatorComponent implements OnDestroy, AfterViewInit, AfterContentInit {
 
 	@ViewChild( '__paginator' ) public paginator: MatPaginator;
 
-	@Input() public pageIndex: number = 0;
-	@Input() public pageSize: number = 15;
-	@Input() public pageSizeOptions: Array<number> = [ 15, 25, 50 ];
-	@Input() public showFirstLastButtons: boolean = true;
+	@Input() public pageIndex: number = ( this.defaultOptions || {} ).pageIndex || 0;
+	@Input() public pageSize: number = ( this.defaultOptions || {} ).pageSize || 15;
+	@Input() public pageSizeOptions: Array<number> = ( this.defaultOptions || {} ).pageSizeOptions || [ 15, 25, 50 ];
+	@Input() public showFirstLastButtons: boolean = ( this.defaultOptions || {} ).showFirstLastButtons !== undefined
+		? ( this.defaultOptions || {} ).showFirstLastButtons
+		: true;
 
 	@Output() public paginatorRef: EventEmitter<any> = new EventEmitter<any>();
 	@Output() public page: EventEmitter<any> = new EventEmitter<any>();
@@ -39,6 +39,7 @@ export class CollapsePaginatorComponent implements OnDestroy, AfterViewInit, Aft
 	* @constructor
 	*/
 	public ngAfterViewInit() {
+		this.paginator._intl = new MatPaginatorIntl();
 		this.paginator._intl.getRangeLabel = this.getExpansionRangeLabel;
 		this.paginatorRef.emit( this.paginator );
 	}

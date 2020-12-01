@@ -6,20 +6,19 @@
 	[style.height]='size + "px"',
 	[style.maxHeight]='size + "px"',
 	[style.minHeight]='size + "px"',
-	[class.no-avatar]='!displayAvatar',
-	[style.backgroundColor]='avatarBackground')
-	ng-template([ngIf]='displayAvatar')
+	[class.rounded]='rounded',
+	[class.no-avatar]='!source && !defaultAvatar',
+	[style.backgroundColor]='!source && !defaultAvatar && avatarBackground')
+	ng-template([ngIf]='source || defaultAvatar')
 		img(
 			*ngIf='lazy',
 			[defaultImage]='defaultAvatar',
-			[errorImage]='defaultAvatar',
-			[lazyLoad]='displayAvatar')
+			[lazyLoad]='source || defaultAvatar')
 		img(
 			*ngIf='!lazy',
-			[src]='displayAvatar')
+			[attr.src]='source | image: defaultAvatar | async')
 	span(
-		*ngIf='!displayAvatar',
-		[style.fontSize]='( size / 2 ) + "px"',
-		[style.lineHeight]='( size / 2 ) + "px"')
-		| {{ title?.trim()?.substring( 0, 1 ) | uppercase }}
-
+		*ngIf='!source && !defaultAvatar',
+		[style.fontSize]='( size / ( titleLength * 1.5 ) ) + "px"',
+		[style.lineHeight]='( size / ( titleLength * 1.5 ) ) + "px"')
+		| {{ avatarTitle }}

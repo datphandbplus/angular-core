@@ -141,13 +141,33 @@ export class NumberService {
 	}
 
 	/**
+	* File size formatter
+	* @static
+	* @param {number} fileSize
+	* @return {string}
+	*/
+	public static fileSizeFormatter( fileSize: number ): string {
+		if ( !fileSize || isNaN( fileSize ) ) fileSize = 0;
+
+		if ( fileSize >= 1048576 ) {
+			return NumberService.addCommas( ( fileSize / 1024 / 1024 ).toFixed( 2 ) ) + 'MB';
+		}
+
+		if ( fileSize >= 1024 ) {
+			return NumberService.addCommas( ( fileSize / 1024 ).toFixed( 2 ) ) + 'KB';
+		}
+
+		return NumberService.addCommas( fileSize.toFixed( 2 ) ) + 'B';
+	}
+
+	/**
 	* Cut off float number
 	* @static
 	* @param {number} num
 	* @param {number} digits
 	* @return {number} Cut off number
 	*/
-	public static cutOffFloatNumber( num: number, digits: number = 2 ) {
+	public static cutOffFloatNumber( num: number, digits: number = 2 ): number {
 		if ( !num || isNaN( num ) ) return 0;
 
 		return +parseFloat( num.toString() ).toFixed( num % 1 === 0 ? 0 : digits );
@@ -160,7 +180,7 @@ export class NumberService {
 	* @param {int} size
 	* @return {string}
 	*/
-	public static padNumberFormatter( num: number, size: number ) {
+	public static padNumberFormatter( num: number, size: number ): string {
 		const s: string = String( num );
 		return s.padStart( size, '0' );
 	}

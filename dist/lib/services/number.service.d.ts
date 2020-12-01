@@ -56,6 +56,13 @@ export declare class NumberService {
     */
     static kFormatter(num: number): string;
     /**
+    * File size formatter
+    * @static
+    * @param {number} fileSize
+    * @return {string}
+    */
+    static fileSizeFormatter(fileSize: number): string;
+    /**
     * Cut off float number
     * @static
     * @param {number} num

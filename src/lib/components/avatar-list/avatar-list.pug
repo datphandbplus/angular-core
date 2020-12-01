@@ -19,6 +19,7 @@
 				| {{ ( ( item?.count || 0 ) | commas ) + "+" }}
 			avatar-box(
 				*ngIf='!item?.is_count_item',
+				[rounded]='rounded',
 				[size]='size',
 				[unique]='item?.id',
 				[source]='item?.avatar',

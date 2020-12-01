@@ -2,60 +2,33 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { Observable, Observer, ReplaySubject } from 'rxjs';
 import io from 'socket.io-client';
 
-import { StoreService } from './store.service';
-import { DEFAULT_AUTHORIZED_KEY, DEFAULT_SERVER_WEBSOCKET_URL } from '../injection-token';
+import { DEFAULT_SERVER_WEBSOCKET_URL } from '../injection-token';
 
 @Injectable()
 export class WebSocketService {
 
-	private webSocketChange: ReplaySubject<any> = new ReplaySubject<any>();
 	private socket: any;
+	private socketChange: ReplaySubject<any> = new ReplaySubject<any>();
 
 	/**
 	* @constructor
-	* @param {string} defaultAuthorizedKey
 	* @param {string} defaultServerWSURL
-	* @param {StoreService} storeService
 	*/
 	constructor(
-		@Optional() @Inject( DEFAULT_AUTHORIZED_KEY ) readonly defaultAuthorizedKey: string,
-		@Optional() @Inject( DEFAULT_SERVER_WEBSOCKET_URL ) readonly defaultServerWSURL: string,
-		private storeService: StoreService
+		@Optional() @Inject( DEFAULT_SERVER_WEBSOCKET_URL ) readonly defaultServerWSURL: string
 	) {}
 
 	/**
 	* Connect
+	* @param {any} options
 	* @return {Observable}
 	*/
-	public connect(): Observable<any> {
+	public connect( options: any = {} ): Observable<any> {
 		return new Observable( ( observer: Observer<any> ) => {
-			const currentUser: any = this.storeService.get( this.defaultAuthorizedKey );
-
-			if ( !currentUser ) return;
-
-			if ( this.socket ) {
-				this.webSocketChange.next( this );
-				observer.next( this.socket );
-				return;
-			}
-
-			const channelId: string = currentUser.channel_id;
-			const userId: number = currentUser.user_id;
-			const userToken: string = encodeURIComponent( currentUser.user_token );
-
-			this.socket = io.connect(
-				this.defaultServerWSURL,
-				{ query: 'channel_id=' + channelId + '&user_id=' + userId + '&token=' + userToken }
-			);
+			this.socket = io.connect( this.defaultServerWSURL, options );
 
 			this.socket.on( 'connect', () => {
-				this.webSocketChange.next( this.socket );
-				observer.next( this.socket );
-			} );
-
-			this.socket.on( 'disconnect', () => {
-				this.socket = null;
-				this.webSocketChange.next( this.socket );
+				this.socketChange.next( this.socket );
 				observer.next( this.socket );
 			} );
 		} );
@@ -63,11 +36,11 @@ export class WebSocketService {
 
 	/**
 	* Emit socket
-	* @param {any} _emit
+	* @param {any} event
 	* @param {any} data
 	* @return {void}
 	*/
-	public emit( _emit: any, data: any ) {
+	public emit( event: any, data: any ) {
 		if ( !this.socket ) return;
 
 		this.socket.emit( event, data );
@@ -82,9 +55,7 @@ export class WebSocketService {
 		return new Observable( ( observer: Observer<any> ) => {
 			if ( !this.socket ) return;
 
-			this.socket.on( event, ( data: any ) => {
-				observer.next( data );
-			} );
+			this.socket.on( event, ( data: any ) => observer.next( data ) );
 		} );
 	}
 
@@ -103,7 +74,7 @@ export class WebSocketService {
 	* @return {ReplaySubject}
 	*/
 	public getSocketChange(): ReplaySubject<any> {
-		return this.webSocketChange;
+		return this.socketChange;
 	}
 
 }

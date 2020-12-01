@@ -1,5 +1,6 @@
 export const CONSTANTS: any = {
 	LOCALE				: 'en-gb',
+	TIMEZONE			: 'Asia/Ho_Chi_Minh',
 	ALLOW_FILE_SIZE		: 2097152, // 2 mb
 	ALLOW_IMAGE_FILES	: [ 'image/jpg', 'image/jpeg', 'image/gif', 'image/png' ],
 	ALLOW_DOCUMENT_FILES: [

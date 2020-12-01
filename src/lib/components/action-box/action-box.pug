@@ -1,0 +1,10 @@
+.action-box
+	button(
+		mat-stroked-button,
+		plugin-button-only-icon,
+		type='button',
+		[matMenuTriggerFor]='__actionMenu',
+		[disabled]='disabled')
+		i.fa.fa-ellipsis-v
+	mat-menu(#__actionMenu='matMenu')
+		ng-content

@@ -59,20 +59,4 @@ export class LocaleService {
 		return this._locale || localStorage.getItem( 'locale' ) || this.defaultLocale;
 	}
 
-	/**
-	* Init locale
-	* @return {void}
-	*/
-	public initLocale() {
-		this.locale = localStorage.getItem( 'locale' ) || this.defaultLocale;
-
-		if ( !this.locale ) return;
-
-		// Set moment language
-		moment.locale( this.locale );
-
-		// This language will be used as a fallback when a translation isn't found in the current language
-		this.translateService.setDefaultLang( this.locale.substring( 0, 2 ).toLowerCase() );
-	}
-
 }

@@ -1,0 +1,11 @@
+.sidebar
+	button.sidebar-btn.sidebar-btn-prev.layout-column.layout-align-center-center(
+		[class.hide]='!isShowBtnPrev',
+		(click)='scrollPrev()')
+		i.fa.fa-angle-left
+	ul.sidebar-list.layout-row
+		ng-content
+	button.sidebar-btn.sidebar-btn-next.layout-column.layout-align-center-center(
+		[class.hide]='!isShowBtnNext',
+		(click)='scrollNext()')
+		i.fa.fa-angle-right

@@ -1,4 +1,6 @@
-.ngx-popover {
+[pluginPopover],
+[plugin-popover],
+.plugin-popover {
 	@include transition;
 	position: absolute;
 	visibility: hidden;
@@ -11,29 +13,135 @@
 	border-radius: 5px;
 }
 
-.mat-dialog {
-	overflow-y: auto;
-
-	&:before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: rgba($black, .5);
+[pluginDataTable],
+[plugin-data-table],
+.plugin-data-table {
+	&:not([data-label='']):after {
+		content: attr(data-label);
+		text-align: center;
+		line-height: 54px;
+		display: block;
+		border-bottom: 1px solid rgba($black, .12);
+		border-left: 1px solid rgba($black, .12);
+		border-right: 1px solid rgba($black, .12);
 	}
 
-	.mat-dialog-container {
-		z-index: 1;
+	.mat-cell,
+	.mat-header-cell,
+	.mat-footer-cell {
+		&:not(:first-of-type):not(:last-of-type) {
+			padding: 5px;
+		}
+
+		&:first-of-type:last-of-type {
+			padding-left: 24px;
+			padding-right: 24px;
+		}
+
+		&:first-of-type,
+		&:last-of-type {
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+
+		&:first-of-type {
+			padding-right: 5px;
+		}
+
+		&:last-of-type {
+			padding-left: 5px;
+		}
 	}
 
-	.mat-dialog-actions {
-		min-height: 68px;
+	.mat-row:not(.mat-table-sticky),
+	.mat-footer-row:not(.mat-table-sticky) {
+		border-left: 1px solid rgba($black, .12);
+		border-right: 1px solid rgba($black, .12);
+	}
+
+	.mat-table-sticky {
+		&:not(.mat-footer-row) {
+			border-left: 1px solid rgba($black, .12);
+			border-right: 1px solid rgba($black, .12);
+		}
+
+		&.mat-footer-row {
+			align-items: stretch;
+			align-content: stretch;
+		}
+	}
+
+	.mat-header-cell {
+		background-color: $primary;
+		color: $white;
+
+		&.mat-column-filters {
+			background-color: $gray;
+			padding: 0 !important;
+		}
 	}
 }
 
-.mat-tooltip {
-	white-space: pre-line;
-	line-height: 15px;
+[pluginButtonOnlyIcon],
+[plugin-button-only-icon],
+.plugin-button-only-icon {
+	min-width: auto !important;
+	padding: 0 !important;
+	width: 36px;
+	height: 36px;
+	font-size: 19px;
+	background-color: $white;
+
+	.mat-button-wrapper {
+		line-height: 17px;
+	}
+}
+
+[pluginInputParseCommas],
+[plugin-input-parse-commas],
+.plugin-input-parse-commas {
+	&.mat-focused {
+		.mat-input-element,
+		.mat-hint {
+			opacity: 1;
+		}
+
+		.mat-form-field-prefix {
+			opacity: 0;
+		}
+	}
+
+	.mat-hint {
+		opacity: 0;
+	}
+
+	.mat-input-element {
+		position: relative;
+		z-index: 1;
+		opacity: 0;
+	}
+
+	.mat-form-field-prefix {
+		position: absolute;
+		left: 10px;
+		top: 25px !important;
+		width: 100%;
+		opacity: 1;
+	}
+}
+
+[pluginInputNoPadding],
+[plugin-input-no-padding],
+.plugin-input-no-padding {
+	.mat-form-field-wrapper {
+		padding-bottom: 0;
+	}
+}
+
+[pluginInputRadio],
+[plugin-input-radio],
+.plugin-input-radio {
+	.mat-form-field-infix {
+		padding-top: 9px;
+	}
 }

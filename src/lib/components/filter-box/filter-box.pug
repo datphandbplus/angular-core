@@ -1,0 +1,86 @@
+ng-template([ngIf]='type === "query"')
+	mat-form-field(
+		appearance='legacy',
+		floatLabel='never')
+		input(
+			matInput,
+			[placeholder]='placeholder',
+			[disabled]='disabled',
+			[(ngModel)]='filter',
+			(ngModelChange)='filterChange?.emit( filter ); applyFilter?.emit( $event )',
+			(keydown.esc)='filter = ""; filterChange?.emit( filter ); applyFilter?.emit( $event );')
+		span(matPrefix)
+			i.fa.fa-search.mr-10
+		.cursor(
+			matSuffix,
+			*ngIf='filter',
+			(click)='filter = ""; filterChange?.emit( filter ); applyFilter?.emit( $event );')
+			i.fa.fa-times-circle.text-warn
+ng-template([ngIf]='type === "filter"')
+	select-box(
+		appearance='legacy',
+		floatLabel='never',
+		[fieldKey]='fieldKey',
+		[fieldParentKey]='fieldParentKey',
+		[fieldName]='fieldName',
+		[fieldSubName]='fieldSubName',
+		[fieldImage]='fieldImage',
+		[emptyLabel]='emptyLabel',
+		[emptyValue]='emptyValue',
+		[data]='data',
+		[multiple]='multiple',
+		[disabled]='disabled',
+		[placeholder]='placeholder',
+		[translated]='translated',
+		[(ngModel)]='filter',
+		(ngModelChange)='filterChange?.emit( filter ); applyFilter?.emit( $event );',
+		ngDefaultControl)
+ng-template([ngIf]='type === "datepicker"')
+	mat-form-field.filter-box__datepicker(
+		floatLabel='never',
+		(click)='__picker?.open()')
+		mat-label
+			| {{ format || emptyLabel }}
+		input(
+			matInput,
+			[(ngModel)]='filter',
+			(dateChange)='filterChange?.emit( filter ); applyFilter?.emit( $event );',
+			[satDatepicker]='__picker',
+			[min]='minDate',
+			[max]='maxDate',
+			ngDefaultControl,
+			readonly)
+		mat-datepicker-toggle(
+			matSuffix,
+			[for]='__picker')
+		sat-datepicker(
+			#__picker,
+			[startView]='startView',
+			[disabled]='disabled',
+			[rangeMode]='rangeMode',
+			(monthSelected)='onMonthChange( __picker, $event )',
+			(yearSelected)='onYearChange( __picker, $event )')
+ng-template([ngIf]='type === "range"')
+	.cursor(
+		[matMenuTriggerFor]='sliderMenu',
+		(menuOpened)='toggleSliderMenu()',
+		(menuClosed)='toggleSliderMenu()')
+		mat-form-field(
+			appearance='legacy',
+			floatLabel='never')
+			input(
+				matInput,
+				[value]='format || emptyLabel',
+				readonly)
+			span(matSuffix)
+				.mat-select-arrow-wrapper(style='top: -1px')
+					.mat-select-arrow
+	mat-menu.filter-box__slider-menu(#sliderMenu='matMenu')
+		ng5-slider(
+			*ngIf='menuOpened',
+			(click)='$event?.stopPropagation()',
+			[(value)]='slideValue',
+			[(highValue)]='slideHighValue',
+			[options]='slideOptions',
+			(valueChange)='onSlideValueChange( $event ); applyFilter?.emit( $event );',
+			(highValueChange)='onSlideHighValueChange( $event ); applyFilter?.emit( $event );')

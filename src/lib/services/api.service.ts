@@ -153,7 +153,8 @@ export class ApiService {
 			this.http[ type ]( url, params, options )
 			.subscribe(
 				( response: any ) => observer.next( response ),
-				( error: any ) => observer.error( this.failCallback( error ) )
+				( error: any ) => observer.error( this.failCallback( error ) ),
+				() => observer.complete()
 			);
 		} );
 	}
@@ -172,8 +173,8 @@ export class ApiService {
 			const formData: FormData = new FormData();
 			const options: any = { headers };
 
-			// In case files is file list
-			if ( files instanceof FileList ) {
+			// In case files is file list or array files
+			if ( files instanceof FileList || files instanceof Array ) {
 				_.each( files, ( file: File ) => formData.append( 'files[]', file, file.name ) );
 			} else {
 				formData.append( 'file', files );
@@ -184,7 +185,8 @@ export class ApiService {
 			this.http.post( url, formData, options )
 			.subscribe(
 				( response: any ) => observer.next( response ),
-				( error: any ) => observer.error( this.failCallback( error ) )
+				( error: any ) => observer.error( this.failCallback( error ) ),
+				() => observer.complete()
 			);
 		} );
 	}

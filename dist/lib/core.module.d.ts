@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders } from '@angular/core';
 import { MultiTranslateHttpLoader } from './loaders/multi-translate-http-loader';
 export declare function translateLoader(http: HttpClient): MultiTranslateHttpLoader;
+export declare const TOOLTIP_PANEL_CLASS: string;
 export declare const lazyLoadImageModuleForRoot: ModuleWithProviders<any>;
 export declare const reactiveFormsModuleWithConfig: ModuleWithProviders<any>;
 export declare const cookieModuleForRoot: ModuleWithProviders<any>;

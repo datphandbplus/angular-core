@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/router'), require('@angular/forms'), require('rxjs/operators'), require('underscore'), require('@angular/material'), require('@ngx-translate/core'), require('rxjs'), require('jquery'), require('@angular/common'), require('moment-timezone'), require('@angular/platform-browser'), require('@angular/common/http'), require('ngx-cookie'), require('crypto-js'), require('moment/locale/vi'), require('@angular/material-moment-adapter'), require('@angular/service-worker'), require('socket.io-client'), require('@angular/platform-browser/animations'), require('ngx-toastr'), require('ng-lazyload-image'), require('ngx-perfect-scrollbar'), require('saturn-datepicker'), require('ngx-mat-select-search')) :
-    typeof define === 'function' && define.amd ? define('angular-core', ['exports', '@angular/core', '@angular/router', '@angular/forms', 'rxjs/operators', 'underscore', '@angular/material', '@ngx-translate/core', 'rxjs', 'jquery', '@angular/common', 'moment-timezone', '@angular/platform-browser', '@angular/common/http', 'ngx-cookie', 'crypto-js', 'moment/locale/vi', '@angular/material-moment-adapter', '@angular/service-worker', 'socket.io-client', '@angular/platform-browser/animations', 'ngx-toastr', 'ng-lazyload-image', 'ngx-perfect-scrollbar', 'saturn-datepicker', 'ngx-mat-select-search'], factory) :
-    (global = global || self, factory(global['angular-core'] = {}, global.ng.core, global.ng.router, global.ng.forms, global.rxjs.operators, global._, global.ng.material, global.core$1, global.rxjs, global._$, global.ng.common, global.moment, global.ng.platformBrowser, global.ng.common.http, global.ngxCookie, global.cryptoJs, global.vi, global.ng['material-moment-adapter'], global.ng['service-worker'], global.io, global.ng.platformBrowser.animations, global.ngxToastr, global.ngLazyloadImage, global.ngxPerfectScrollbar, global.saturnDatepicker, global.ngxMatSelectSearch));
-}(this, function (exports, core, router, forms, operators, _, material, core$1, rxjs, _$, common, moment, platformBrowser, http, ngxCookie, cryptoJs, vi, materialMomentAdapter, serviceWorker, io, animations, ngxToastr, ngLazyloadImage, ngxPerfectScrollbar, saturnDatepicker, ngxMatSelectSearch) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/router'), require('@angular/forms'), require('rxjs/operators'), require('underscore'), require('@angular/material'), require('@ngx-translate/core'), require('ng5-slider'), require('moment-timezone'), require('rxjs'), require('jquery'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/common/http'), require('ngx-cookie'), require('crypto-js'), require('moment/locale/vi'), require('@angular/material-moment-adapter'), require('@angular/service-worker'), require('socket.io-client'), require('@angular/platform-browser/animations'), require('ngx-toastr'), require('ng-lazyload-image'), require('ngx-perfect-scrollbar'), require('saturn-datepicker'), require('ngx-mat-select-search')) :
+    typeof define === 'function' && define.amd ? define('angular-core', ['exports', '@angular/core', '@angular/router', '@angular/forms', 'rxjs/operators', 'underscore', '@angular/material', '@ngx-translate/core', 'ng5-slider', 'moment-timezone', 'rxjs', 'jquery', '@angular/common', '@angular/platform-browser', '@angular/common/http', 'ngx-cookie', 'crypto-js', 'moment/locale/vi', '@angular/material-moment-adapter', '@angular/service-worker', 'socket.io-client', '@angular/platform-browser/animations', 'ngx-toastr', 'ng-lazyload-image', 'ngx-perfect-scrollbar', 'saturn-datepicker', 'ngx-mat-select-search'], factory) :
+    (global = global || self, factory(global['angular-core'] = {}, global.ng.core, global.ng.router, global.ng.forms, global.rxjs.operators, global._, global.ng.material, global.core$1, global.ng5Slider, global.moment, global.rxjs, global._$, global.ng.common, global.ng.platformBrowser, global.ng.common.http, global.ngxCookie, global.cryptoJs, global['moment/locale/vi'], global.ng['material-moment-adapter'], global.ng['service-worker'], global.io, global.ng.platformBrowser.animations, global.ngxToastr, global.ngLazyloadImage, global.ngxPerfectScrollbar, global.saturnDatepicker, global.ngxMatSelectSearch));
+}(this, function (exports, core, router, forms, operators, _, material, core$1, ng5Slider, moment, rxjs, _$, common, platformBrowser, http, ngxCookie, cryptoJs, vi, materialMomentAdapter, serviceWorker, io, animations, ngxToastr, ngLazyloadImage, ngxPerfectScrollbar, saturnDatepicker, ngxMatSelectSearch) { 'use strict';
 
     _ = _ && _.hasOwnProperty('default') ? _['default'] : _;
     moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
@@ -310,6 +310,7 @@
 
     var CONSTANTS = {
         LOCALE: 'en-gb',
+        TIMEZONE: 'Asia/Ho_Chi_Minh',
         ALLOW_FILE_SIZE: 2097152,
         ALLOW_IMAGE_FILES: ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'],
         ALLOW_DOCUMENT_FILES: [
@@ -12406,8 +12407,8 @@
             this.cdRef = cdRef;
             this.floatLabel = (this.defaultOptions || {}).floatLabel || 'always';
             this.appearance = (this.defaultOptions || {}).appearance || 'outline';
-            this.fieldKey = 'id';
-            this.fieldName = 'name';
+            this.fieldKey = (this.defaultOptions || {}).fieldKey || 'id';
+            this.fieldName = (this.defaultOptions || {}).fieldName || 'name';
             this.data = [];
             this.formControl = new forms.FormControl();
             this.ngModelChange = new core.EventEmitter();
@@ -12542,51 +12543,47 @@
         function AvatarBoxComponent(defaultOptions) {
             this.defaultOptions = defaultOptions;
             this.defaultAvatar = (this.defaultOptions || {}).defaultAvatar;
-            this.lazy = (this.defaultOptions || {}).lazy || true;
+            this.titleLength = (this.defaultOptions || {}).titleLength || 2;
             this.size = (this.defaultOptions || {}).size || 44;
-            this.displayAvatar = this.defaultAvatar;
+            this.rounded = (this.defaultOptions || {}).rounded !== undefined
+                ? (this.defaultOptions || {}).rounded
+                : false;
+            this.lazy = (this.defaultOptions || {}).lazy !== undefined
+                ? (this.defaultOptions || {}).lazy
+                : true;
         }
-        /**
-        * @constructor
-        * @param {SimpleChanges} changes
-        */
-        AvatarBoxComponent.prototype.ngOnChanges = function (changes) {
-            var _this = this;
-            if (changes.source) {
-                if (!this.source) {
-                    this.displayAvatar = this.defaultAvatar;
-                    return;
-                }
-                // Create the image
-                var imgElement = new Image();
-                // When image is loaded, resolve the promise
-                imgElement.addEventListener('load', function () {
-                    _this.displayAvatar = _this.source;
-                });
-                // When there's an error during load, reject the promise
-                imgElement.addEventListener('error', function () {
-                    _this.displayAvatar = _this.defaultAvatar;
-                });
-                // Assign URL
-                imgElement.src = this.source;
-            }
-        };
         Object.defineProperty(AvatarBoxComponent.prototype, "avatarBackground", {
             /**
             * Get avatar background
             * @return {string}
             */
             get: function () {
-                if (this.displayAvatar)
-                    return null;
-                if (this.background)
-                    return this.background;
+                if (this._background)
+                    return this._background;
                 var n = this.unique ? +this.unique.toString()[this.unique.toString().length - 1] : 1;
                 var rand1 = Math.floor((Math.random() * (254 - n)) + 1);
                 var rand2 = Math.floor((Math.random() * (254 - n)) + 1);
                 var rand3 = Math.floor((Math.random() * (254 - n)) + 1);
-                this.background = "rgb(" + rand1 + ", " + rand2 + ", " + rand3 + ")";
-                return this.background;
+                this._background = "rgb(" + rand1 + ", " + rand2 + ", " + rand3 + ")";
+                return this._background;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AvatarBoxComponent.prototype, "avatarTitle", {
+            /**
+            * Get avatar title
+            * @return {string}
+            */
+            get: function () {
+                if (!this.title)
+                    return '';
+                var title = this.title.trim();
+                if (this.titleLength === 1)
+                    return title.charAt(0).toUpperCase();
+                return title.search(' ') === -1
+                    ? title.substring(0, this.titleLength)
+                    : _.map(title.split(' ').slice(0, this.titleLength), function (item) { return item.charAt(0); }).join('');
             },
             enumerable: true,
             configurable: true
@@ -12612,17 +12609,24 @@
         ], AvatarBoxComponent.prototype, "defaultAvatar", void 0);
         __decorate([
             core.Input(),
-            __metadata("design:type", Boolean)
-        ], AvatarBoxComponent.prototype, "lazy", void 0);
+            __metadata("design:type", Number)
+        ], AvatarBoxComponent.prototype, "titleLength", void 0);
         __decorate([
             core.Input(),
             __metadata("design:type", Number)
         ], AvatarBoxComponent.prototype, "size", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], AvatarBoxComponent.prototype, "rounded", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], AvatarBoxComponent.prototype, "lazy", void 0);
         AvatarBoxComponent = __decorate([
             core.Component({
                 selector: 'avatar-box',
-                template: "<div class=\"avatar-box\" [ngClass]=\"defaultOptions?.componentClass\" [style.width]=\"size + &quot;px&quot;\" [style.maxWidth]=\"size + &quot;px&quot;\" [style.minWidth]=\"size + &quot;px&quot;\" [style.height]=\"size + &quot;px&quot;\" [style.maxHeight]=\"size + &quot;px&quot;\" [style.minHeight]=\"size + &quot;px&quot;\" [class.no-avatar]=\"!displayAvatar\" [style.backgroundColor]=\"avatarBackground\"><ng-template [ngIf]=\"displayAvatar\"><img *ngIf=\"lazy\" [defaultImage]=\"defaultAvatar\" [errorImage]=\"defaultAvatar\" [lazyLoad]=\"displayAvatar\"><img *ngIf=\"!lazy\" [src]=\"displayAvatar\"></ng-template><span *ngIf=\"!displayAvatar\" [style.fontSize]=\"( size / 2 ) + &quot;px&quot;\" [style.lineHeight]=\"( size / 2 ) + &quot;px&quot;\">{{ title?.trim()?.substring( 0, 1 ) | uppercase }}</span></div>",
-                styles: [".avatar-box{overflow:hidden;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);display:flex;align-items:center;align-content:center;justify-content:center;border-radius:6px;font-weight:700;box-shadow:.3px .3px 3px #e7e7e7}.avatar-box.no-avatar img{display:none}.avatar-box.no-avatar span{display:block!important}.avatar-box img{width:100%;height:100%}.avatar-box span{display:none;color:#fff;text-shadow:.3px .3px #e7e7e7;font-style:normal}"]
+                template: "<div class=\"avatar-box\" [ngClass]=\"defaultOptions?.componentClass\" [style.width]=\"size + &quot;px&quot;\" [style.maxWidth]=\"size + &quot;px&quot;\" [style.minWidth]=\"size + &quot;px&quot;\" [style.height]=\"size + &quot;px&quot;\" [style.maxHeight]=\"size + &quot;px&quot;\" [style.minHeight]=\"size + &quot;px&quot;\" [class.rounded]=\"rounded\" [class.no-avatar]=\"!source &amp;&amp; !defaultAvatar\" [style.backgroundColor]=\"!source &amp;&amp; !defaultAvatar &amp;&amp; avatarBackground\"><ng-template [ngIf]=\"source || defaultAvatar\"><img *ngIf=\"lazy\" [defaultImage]=\"defaultAvatar\" [lazyLoad]=\"source || defaultAvatar\"><img *ngIf=\"!lazy\" [attr.src]=\"source | image: defaultAvatar | async\"></ng-template><span *ngIf=\"!source &amp;&amp; !defaultAvatar\" [style.fontSize]=\"( size / ( titleLength * 1.5 ) ) + &quot;px&quot;\" [style.lineHeight]=\"( size / ( titleLength * 1.5 ) ) + &quot;px&quot;\">{{ avatarTitle }}</span></div>"
             }),
             __param(0, core.Optional()), __param(0, core.Inject(AVATAR_BOX_DEFAULT_OPTIONS)),
             __metadata("design:paramtypes", [Object])
@@ -12643,7 +12647,12 @@
             this.size = (this.defaultOptions || {}).size || 40;
             this.boardHeight = (this.defaultOptions || {}).boardHeight || 40;
             this.maximum = (this.defaultOptions || {}).maximum || 9;
-            this.lazy = (this.defaultOptions || {}).lazy || true;
+            this.rounded = (this.defaultOptions || {}).rounded !== undefined
+                ? (this.defaultOptions || {}).rounded
+                : false;
+            this.lazy = (this.defaultOptions || {}).lazy !== undefined
+                ? (this.defaultOptions || {}).lazy
+                : true;
         }
         /**
         * @constructor
@@ -12714,12 +12723,15 @@
         __decorate([
             core.Input(),
             __metadata("design:type", Boolean)
+        ], AvatarListComponent.prototype, "rounded", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
         ], AvatarListComponent.prototype, "lazy", void 0);
         AvatarListComponent = __decorate([
             core.Component({
                 selector: 'avatar-list',
-                template: "<div class=\"avatar-list\" *ngIf=\"items?.length || alwaysVisible\" [ngClass]=\"defaultOptions?.componentClass\" [class.avatar-list__board]=\"board\" [style.minHeight]=\"board &amp;&amp; boardHeight ? boardHeight + &quot;px&quot; : &quot;inherit&quot;\"><div class=\"layout-row layout-wrap layout-fixer-5\"><div class=\"p-5 layout-colum layout-align-center-center pos-relative\" *ngFor=\"let item of handledItems\" [matTooltip]=\"item?.full_name || &quot;N/A&quot;\"><div class=\"avatar-list__count-box\" *ngIf=\"item?.is_count_item\" [style.width]=\"size + &quot;px&quot;\" [style.maxWidth]=\"size + &quot;px&quot;\" [style.minWidth]=\"size + &quot;px&quot;\" [style.height]=\"size + &quot;px&quot;\" [style.maxHeight]=\"size + &quot;px&quot;\" [style.minHeight]=\"size + &quot;px&quot;\" [style.fontSize]=\"( size / 2.5 ) + &quot;px&quot;\">{{ ( ( item?.count || 0 ) | commas ) + \"+\" }}</div><avatar-box *ngIf=\"!item?.is_count_item\" [size]=\"size\" [unique]=\"item?.id\" [source]=\"item?.avatar\" [title]=\"item?.full_name\" [lazy]=\"lazy\"></avatar-box><div class=\"avatar-list__disabled-box\" *ngIf=\"item?.is_disabled\"><i class=\"fas fa-ban text-warn\" [style.fontSize]=\"( size / 1.5 ) + &quot;px&quot;\"></i></div></div></div></div>",
-                styles: [".avatar-list__board{min-height:50px;border:1px solid #e7e7e7;padding:10px;border-radius:4px;background-color:#fff}.avatar-list__count-box{background-color:#000;color:#fff;font-weight:600;border-radius:6px;height:100%;width:100%;display:flex;align-items:center;align-content:center;justify-content:center;box-shadow:1px 1px 3px #e7e7e7}.avatar-list__disabled-box{position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,.5)}.avatar-list__disabled-box i{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}"]
+                template: "<div class=\"avatar-list\" *ngIf=\"items?.length || alwaysVisible\" [ngClass]=\"defaultOptions?.componentClass\" [class.avatar-list__board]=\"board\" [style.minHeight]=\"board &amp;&amp; boardHeight ? boardHeight + &quot;px&quot; : &quot;inherit&quot;\"><div class=\"layout-row layout-wrap layout-fixer-5\"><div class=\"p-5 layout-colum layout-align-center-center pos-relative\" *ngFor=\"let item of handledItems\" [matTooltip]=\"item?.full_name || &quot;N/A&quot;\"><div class=\"avatar-list__count-box\" *ngIf=\"item?.is_count_item\" [style.width]=\"size + &quot;px&quot;\" [style.maxWidth]=\"size + &quot;px&quot;\" [style.minWidth]=\"size + &quot;px&quot;\" [style.height]=\"size + &quot;px&quot;\" [style.maxHeight]=\"size + &quot;px&quot;\" [style.minHeight]=\"size + &quot;px&quot;\" [style.fontSize]=\"( size / 2.5 ) + &quot;px&quot;\">{{ ( ( item?.count || 0 ) | commas ) + \"+\" }}</div><avatar-box *ngIf=\"!item?.is_count_item\" [rounded]=\"rounded\" [size]=\"size\" [unique]=\"item?.id\" [source]=\"item?.avatar\" [title]=\"item?.full_name\" [lazy]=\"lazy\"></avatar-box><div class=\"avatar-list__disabled-box\" *ngIf=\"item?.is_disabled\"><i class=\"fas fa-ban text-warn\" [style.fontSize]=\"( size / 1.5 ) + &quot;px&quot;\"></i></div></div></div></div>"
             }),
             __param(0, core.Optional()), __param(0, core.Inject(AVATAR_LIST_DEFAULT_OPTIONS)),
             __metadata("design:paramtypes", [Object])
@@ -12735,10 +12747,12 @@
         */
         function CollapsePaginatorComponent(defaultOptions) {
             this.defaultOptions = defaultOptions;
-            this.pageIndex = 0;
-            this.pageSize = 15;
-            this.pageSizeOptions = [15, 25, 50];
-            this.showFirstLastButtons = true;
+            this.pageIndex = (this.defaultOptions || {}).pageIndex || 0;
+            this.pageSize = (this.defaultOptions || {}).pageSize || 15;
+            this.pageSizeOptions = (this.defaultOptions || {}).pageSizeOptions || [15, 25, 50];
+            this.showFirstLastButtons = (this.defaultOptions || {}).showFirstLastButtons !== undefined
+                ? (this.defaultOptions || {}).showFirstLastButtons
+                : true;
             this.paginatorRef = new core.EventEmitter();
             this.page = new core.EventEmitter();
         }
@@ -12746,6 +12760,7 @@
         * @constructor
         */
         CollapsePaginatorComponent.prototype.ngAfterViewInit = function () {
+            this.paginator._intl = new material.MatPaginatorIntl();
             this.paginator._intl.getRangeLabel = this.getExpansionRangeLabel;
             this.paginatorRef.emit(this.paginator);
         };
@@ -12827,9 +12842,7 @@
         CollapsePaginatorComponent = __decorate([
             core.Component({
                 selector: 'collapse-paginator',
-                template: "<div class=\"collapse-paginator layout-row layout-align-end-center\" [ngClass]=\"defaultOptions?.componentClass\"><mat-paginator [ngClass]=\"defaultOptions?.paginatorClass\" [pageIndex]=\"pageIndex\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"onPageChange( $event )\" [showFirstLastButtons]=\"showFirstLastButtons\"></mat-paginator><mat-paginator #__paginator hidePageSize=\"true\" [ngClass]=\"defaultOptions?.paginatorClass\" [pageIndex]=\"pageIndex\" [pageSize]=\"pageSize * 2\" [pageSizeOptions]=\"realPageSizeOptions\" [showFirstLastButtons]=\"showFirstLastButtons\"></mat-paginator></div>",
-                encapsulation: core.ViewEncapsulation.None,
-                styles: [".collapse-paginator .mat-paginator:first-child .mat-paginator-range-actions{display:none}.collapse-paginator .mat-paginator:first-child .mat-paginator-container{padding-right:0}.collapse-paginator .mat-paginator:last-child .mat-paginator-container{padding-left:0}"]
+                template: "<div class=\"collapse-paginator layout-row layout-align-end-center\" [ngClass]=\"defaultOptions?.componentClass\"><mat-paginator [ngClass]=\"defaultOptions?.paginatorClass\" [pageIndex]=\"pageIndex\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"onPageChange( $event )\" [showFirstLastButtons]=\"showFirstLastButtons\"></mat-paginator><mat-paginator #__paginator hidePageSize=\"true\" (page)=\"page?.emit( $event )\" [ngClass]=\"defaultOptions?.paginatorClass\" [pageIndex]=\"pageIndex\" [pageSize]=\"pageSize * 2\" [pageSizeOptions]=\"realPageSizeOptions\" [showFirstLastButtons]=\"showFirstLastButtons\"></mat-paginator></div>"
             }),
             __param(0, core.Optional()), __param(0, core.Inject(COLLAPSE_PAGINATOR_DEFAULT_OPTIONS)),
             __metadata("design:paramtypes", [Object])
@@ -12900,117 +12913,13 @@
         DialogConfirmComponent = __decorate([
             core.Component({
                 selector: 'dialog-confirm',
-                template: "<div class=\"dialog-confirm\" [ngClass]=\"defaultOptions?.componentClass\"><h1 matDialogTitle [innerHtml]=\"data?.title\"></h1><div matDialogContent [innerHtml]=\"data?.content\"></div><div matDialogActions align=\"end\"><button mat-raised-button [color]=\"data?.actions?.no?.color\" (click)=\"onNoClick()\">{{ data?.actions?.no?.name || ( \"GENERAL.LABELS.NO_THANKS\" | translate ) }}</button><button mat-raised-button *ngIf=\"data?.actions?.other\" [color]=\"data?.actions?.other?.color || &quot;accent&quot;\" (click)=\"onOtherClick()\">{{ data?.actions?.other?.name || ( \"GENERAL.LABELS.OTHER\" | translate ) }}</button><button mat-raised-button [color]=\"data?.actions?.yes?.color || &quot;primary&quot;\" (click)=\"onYesClick()\" cdkFocusInitial>{{ data?.actions?.yes?.name || ( \"GENERAL.LABELS.OK\" | translate ) }}</button></div></div>"
+                template: "<div class=\"dialog-confirm\" [ngClass]=\"defaultOptions?.componentClass\"><h1 matDialogTitle [innerHtml]=\"data?.title\"></h1><div matDialogContent style=\"padding-bottom: 20px\" [innerHtml]=\"data?.content\"></div><div matDialogActions align=\"end\"><button mat-raised-button [color]=\"data?.actions?.no?.color\" (click)=\"onNoClick()\">{{ data?.actions?.no?.name || ( \"GENERAL.LABELS.NO_THANKS\" | translate ) }}</button><button mat-raised-button *ngIf=\"data?.actions?.other\" [color]=\"data?.actions?.other?.color || &quot;accent&quot;\" (click)=\"onOtherClick()\">{{ data?.actions?.other?.name || ( \"GENERAL.LABELS.OTHER\" | translate ) }}</button><button mat-raised-button [color]=\"data?.actions?.yes?.color || &quot;primary&quot;\" (click)=\"onYesClick()\" cdkFocusInitial>{{ data?.actions?.yes?.name || ( \"GENERAL.LABELS.OK\" | translate ) }}</button></div></div>"
             }),
             __param(0, core.Optional()), __param(0, core.Inject(DIALOG_CONFIRM_DEFAULT_OPTIONS)),
             __param(1, core.Inject(material.MAT_DIALOG_DATA)),
             __metadata("design:paramtypes", [Object, Object, material.MatDialogRef])
         ], DialogConfirmComponent);
         return DialogConfirmComponent;
-    }());
-
-    var ERROR_MESSAGE_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
-    var ErrorMessageComponent = /** @class */ (function () {
-        /**
-        * @constructor
-        * @param {any} defaultOptions
-        * @param {TranslateService} translateService
-        */
-        function ErrorMessageComponent(defaultOptions, translateService) {
-            this.defaultOptions = defaultOptions;
-            this.translateService = translateService;
-            this.multiple = (this.defaultOptions || {}).mutiple;
-            this.control = new forms.FormControl();
-        }
-        /**
-        * Get field errors
-        * @return {Array}
-        */
-        ErrorMessageComponent.prototype.getFieldErrors = function () {
-            var _this = this;
-            if (!this.control)
-                return [];
-            var errors = this.control.errors;
-            var keys = _.keys(errors);
-            if (!keys || !keys.length)
-                return [];
-            return _.map(this.multiple ? keys : [keys[0]], function (key) {
-                var error = errors[key];
-                key = key.toUpperCase();
-                if (!_.contains([
-                    'REQUIRED', 'MIN', 'MAX',
-                    'MINLENGTH', 'MAXLENGTH',
-                    'PATTERN', 'MATCHPASSWORD',
-                ], key)) {
-                    key = 'INVALID';
-                }
-                return _this.translateService.instant('FORM_ERROR_MESSAGES.' + key, __assign({}, error, { field: _this.label, length: error.requiredLength, format: error.requiredPattern }));
-            });
-        };
-        ErrorMessageComponent.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [ERROR_MESSAGE_DEFAULT_OPTIONS,] }] },
-            { type: core$1.TranslateService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], ErrorMessageComponent.prototype, "label", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Boolean)
-        ], ErrorMessageComponent.prototype, "multiple", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", forms.FormControl)
-        ], ErrorMessageComponent.prototype, "control", void 0);
-        ErrorMessageComponent = __decorate([
-            core.Component({
-                selector: 'error-message',
-                template: "<mat-error class=\"error-message\" *ngFor=\"let error of getFieldErrors()\" [ngClass]=\"defaultOptions?.componentClass\" [innerHTML]=\"error\"></mat-error>"
-            }),
-            __param(0, core.Optional()), __param(0, core.Inject(ERROR_MESSAGE_DEFAULT_OPTIONS)),
-            __metadata("design:paramtypes", [Object, core$1.TranslateService])
-        ], ErrorMessageComponent);
-        return ErrorMessageComponent;
-    }());
-
-    var LOADING_OVERLAY_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
-    var LoadingOverlayComponent = /** @class */ (function () {
-        /**
-        * @constructor
-        * @param {any} defaultOptions
-        */
-        function LoadingOverlayComponent(defaultOptions) {
-            this.defaultOptions = defaultOptions;
-            this.iconOnTop = (this.defaultOptions || {}).iconOnTop;
-            this.iconSize = (this.defaultOptions || {}).iconSize || 30;
-            this.visible = true;
-        }
-        LoadingOverlayComponent.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [LOADING_OVERLAY_DEFAULT_OPTIONS,] }] }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Boolean)
-        ], LoadingOverlayComponent.prototype, "iconOnTop", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], LoadingOverlayComponent.prototype, "iconSize", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Boolean)
-        ], LoadingOverlayComponent.prototype, "visible", void 0);
-        LoadingOverlayComponent = __decorate([
-            core.Component({
-                selector: 'loading-overlay',
-                template: "<div class=\"loading-overlay\" [ngClass]=\"defaultOptions?.componentClass\" [class.loading-overlay__visible]=\"visible\"><div class=\"loading-overlay__overlay\"><div class=\"loading-overlay__icon\" [class.loading-overlay__top]=\"iconOnTop\"><mat-spinner [diameter]=\"iconSize\"></mat-spinner></div></div><ng-content></ng-content></div>",
-                styles: [".loading-overlay{position:relative}.loading-overlay__visible{min-height:170px}.loading-overlay__visible .loading-overlay__overlay{visibility:visible;opacity:1}.loading-overlay__overlay{position:absolute;background-color:rgba(255,255,255,.4);top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:10;visibility:hidden;opacity:0}.loading-overlay__overlay .loading-overlay__icon:not(.loading-overlay__top){position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.loading-overlay__overlay .loading-overlay__icon.loading-overlay__top{position:absolute;left:50%;transform:translate(-50%,-50%);top:50px!important}"]
-            }),
-            __param(0, core.Optional()), __param(0, core.Inject(LOADING_OVERLAY_DEFAULT_OPTIONS)),
-            __metadata("design:paramtypes", [Object])
-        ], LoadingOverlayComponent);
-        return LoadingOverlayComponent;
     }());
 
     // @dynamic
@@ -13133,6 +13042,23 @@
             return NumberService.addCommas(num);
         };
         /**
+        * File size formatter
+        * @static
+        * @param {number} fileSize
+        * @return {string}
+        */
+        NumberService.fileSizeFormatter = function (fileSize) {
+            if (!fileSize || isNaN(fileSize))
+                fileSize = 0;
+            if (fileSize >= 1048576) {
+                return NumberService.addCommas((fileSize / 1024 / 1024).toFixed(2)) + 'MB';
+            }
+            if (fileSize >= 1024) {
+                return NumberService.addCommas((fileSize / 1024).toFixed(2)) + 'KB';
+            }
+            return NumberService.addCommas(fileSize.toFixed(2)) + 'B';
+        };
+        /**
         * Cut off float number
         * @static
         * @param {number} num
@@ -13159,6 +13085,408 @@
         return NumberService;
     }());
 
+    var ERROR_MESSAGE_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
+    var ErrorMessageComponent = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {any} defaultOptions
+        * @param {NumberService} numberService
+        * @param {TranslateService} translateService
+        */
+        function ErrorMessageComponent(defaultOptions, numberService, translateService) {
+            this.defaultOptions = defaultOptions;
+            this.numberService = numberService;
+            this.translateService = translateService;
+            this.multiple = (this.defaultOptions || {}).mutiple;
+            this.control = new forms.FormControl();
+        }
+        /**
+        * Get field errors
+        * @return {Array}
+        */
+        ErrorMessageComponent.prototype.getFieldErrors = function () {
+            var _this = this;
+            if (!this.control)
+                return [];
+            var errors = this.control.errors;
+            var keys = _.keys(errors);
+            if (!keys || !keys.length)
+                return [];
+            return _.map(this.multiple ? keys : [keys[0]], function (key) {
+                var error = errors[key];
+                key = key.toUpperCase();
+                if (!_.contains([
+                    'REQUIRED', 'MIN', 'MAX',
+                    'MIN_GREATER_THAN', 'MAX_LESS_THAN', 'MINLENGTH',
+                    'MAXLENGTH', 'PATTERN', 'MATCHPASSWORD',
+                    'LENGTH', 'EQUAL',
+                ], key)) {
+                    key = 'INVALID';
+                }
+                var value;
+                switch (key) {
+                    case 'MIN':
+                    case 'MIN_GREATER_THAN':
+                        value = NumberService.addCommas(error.min);
+                        break;
+                    case 'MAX':
+                    case 'MAX_LESS_THAN':
+                        value = NumberService.addCommas(error.max);
+                        break;
+                    case 'LENGTH':
+                    case 'MAXLENGTH':
+                    case 'MINLENGTH':
+                        value = NumberService.addCommas(error.requiredLength);
+                        break;
+                    case 'EQUAL':
+                        value = NumberService.addCommas(error.requiredValue);
+                        break;
+                    case 'PATTERN':
+                        value = error.requiredPattern;
+                        break;
+                }
+                return _this.translateService.instant('FORM_ERROR_MESSAGES.' + key, __assign({}, error, { value: value, field: _this.label }));
+            });
+        };
+        ErrorMessageComponent.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [ERROR_MESSAGE_DEFAULT_OPTIONS,] }] },
+            { type: NumberService },
+            { type: core$1.TranslateService }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], ErrorMessageComponent.prototype, "label", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], ErrorMessageComponent.prototype, "multiple", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", forms.FormControl)
+        ], ErrorMessageComponent.prototype, "control", void 0);
+        ErrorMessageComponent = __decorate([
+            core.Component({
+                selector: 'error-message',
+                template: "<mat-error class=\"error-message\" *ngFor=\"let error of getFieldErrors()\" [ngClass]=\"defaultOptions?.componentClass\" [innerHTML]=\"error\"></mat-error>"
+            }),
+            __param(0, core.Optional()), __param(0, core.Inject(ERROR_MESSAGE_DEFAULT_OPTIONS)),
+            __metadata("design:paramtypes", [Object, NumberService,
+                core$1.TranslateService])
+        ], ErrorMessageComponent);
+        return ErrorMessageComponent;
+    }());
+
+    var FILTER_BOX_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
+    var FilterBoxComponent = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {any} defaultOptions
+        * @param {TranslateService} translateService
+        */
+        function FilterBoxComponent(defaultOptions, translateService) {
+            var _this = this;
+            this.defaultOptions = defaultOptions;
+            this.translateService = translateService;
+            this.startView = (this.defaultOptions || {}).startView || 'month';
+            this.fieldKey = (this.defaultOptions || {}).fieldKey || 'id';
+            this.fieldParentKey = (this.defaultOptions || {}).fieldParentKey || 'parent_id';
+            this.fieldName = (this.defaultOptions || {}).fieldName || 'name';
+            this.type = (this.defaultOptions || {}).type || 'query';
+            this.min = (this.defaultOptions || {}).min || 0;
+            this.max = (this.defaultOptions || {}).max || 1000;
+            this.applyFilter = new core.EventEmitter();
+            this.filterChange = new core.EventEmitter();
+            this.slideValue = 0;
+            this.slideHighValue = 1000;
+            this.slideOptions = {
+                floor: 0, ceil: 1000,
+                translate: function (value, label) {
+                    switch (label) {
+                        case ng5Slider.LabelType.Low:
+                            return '<b>'
+                                + _this.translateService.instant('GENERAL.LABELS.MIN')
+                                + '</b> '
+                                + NumberService.kFormatter(value);
+                        case ng5Slider.LabelType.High:
+                            return '<b>'
+                                + _this.translateService.instant('GENERAL.LABELS.MAX')
+                                + '</b> '
+                                + NumberService.kFormatter(value);
+                        default:
+                            return NumberService.kFormatter(value);
+                    }
+                },
+            };
+        }
+        /**
+        * @constructor
+        */
+        FilterBoxComponent.prototype.ngAfterContentInit = function () {
+            if (!this.emptyLabel) {
+                this.emptyLabel = this.type === 'datepicker'
+                    ? this.translateService.instant('GENERAL.LABELS.ALL_DATES')
+                    : (!this.multiple ? this.translateService.instant('GENERAL.LABELS.ALL_ITEMS') : '');
+            }
+            if (!this.placeholder) {
+                this.placeholder = this.type === 'query'
+                    ? this.translateService.instant('GENERAL.PLACEHOLDERS.SEARCH')
+                    : this.translateService.instant('GENERAL.PLACEHOLDERS.CHOOSE');
+            }
+        };
+        /**
+        * @constructor
+        * @param {SimpleChanges} changes
+        */
+        FilterBoxComponent.prototype.ngOnChanges = function (changes) {
+            if (this.type === 'range') {
+                if (this.filter
+                    && !_.has(changes, 'min')
+                    && !_.has(changes, 'max')) {
+                    return;
+                }
+                this.slideValue = Math.ceil(this.min) || 0;
+                this.slideHighValue = Math.ceil(this.max) || 1000;
+                this.slideOptions = __assign({}, this.slideOptions, { floor: this.slideValue, ceil: this.slideHighValue });
+                this.filter = { min: this.slideValue, max: this.slideHighValue };
+            }
+        };
+        /**
+        * On month of Datepicker change
+        * @param {any} picker
+        * @param {any} event
+        * @return {void}
+        */
+        FilterBoxComponent.prototype.onMonthChange = function (picker, event) {
+            if (!this.onlyMonth)
+                return;
+            this.filter = event;
+            this.filterChange.emit(this.filter);
+            this.applyFilter.emit(event);
+            picker.close();
+        };
+        /**
+        * On year of Datepicker change
+        * @param {any} picker
+        * @param {any} event
+        * @return {void}
+        */
+        FilterBoxComponent.prototype.onYearChange = function (picker, event) {
+            if (!this.onlyYear)
+                return;
+            this.filter = event;
+            this.filterChange.emit(this.filter);
+            this.applyFilter.emit(event);
+            picker.close();
+        };
+        /**
+        * On slide value change
+        * @param {any} event
+        * @return {void}
+        */
+        FilterBoxComponent.prototype.onSlideValueChange = function (event) {
+            this.filter = __assign({}, this.filter, { min: event });
+            this.filterChange.emit(this.filter);
+        };
+        /**
+        * On slide high value change
+        * @param {any} event
+        * @return {void}
+        */
+        FilterBoxComponent.prototype.onSlideHighValueChange = function (event) {
+            this.filter = __assign({}, this.filter, { max: event });
+            this.filterChange.emit(this.filter);
+        };
+        /**
+        * Toggle slider menu
+        * @return {void}
+        */
+        FilterBoxComponent.prototype.toggleSliderMenu = function () {
+            var _this = this;
+            setTimeout(function () { return _this.menuOpened = !_this.menuOpened; }, 100);
+        };
+        Object.defineProperty(FilterBoxComponent.prototype, "format", {
+            /**
+            * Format filter
+            * @return {string}
+            */
+            get: function () {
+                if (!this.filter)
+                    return;
+                switch (this.type) {
+                    case 'datepicker':
+                        if (this.onlyMonth)
+                            return moment(this.filter).format('MMMM YYYY');
+                        if (this.onlyYear)
+                            return moment(this.filter).format('YYYY');
+                        if (!this.rangeMode)
+                            return moment(this.filter).format('DD/MM/YYYY');
+                        return moment(this.filter.begin).format('DD/MM/YYYY')
+                            + ' - '
+                            + moment(this.filter.end).format('DD/MM/YYYY');
+                    case 'range':
+                        return this.translateService.instant('GENERAL.LABELS.RANGE')
+                            + ': '
+                            + NumberService.addCommas(this.filter.min)
+                            + ' - '
+                            + NumberService.addCommas(this.filter.max);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        FilterBoxComponent.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [FILTER_BOX_DEFAULT_OPTIONS,] }] },
+            { type: core$1.TranslateService }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "fieldSubName", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "fieldImage", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "emptyLabel", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "placeholder", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], FilterBoxComponent.prototype, "emptyValue", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], FilterBoxComponent.prototype, "data", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], FilterBoxComponent.prototype, "filter", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], FilterBoxComponent.prototype, "minDate", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], FilterBoxComponent.prototype, "maxDate", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "translated", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "disabled", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "multiple", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "rangeMode", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "onlyYear", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], FilterBoxComponent.prototype, "onlyMonth", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "startView", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "fieldKey", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "fieldParentKey", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "fieldName", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], FilterBoxComponent.prototype, "type", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], FilterBoxComponent.prototype, "min", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], FilterBoxComponent.prototype, "max", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], FilterBoxComponent.prototype, "applyFilter", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], FilterBoxComponent.prototype, "filterChange", void 0);
+        FilterBoxComponent = __decorate([
+            core.Component({
+                selector: 'filter-box',
+                template: "<ng-template [ngIf]=\"type === &quot;query&quot;\"><mat-form-field appearance=\"legacy\" floatLabel=\"never\"><input matInput [placeholder]=\"placeholder\" [disabled]=\"disabled\" [(ngModel)]=\"filter\" (ngModelChange)=\"filterChange?.emit( filter ); applyFilter?.emit( $event )\" (keydown.esc)=\"filter = &quot;&quot;; filterChange?.emit( filter ); applyFilter?.emit( $event );\"><span matPrefix><i class=\"fa fa-search mr-10\"></i></span><div class=\"cursor\" matSuffix *ngIf=\"filter\" (click)=\"filter = &quot;&quot;; filterChange?.emit( filter ); applyFilter?.emit( $event );\"><i class=\"fa fa-times-circle text-warn\"></i></div></mat-form-field></ng-template><ng-template [ngIf]=\"type === &quot;filter&quot;\"><select-box appearance=\"legacy\" floatLabel=\"never\" [fieldKey]=\"fieldKey\" [fieldParentKey]=\"fieldParentKey\" [fieldName]=\"fieldName\" [fieldSubName]=\"fieldSubName\" [fieldImage]=\"fieldImage\" [emptyLabel]=\"emptyLabel\" [emptyValue]=\"emptyValue\" [data]=\"data\" [multiple]=\"multiple\" [disabled]=\"disabled\" [placeholder]=\"placeholder\" [translated]=\"translated\" [(ngModel)]=\"filter\" (ngModelChange)=\"filterChange?.emit( filter ); applyFilter?.emit( $event );\" ngDefaultControl></select-box></ng-template><ng-template [ngIf]=\"type === &quot;datepicker&quot;\"><mat-form-field class=\"filter-box__datepicker\" floatLabel=\"never\" (click)=\"__picker?.open()\"><mat-label>{{ format || emptyLabel }}</mat-label><input matInput [(ngModel)]=\"filter\" (dateChange)=\"filterChange?.emit( filter ); applyFilter?.emit( $event );\" [satDatepicker]=\"__picker\" [min]=\"minDate\" [max]=\"maxDate\" ngDefaultControl readonly><mat-datepicker-toggle matSuffix [for]=\"__picker\"></mat-datepicker-toggle><sat-datepicker #__picker [startView]=\"startView\" [disabled]=\"disabled\" [rangeMode]=\"rangeMode\" (monthSelected)=\"onMonthChange( __picker, $event )\" (yearSelected)=\"onYearChange( __picker, $event )\"></sat-datepicker></mat-form-field></ng-template><ng-template [ngIf]=\"type === &quot;range&quot;\"><div class=\"cursor\" [matMenuTriggerFor]=\"sliderMenu\" (menuOpened)=\"toggleSliderMenu()\" (menuClosed)=\"toggleSliderMenu()\"><mat-form-field appearance=\"legacy\" floatLabel=\"never\"><input matInput [value]=\"format || emptyLabel\" readonly><span matSuffix><div class=\"mat-select-arrow-wrapper\" style=\"top: -1px\"><div class=\"mat-select-arrow\"></div></div></span></mat-form-field></div><mat-menu class=\"filter-box__slider-menu\" #sliderMenu=\"matMenu\"><ng5-slider *ngIf=\"menuOpened\" (click)=\"$event?.stopPropagation()\" [(value)]=\"slideValue\" [(highValue)]=\"slideHighValue\" [options]=\"slideOptions\" (valueChange)=\"onSlideValueChange( $event ); applyFilter?.emit( $event );\" (highValueChange)=\"onSlideHighValueChange( $event ); applyFilter?.emit( $event );\"></ng5-slider></mat-menu></ng-template>",
+                host: { class: 'filter-box' }
+            }),
+            __param(0, core.Optional()), __param(0, core.Inject(FILTER_BOX_DEFAULT_OPTIONS)),
+            __metadata("design:paramtypes", [Object, core$1.TranslateService])
+        ], FilterBoxComponent);
+        return FilterBoxComponent;
+    }());
+
+    var LOADING_OVERLAY_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
+    var LoadingOverlayComponent = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {any} defaultOptions
+        */
+        function LoadingOverlayComponent(defaultOptions) {
+            this.defaultOptions = defaultOptions;
+            this.iconOnTop = (this.defaultOptions || {}).iconOnTop;
+            this.iconSize = (this.defaultOptions || {}).iconSize || 30;
+            this.visible = (this.defaultOptions || {}).visible !== undefined
+                ? (this.defaultOptions || {}).visible
+                : true;
+        }
+        LoadingOverlayComponent.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [LOADING_OVERLAY_DEFAULT_OPTIONS,] }] }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], LoadingOverlayComponent.prototype, "iconOnTop", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], LoadingOverlayComponent.prototype, "iconSize", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], LoadingOverlayComponent.prototype, "visible", void 0);
+        LoadingOverlayComponent = __decorate([
+            core.Component({
+                selector: 'loading-overlay',
+                template: "<div class=\"loading-overlay\" [ngClass]=\"defaultOptions?.componentClass\" [class.loading-overlay__visible]=\"visible\"><div class=\"loading-overlay__overlay\"><div class=\"loading-overlay__icon\" [class.loading-overlay__top]=\"iconOnTop\"><mat-spinner [diameter]=\"iconSize\"></mat-spinner></div></div><ng-content></ng-content></div>"
+            }),
+            __param(0, core.Optional()), __param(0, core.Inject(LOADING_OVERLAY_DEFAULT_OPTIONS)),
+            __metadata("design:paramtypes", [Object])
+        ], LoadingOverlayComponent);
+        return LoadingOverlayComponent;
+    }());
+
     var SELECT_BOX_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
     var SelectBoxComponent = /** @class */ (function () {
         /**
@@ -13176,12 +13504,15 @@
             this.panelClass = (this.defaultOptions || {}).panelClass || '';
             this.floatLabel = (this.defaultOptions || {}).floatLabel || 'always';
             this.appearance = (this.defaultOptions || {}).appearance || 'outline';
-            this.sort = true;
             this.formControl = new forms.FormControl();
-            this.fieldKey = 'id';
-            this.fieldParentKey = 'parent_id';
-            this.fieldName = 'name';
-            this.placeholder = this.translateService.instant('GENERAL.PLACEHOLDERS.CHOOSE');
+            this.fieldKey = (this.defaultOptions || {}).fieldKey || 'id';
+            this.fieldParentKey = (this.defaultOptions || {}).fieldParentKey || 'parent_id';
+            this.fieldName = (this.defaultOptions || {}).fieldName || 'name';
+            this.sort = (this.defaultOptions || {}).sort !== undefined
+                ? (this.defaultOptions || {}).sort
+                : true;
+            this.placeholder = (this.defaultOptions || {}).placeholder
+                || this.translateService.instant('GENERAL.PLACEHOLDERS.CHOOSE');
             this.ngModelChange = new core.EventEmitter();
             this.selectionChange = new core.EventEmitter();
             this.selectionOptionChange = new core.EventEmitter();
@@ -13305,6 +13636,10 @@
             this.selectionOptionChange.emit(this.multiple
                 ? _.filter(this.handledItems, function (item) { return _.contains(ev.value, item[_this.fieldKey]); })
                 : _.find(this.handledItems, function (item) { return value === item[_this.fieldKey]; }));
+            this.isSelectAll = this.multiple
+                && this.handledItems
+                && this.ngModel
+                && this.handledItems.length === this.ngModel.length;
         };
         /**
         * Toggle select all options for multple mode
@@ -13479,10 +13814,6 @@
         ], SelectBoxComponent.prototype, "appearance", void 0);
         __decorate([
             core.Input(),
-            __metadata("design:type", Boolean)
-        ], SelectBoxComponent.prototype, "sort", void 0);
-        __decorate([
-            core.Input(),
             __metadata("design:type", forms.FormControl)
         ], SelectBoxComponent.prototype, "formControl", void 0);
         __decorate([
@@ -13497,6 +13828,10 @@
             core.Input(),
             __metadata("design:type", String)
         ], SelectBoxComponent.prototype, "fieldName", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], SelectBoxComponent.prototype, "sort", void 0);
         __decorate([
             core.Input(),
             __metadata("design:type", String)
@@ -13524,16 +13859,46 @@
         SelectBoxComponent = __decorate([
             core.Component({
                 selector: 'select-box',
-                template: "<div class=\"select-box layout-column flex-noshirnk\" [ngClass]=\"defaultOptions?.componentClass\"><ng-template [ngIf]=\"noFormField\"><mat-label *ngIf=\"label\">{{ label }}</mat-label><ng-template [ngIf]=\"readonly\"><input matInput [disableControl]=\"disableControl || disabled\" [value]=\"displayValue || &quot;&quot;\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" [required]=\"required\" ngDefaultControl readonly></ng-template><ng-template [ngIf]=\"!readonly\"><mat-select matInput [panelClass]=\"[ panelClass, &quot;select-box__panel&quot; ]\" [multiple]=\"multiple\" [disableControl]=\"disableControl || disabled\" [(ngModel)]=\"ngModel\" (ngModelChange)=\"ngModelChange?.emit( ngModel )\" (selectionChange)=\"optionChange( $event )\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" (openedChange)=\"$event &amp;&amp; !loaded &amp;&amp; loadData(); openedChange?.emit( $event );\" [required]=\"required\" ngDefaultControl><ngx-mat-select-search class=\"select-box__search\" [placeholderLabel]=\"&quot;GENERAL.PLACEHOLDERS.SEARCH&quot; | translate\" [noEntriesFoundLabel]=\"&quot;GENERAL.LABELS.NOT_FOUND&quot; | translate\" [formControl]=\"filterCtrl\"></ngx-mat-select-search><mat-select-trigger><ng-template [ngIf]=\"displayImage\"><div class=\"select-box__display-image\"><avatar-box size=\"24\" [lazy]=\"false\" [source]=\"displayImage\" [title]=\"displayValue\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ displayValue }}</div></ng-template><ng-template [ngIf]=\"!displayImage\">{{ displayValue }}</ng-template></mat-select-trigger><loading-overlay [visible]=\"!loaded\"><mat-checkbox class=\"select-box__checkbox\" matRipple matRippleColor=\"rgba(0, 0, 0, .7)\" *ngIf=\"multiple &amp;&amp; handledItems?.length &amp;&amp; !filterCtrl?.value?.length\" color=\"primary\" [(ngModel)]=\"isSelectAll\" [checked]=\"handledItems?.length === ngModel?.length\" (change)=\"toggleSelectAll()\">{{ \"GENERAL.LABELS.SELECT_ALL\" | translate }}\n({{ ( handledItems?.length || 0 ) | commas }} {{ \"GENERAL.LABELS.ITEMS\" | translate }})</mat-checkbox><mat-option empty *ngIf=\"!loaded || emptyLabel\" [value]=\"emptyValue\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"emptyImage\" size=\"28\" [source]=\"emptyImage\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ emptyLabel }}</div></mat-option><ng-template [ngIf]=\"groups\"><mat-option *ngFor=\"let item of handledGroupItems?.no_groups\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option><mat-optgroup *ngFor=\"let group of groups\" [label]=\"group?.name || &quot;N/A&quot;\"><mat-option *ngFor=\"let item of handledGroupItems?.groups[ group?.id ]\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></mat-optgroup></ng-template><ng-template [ngIf]=\"!groups\"><mat-option *ngFor=\"let item of filtered\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></ng-template></loading-overlay></mat-select></ng-template></ng-template><ng-template [ngIf]=\"!noFormField\"><mat-form-field [class.select-box__empty-selected]=\"isEmptySelected\" [class.select-box__no-error-spacing]=\"noErrorSpacing\" [floatLabel]=\"floatLabel\" [appearance]=\"appearance\" [ngClass]=\"formFieldClass\"><mat-label *ngIf=\"label\">{{ label }}</mat-label><ng-template [ngIf]=\"readonly\"><input matInput [disableControl]=\"disableControl || disabled\" [value]=\"displayValue || &quot;&quot;\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" [required]=\"required\" ngDefaultControl readonly></ng-template><ng-template [ngIf]=\"!readonly\"><mat-select matInput [panelClass]=\"[ panelClass, &quot;select-box__panel&quot; ]\" [multiple]=\"multiple\" [disableControl]=\"disableControl || disabled\" [(ngModel)]=\"ngModel\" (ngModelChange)=\"ngModelChange?.emit( ngModel )\" (selectionChange)=\"optionChange( $event )\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" (openedChange)=\"$event &amp;&amp; !loaded &amp;&amp; loadData(); openedChange?.emit( $event );\" [required]=\"required\" ngDefaultControl><ngx-mat-select-search class=\"select-box__search\" [placeholderLabel]=\"&quot;GENERAL.PLACEHOLDERS.SEARCH&quot; | translate\" [noEntriesFoundLabel]=\"&quot;GENERAL.LABELS.NOT_FOUND&quot; | translate\" [formControl]=\"filterCtrl\"></ngx-mat-select-search><mat-select-trigger><ng-template [ngIf]=\"displayImage\"><div class=\"select-box__display-image\"><avatar-box size=\"24\" [lazy]=\"false\" [source]=\"displayImage\" [title]=\"displayValue\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ displayValue }}</div></ng-template><ng-template [ngIf]=\"!displayImage\">{{ displayValue }}</ng-template></mat-select-trigger><loading-overlay [visible]=\"!loaded\"><mat-checkbox class=\"select-box__checkbox\" matRipple matRippleColor=\"rgba(0, 0, 0, .7)\" *ngIf=\"multiple &amp;&amp; handledItems?.length &amp;&amp; !filterCtrl?.value?.length\" color=\"primary\" [(ngModel)]=\"isSelectAll\" [checked]=\"handledItems?.length === ngModel?.length\" (change)=\"toggleSelectAll()\">{{ \"GENERAL.LABELS.SELECT_ALL\" | translate }}\n({{ ( handledItems?.length || 0 ) | commas }} {{ \"GENERAL.LABELS.ITEMS\" | translate }})</mat-checkbox><mat-option empty *ngIf=\"!loaded || emptyLabel\" [value]=\"emptyValue\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"emptyImage\" size=\"28\" [source]=\"emptyImage\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ emptyLabel }}</div></mat-option><ng-template [ngIf]=\"groups\"><mat-option *ngFor=\"let item of handledGroupItems?.no_groups\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option><mat-optgroup *ngFor=\"let group of groups\" [label]=\"group?.name || &quot;N/A&quot;\"><mat-option *ngFor=\"let item of handledGroupItems?.groups[ group?.id ]\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></mat-optgroup></ng-template><ng-template [ngIf]=\"!groups\"><mat-option *ngFor=\"let item of filtered\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></ng-template></loading-overlay></mat-select></ng-template><mat-error><error-message [label]=\"label\" [control]=\"formControl\"></error-message></mat-error></mat-form-field></ng-template></div>",
-                host: { class: 'flex-noshrink layout-column' },
-                encapsulation: core.ViewEncapsulation.None,
-                styles: [".select-box__empty-selected .mat-select-placeholder{color:rgba(0,0,0,.87)!important;-webkit-text-fill-color:currentColor!important}.select-box__empty-selected.mat-form-field-hide-placeholder .mat-form-field-label{display:none}.select-box__no-error-spacing .mat-form-field-wrapper{padding:0}.select-box__no-error-spacing .mat-form-field-underline{bottom:0}.select-box__search{display:block}.select-box__search .mat-select-search-input{min-height:52px}.select-box__checkbox{display:flex;line-height:3em;height:3em;padding:0 16px}.select-box__checkbox:hover{background-color:#f5f5f5}.select-box__checkbox.mat-checkbox-checked .mat-checkbox-background{border:2px solid transparent}.select-box__checkbox.mat-checkbox-checked .mat-checkbox-background:after{display:block}.select-box__checkbox .mat-checkbox-inner-container{margin-left:unset;margin-top:unset;margin-bottom:unset;margin-right:8px}.select-box__checkbox .mat-checkbox-layout{align-items:center;margin-top:7px;width:100%}.select-box__checkbox .mat-checkbox-label{color:rgba(0,0,0,.87);font-size:14px}.select-box__checkbox .mat-checkbox-background:after{top:3px;width:8px;height:3px;border-left:2px solid currentColor;transform:rotate(-45deg);opacity:1;box-sizing:content-box;color:#fafafa;position:absolute;content:'';border-bottom:2px solid currentColor;transition:opacity 90ms cubic-bezier(0,0,.2,.1);display:none}.select-box__checkbox .mat-checkbox-background .mat-checkbox-mixedmark,.select-box__checkbox .mat-checkbox-background svg{display:none}.select-box__panel .mat-option-text{white-space:normal}.select-box__display-image{padding-left:30px}.select-box__display-image avatar-box{position:absolute;left:0;top:-5px}"]
+                template: "<div class=\"select-box layout-column flex-noshirnk\" [ngClass]=\"defaultOptions?.componentClass\"><ng-template [ngIf]=\"noFormField\"><mat-label *ngIf=\"label\">{{ label }}</mat-label><ng-template [ngIf]=\"readonly\"><input matInput [disableControl]=\"disableControl || disabled\" [value]=\"displayValue || &quot;&quot;\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" [required]=\"required\" ngDefaultControl readonly></ng-template><ng-template [ngIf]=\"!readonly\"><mat-select matInput [panelClass]=\"[ panelClass, &quot;select-box__panel&quot; ]\" [multiple]=\"multiple\" [disableControl]=\"disableControl || disabled\" [(ngModel)]=\"ngModel\" (ngModelChange)=\"ngModelChange?.emit( ngModel )\" (selectionChange)=\"optionChange( $event )\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" (openedChange)=\"$event &amp;&amp; !loaded &amp;&amp; loadData(); openedChange?.emit( $event );\" [required]=\"required\" ngDefaultControl><ngx-mat-select-search class=\"select-box__search\" [placeholderLabel]=\"&quot;GENERAL.PLACEHOLDERS.SEARCH&quot; | translate\" [noEntriesFoundLabel]=\"&quot;GENERAL.LABELS.NOT_FOUND&quot; | translate\" [formControl]=\"filterCtrl\"></ngx-mat-select-search><mat-select-trigger><ng-template [ngIf]=\"displayImage\"><div class=\"select-box__display-image\"><avatar-box size=\"24\" [lazy]=\"false\" [source]=\"displayImage\" [title]=\"displayValue\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ displayValue }}</div></ng-template><ng-template [ngIf]=\"!displayImage\">{{ displayValue }}</ng-template></mat-select-trigger><loading-overlay [visible]=\"!loaded\"><mat-checkbox class=\"select-box__checkbox\" matRipple matRippleColor=\"rgba(0, 0, 0, .7)\" *ngIf=\"multiple &amp;&amp; handledItems?.length &amp;&amp; !filterCtrl?.value?.length\" color=\"primary\" [(ngModel)]=\"isSelectAll\" (change)=\"toggleSelectAll()\">{{ \"GENERAL.LABELS.SELECT_ALL\" | translate }}\n({{ ( handledItems?.length || 0 ) | commas }} {{ \"GENERAL.LABELS.ITEMS\" | translate }})</mat-checkbox><mat-option empty *ngIf=\"!loaded || emptyLabel\" [value]=\"emptyValue\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"emptyImage\" size=\"28\" [lazy]=\"false\" [source]=\"emptyImage\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ emptyLabel }}</div></mat-option><ng-template [ngIf]=\"groups\"><mat-option *ngFor=\"let item of handledGroupItems?.no_groups\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option><mat-optgroup *ngFor=\"let group of groups\" [label]=\"group?.name || &quot;N/A&quot;\"><mat-option *ngFor=\"let item of handledGroupItems?.groups[ group?.id ]\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></mat-optgroup></ng-template><ng-template [ngIf]=\"!groups\"><mat-option *ngFor=\"let item of filtered\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></ng-template></loading-overlay></mat-select></ng-template></ng-template><ng-template [ngIf]=\"!noFormField\"><mat-form-field [class.select-box__empty-selected]=\"isEmptySelected\" [class.select-box__no-error-spacing]=\"noErrorSpacing\" [floatLabel]=\"floatLabel\" [appearance]=\"appearance\" [ngClass]=\"formFieldClass\"><mat-label *ngIf=\"label\">{{ label }}</mat-label><ng-template [ngIf]=\"readonly\"><input matInput [disableControl]=\"disableControl || disabled\" [value]=\"displayValue || &quot;&quot;\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" [required]=\"required\" ngDefaultControl readonly></ng-template><ng-template [ngIf]=\"!readonly\"><mat-select matInput [panelClass]=\"[ panelClass, &quot;select-box__panel&quot; ]\" [multiple]=\"multiple\" [disableControl]=\"disableControl || disabled\" [(ngModel)]=\"ngModel\" (ngModelChange)=\"ngModelChange?.emit( ngModel )\" (selectionChange)=\"optionChange( $event )\" [placeholder]=\"isEmptySelected ? emptyLabel : placeholder\" [formControl]=\"formControl\" (openedChange)=\"$event &amp;&amp; !loaded &amp;&amp; loadData(); openedChange?.emit( $event );\" [required]=\"required\" ngDefaultControl><ngx-mat-select-search class=\"select-box__search\" [placeholderLabel]=\"&quot;GENERAL.PLACEHOLDERS.SEARCH&quot; | translate\" [noEntriesFoundLabel]=\"&quot;GENERAL.LABELS.NOT_FOUND&quot; | translate\" [formControl]=\"filterCtrl\"></ngx-mat-select-search><mat-select-trigger><ng-template [ngIf]=\"displayImage\"><div class=\"select-box__display-image\"><avatar-box size=\"24\" [lazy]=\"false\" [source]=\"displayImage\" [title]=\"displayValue\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ displayValue }}</div></ng-template><ng-template [ngIf]=\"!displayImage\">{{ displayValue }}</ng-template></mat-select-trigger><loading-overlay [visible]=\"!loaded\"><mat-checkbox class=\"select-box__checkbox\" matRipple matRippleColor=\"rgba(0, 0, 0, .7)\" *ngIf=\"multiple &amp;&amp; handledItems?.length &amp;&amp; !filterCtrl?.value?.length\" color=\"primary\" [(ngModel)]=\"isSelectAll\" (change)=\"toggleSelectAll()\">{{ \"GENERAL.LABELS.SELECT_ALL\" | translate }}\n({{ ( handledItems?.length || 0 ) | commas }} {{ \"GENERAL.LABELS.ITEMS\" | translate }})</mat-checkbox><mat-option empty *ngIf=\"!loaded || emptyLabel\" [value]=\"emptyValue\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"emptyImage\" size=\"28\" [lazy]=\"false\" [source]=\"emptyImage\" [defaultAvatar]=\"defaultImage\"></avatar-box>{{ emptyLabel }}</div></mat-option><ng-template [ngIf]=\"groups\"><mat-option *ngFor=\"let item of handledGroupItems?.no_groups\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option><mat-optgroup *ngFor=\"let group of groups\" [label]=\"group?.name || &quot;N/A&quot;\"><mat-option *ngFor=\"let item of handledGroupItems?.groups[ group?.id ]\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></mat-optgroup></ng-template><ng-template [ngIf]=\"!groups\"><mat-option *ngFor=\"let item of filtered\" [class.hide]=\"isHiddenItem( item )\" [disabled]=\"isDisabledItem( item )\" [value]=\"item[ fieldKey ]\"><div class=\"layout-row layout-align-start-center\"><avatar-box class=\"mr-5\" *ngIf=\"fieldImage\" size=\"28\" [lazy]=\"false\" [source]=\"item[ fieldImage ]\" [defaultAvatar]=\"defaultImage\" [title]=\"item[ fieldName ]\"></avatar-box><ng-template [ngIf]=\"!translated\"><div class=\"line-height-14\">{{ item?.__name || item[ fieldName ] || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] || \"N/A\" }}</div></div></ng-template><ng-template [ngIf]=\"translated\"><div class=\"line-height-14\">{{ item?.__name || ( item[ fieldName ] | translate ) || \"N/A\" }}&nbsp;<div class=\"font-size-10\" *ngIf=\"fieldSubName\">{{ item[ fieldSubName ] | translate }}</div></div></ng-template></div></mat-option></ng-template></loading-overlay></mat-select></ng-template><mat-error><error-message [label]=\"label\" [control]=\"formControl\"></error-message></mat-error></mat-form-field></ng-template></div>",
+                host: { class: 'flex-noshrink layout-column' }
             }),
             __param(0, core.Optional()), __param(0, core.Inject(SELECT_BOX_DEFAULT_OPTIONS)),
             __metadata("design:paramtypes", [Object, core$1.TranslateService,
                 core.ChangeDetectorRef])
         ], SelectBoxComponent);
         return SelectBoxComponent;
+    }());
+
+    var STATUS_BOX_DEFAULT_OPTIONS = new core.InjectionToken('defaultOptions');
+    var StatusBoxComponent = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {any} defaultOptions
+        */
+        function StatusBoxComponent(defaultOptions) {
+            this.defaultOptions = defaultOptions;
+        }
+        StatusBoxComponent.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [STATUS_BOX_DEFAULT_OPTIONS,] }] }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], StatusBoxComponent.prototype, "color", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], StatusBoxComponent.prototype, "status", void 0);
+        StatusBoxComponent = __decorate([
+            core.Component({
+                selector: 'status-box',
+                template: "<div class=\"status-box layout-column layout-align-center\"><mat-chip-list><mat-chip selected [style.backgroundColor]=\"color\" [matTooltip]=\"status | uppercase\"><div>{{ status | uppercase }}<ng-content></ng-content></div></mat-chip></mat-chip-list></div>",
+                host: { class: 'margin-auto' }
+            }),
+            __param(0, core.Optional()), __param(0, core.Inject(STATUS_BOX_DEFAULT_OPTIONS)),
+            __metadata("design:paramtypes", [Object])
+        ], StatusBoxComponent);
+        return StatusBoxComponent;
     }());
 
     var $ = _$;
@@ -13573,6 +13938,80 @@
             __metadata("design:paramtypes", [core.ElementRef])
         ], AdjustFontsizeDirective);
         return AdjustFontsizeDirective;
+    }());
+
+    var DetectScrollDirective = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {ElementRef} elementRef
+        */
+        function DetectScrollDirective(elementRef) {
+            this.elementRef = elementRef;
+            this.delay = 0;
+            this.offset = 0;
+            this.onScroll = new core.EventEmitter();
+            this.onReachStart = new core.EventEmitter();
+            this.onReachEnd = new core.EventEmitter();
+        }
+        /**
+        * @constructor
+        */
+        DetectScrollDirective.prototype.ngAfterViewInit = function () {
+            var _this = this;
+            var element = this.elementRef.nativeElement;
+            // Init
+            this.detectScroll(element);
+            // Scrolling
+            element.addEventListener('scroll', function () { return _this.detectScroll(element); });
+        };
+        /**
+        * Detect scroll
+        * @private
+        * @param {any} element
+        * @return {void}
+        */
+        DetectScrollDirective.prototype.detectScroll = function (element) {
+            var _this = this;
+            element.scrollHeight !== element.clientHeight && setTimeout(function () {
+                // Scrolling
+                _this.onScroll.emit(event);
+                // In case scroll reach start
+                element.scrollTop <= _this.offset && _this.onReachStart.emit(event);
+                // In case scroll reach end
+                element.scrollTop >= (element.scrollHeight - element.clientHeight - _this.offset)
+                    && _this.onReachEnd.emit(event);
+            }, this.delay);
+        };
+        DetectScrollDirective.ctorParameters = function () { return [
+            { type: core.ElementRef }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], DetectScrollDirective.prototype, "delay", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], DetectScrollDirective.prototype, "offset", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], DetectScrollDirective.prototype, "onScroll", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], DetectScrollDirective.prototype, "onReachStart", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], DetectScrollDirective.prototype, "onReachEnd", void 0);
+        DetectScrollDirective = __decorate([
+            core.Directive({
+                selector: '[detectScroll]',
+            }),
+            __metadata("design:paramtypes", [core.ElementRef])
+        ], DetectScrollDirective);
+        return DetectScrollDirective;
     }());
 
     var DisableControlDirective = /** @class */ (function () {
@@ -13789,64 +14228,6 @@
         return FullscreenDirective;
     }());
 
-    var MaxLessThanDirective = /** @class */ (function () {
-        function MaxLessThanDirective() {
-        }
-        MaxLessThanDirective_1 = MaxLessThanDirective;
-        /**
-        * Validate
-        * @param {FormControl} c
-        * @return {any}
-        */
-        MaxLessThanDirective.prototype.validate = function (c) {
-            var v = c.value;
-            return v >= this.maxLessThan
-                ? { max_less_than: { max: this.maxLessThan, actual: v } }
-                : null;
-        };
-        var MaxLessThanDirective_1;
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], MaxLessThanDirective.prototype, "maxLessThan", void 0);
-        MaxLessThanDirective = MaxLessThanDirective_1 = __decorate([
-            core.Directive({
-                selector: '[maxLessThan][formControlName],[maxLessThan][formControl],[maxLessThan][ngModel]',
-                providers: [{ provide: forms.NG_VALIDATORS, useExisting: MaxLessThanDirective_1, multi: true }],
-            })
-        ], MaxLessThanDirective);
-        return MaxLessThanDirective;
-    }());
-
-    var MinGreaterThanDirective = /** @class */ (function () {
-        function MinGreaterThanDirective() {
-        }
-        MinGreaterThanDirective_1 = MinGreaterThanDirective;
-        /**
-        * Validate
-        * @param {FormControl} c
-        * @return {any}
-        */
-        MinGreaterThanDirective.prototype.validate = function (c) {
-            var v = c.value;
-            return v <= this.minGreaterThan
-                ? { min_greater_than: { min: this.minGreaterThan, actual: v } }
-                : null;
-        };
-        var MinGreaterThanDirective_1;
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], MinGreaterThanDirective.prototype, "minGreaterThan", void 0);
-        MinGreaterThanDirective = MinGreaterThanDirective_1 = __decorate([
-            core.Directive({
-                selector: '[minGreaterThan][formControlName],[minGreaterThan][formControl],[minGreaterThan][ngModel]',
-                providers: [{ provide: forms.NG_VALIDATORS, useExisting: MinGreaterThanDirective_1, multi: true }],
-            })
-        ], MinGreaterThanDirective);
-        return MinGreaterThanDirective;
-    }());
-
     var NgInitDirective = /** @class */ (function () {
         function NgInitDirective() {
             this.resultChange = new core.EventEmitter();
@@ -13982,7 +14363,7 @@
             if (this.popoverEle.length)
                 return;
             // Append popover element
-            this.popoverEle = $$3('<div></div>').addClass('ngx-popover');
+            this.popoverEle = $$3('<div></div>').addClass('plugin-popover');
             body.append(this.popoverEle);
         };
         /**
@@ -14068,16 +14449,24 @@
         return UploadFileDirective;
     }());
 
-    function appInitializerFactory(localeService, injector) {
+    function appInitializerFactory(translateService, localeService, injector) {
         return function () { return new Promise(function (resolve) {
             var locationInitialized = injector.get(common.LOCATION_INITIALIZED, Promise.resolve(null));
             var defaultTimezone = injector.get(DEFAULT_TIMEZONE);
+            var locale = localeService.locale;
             locationInitialized.then(function () {
                 // Set moment timezone
                 moment.tz.setDefault(defaultTimezone);
-                // Init system locale
-                localeService.initLocale();
-                resolve(true);
+                // Set moment language
+                moment.locale(locale);
+                // This language will be used as a fallback when a translation isn't found in the current language
+                var langToSet = locale.substring(0, 2).toLowerCase();
+                translateService.setDefaultLang(langToSet);
+                translateService.use(langToSet).subscribe(
+                /* tslint:disable-next-line */
+                function () { return console.info("Successfully initialized '" + langToSet + "' language.'"); }, 
+                /* tslint:disable-next-line */
+                function () { return console.error("Problem with '" + langToSet + "' language initialization.'"); }, function () { return resolve(null); });
             });
         }); };
     }
@@ -14173,6 +14562,25 @@
             })
         ], CommasPipe);
         return CommasPipe;
+    }());
+
+    var FileSizeFormatterPipe = /** @class */ (function () {
+        function FileSizeFormatterPipe() {
+        }
+        /**
+        * Transform
+        * @param {any} input
+        * @return {string}
+        */
+        FileSizeFormatterPipe.prototype.transform = function (input) {
+            return NumberService.fileSizeFormatter(input);
+        };
+        FileSizeFormatterPipe = __decorate([
+            core.Pipe({
+                name: 'fileSizeFormatter',
+            })
+        ], FileSizeFormatterPipe);
+        return FileSizeFormatterPipe;
     }());
 
     var FilterPipe = /** @class */ (function () {
@@ -14778,7 +15186,7 @@
                     params = options;
                 }
                 _this.http[type](url, params, options)
-                    .subscribe(function (response) { return observer.next(response); }, function (error) { return observer.error(_this.failCallback(error)); });
+                    .subscribe(function (response) { return observer.next(response); }, function (error) { return observer.error(_this.failCallback(error)); }, function () { return observer.complete(); });
             });
         };
         /**
@@ -14795,8 +15203,8 @@
                 headers = _this.setHeaders(headers);
                 var formData = new FormData();
                 var options = { headers: headers };
-                // In case files is file list
-                if (files instanceof FileList) {
+                // In case files is file list or array files
+                if (files instanceof FileList || files instanceof Array) {
                     _.each(files, function (file) { return formData.append('files[]', file, file.name); });
                 }
                 else {
@@ -14804,7 +15212,7 @@
                 }
                 url = _this.baseUrl ? _this.baseUrl + url : _this.baseUrl;
                 _this.http.post(url, formData, options)
-                    .subscribe(function (response) { return observer.next(response); }, function (error) { return observer.error(_this.failCallback(error)); });
+                    .subscribe(function (response) { return observer.next(response); }, function (error) { return observer.error(_this.failCallback(error)); }, function () { return observer.complete(); });
             });
         };
         ApiService.ctorParameters = function () { return [
@@ -14907,19 +15315,6 @@
             enumerable: true,
             configurable: true
         });
-        /**
-        * Init locale
-        * @return {void}
-        */
-        LocaleService.prototype.initLocale = function () {
-            this.locale = localStorage.getItem('locale') || this.defaultLocale;
-            if (!this.locale)
-                return;
-            // Set moment language
-            moment.locale(this.locale);
-            // This language will be used as a fallback when a translation isn't found in the current language
-            this.translateService.setDefaultLang(this.locale.substring(0, 2).toLowerCase());
-        };
         LocaleService.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_LOCALE,] }] },
             { type: core$1.TranslateService }
@@ -15079,14 +15474,7 @@
             if (date < 1) {
                 throw Error("Invalid date \"" + date + "\". Date has to be greater than 0.");
             }
-            var result = moment()
-                .year(year)
-                .month(month)
-                .date(date)
-                .hour(0)
-                .minute(0)
-                .second(0)
-                .locale(this.locale);
+            var result = moment.utc({ year: year, month: month, date: date }).locale(this.locale);
             // If the result isn't valid, the date must have been out of bounds for this month.
             if (!result.isValid()) {
                 throw Error("Invalid date \"" + date + "\" for month with index \"" + month + "\".");
@@ -15183,21 +15571,17 @@
         /**
         * @constructor
         * @param {string} defaultFCMPublicKey
-        * @param {string} defaultAuthorizedKey
         * @param {string} defaultAppURL
         * @param {SwPush} swPush
         * @param {SwUpdate} swUpdate
         * @param {ApiService} apiService
-        * @param {StoreService} storeService
         */
-        function ServiceWorkerService(defaultFCMPublicKey, defaultAuthorizedKey, defaultAppURL, swPush, swUpdate, apiService, storeService) {
+        function ServiceWorkerService(defaultFCMPublicKey, defaultAppURL, swPush, swUpdate, apiService) {
             this.defaultFCMPublicKey = defaultFCMPublicKey;
-            this.defaultAuthorizedKey = defaultAuthorizedKey;
             this.defaultAppURL = defaultAppURL;
             this.swPush = swPush;
             this.swUpdate = swUpdate;
             this.apiService = apiService;
-            this.storeService = storeService;
         }
         /**
         * Update available version
@@ -15255,36 +15639,24 @@
                     observer.next(null);
                     return;
                 }
-                _this.swPush.messages
-                    .subscribe(function (payload) {
-                    var stored = _this.storeService.get(_this.defaultAuthorizedKey);
-                    // In case user unauthorized
-                    if (!stored) {
-                        observer.next(null);
-                        return;
-                    }
-                    observer.next(payload);
-                }, function (error) { return observer.error(error); });
+                return _this.swPush.messages
+                    .subscribe(function (payload) { return observer.next(payload); }, function (error) { return observer.error(error); });
             });
         };
         ServiceWorkerService.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_FCM_PUBLIC_KEY,] }] },
-            { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_AUTHORIZED_KEY,] }] },
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_APP_URL,] }] },
             { type: serviceWorker.SwPush },
             { type: serviceWorker.SwUpdate },
-            { type: ApiService },
-            { type: StoreService }
+            { type: ApiService }
         ]; };
         ServiceWorkerService = __decorate([
             core.Injectable(),
             __param(0, core.Optional()), __param(0, core.Inject(DEFAULT_FCM_PUBLIC_KEY)),
-            __param(1, core.Optional()), __param(1, core.Inject(DEFAULT_AUTHORIZED_KEY)),
-            __param(2, core.Optional()), __param(2, core.Inject(DEFAULT_APP_URL)),
-            __metadata("design:paramtypes", [String, String, String, serviceWorker.SwPush,
+            __param(1, core.Optional()), __param(1, core.Inject(DEFAULT_APP_URL)),
+            __metadata("design:paramtypes", [String, String, serviceWorker.SwPush,
                 serviceWorker.SwUpdate,
-                ApiService,
-                StoreService])
+                ApiService])
         ], ServiceWorkerService);
         return ServiceWorkerService;
     }());
@@ -15323,6 +15695,137 @@
             core.Injectable()
         ], SharedService);
         return SharedService;
+    }());
+
+    var SnackBarService = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {MatSnackBar} snackBar
+        * @param {TranslateService} translateService
+        */
+        function SnackBarService(snackBar, translateService) {
+            this.snackBar = snackBar;
+            this.translateService = translateService;
+            this.btnDismiss = this.translateService.instant('GENERAL.LABELS.OK');
+            this.defaultConfig = {
+                panelClass: [],
+                horizontalPosition: 'right',
+                duration: 3000,
+            };
+        }
+        /**
+        * Set config
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.setConfig = function (config) {
+            this.defaultConfig = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+        };
+        /**
+        * Show Success Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.success = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            config.panelClass.push('mat-success');
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        /**
+        * Show Warning Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.warning = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            config.panelClass.push('mat-warning');
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        /**
+        * Show Primary Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.primary = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            config.panelClass.push('mat-primary');
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        /**
+        * Show Warn Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.warn = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            config.panelClass.push('mat-warn');
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        /**
+        * Show Accent Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.accent = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            config.panelClass.push('mat-accent');
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        /**
+        * Show Default Snack Bar
+        * @param {string} message
+        * @param {any} params
+        * @param {any} config
+        * @return {void}
+        */
+        SnackBarService.prototype.open = function (message, params, config) {
+            var _this = this;
+            if (params === void 0) { params = null; }
+            if (config === void 0) { config = null; }
+            config = __assign({}, JSON.parse(JSON.stringify(this.defaultConfig)), config);
+            this.translateService.get(message, params)
+                .subscribe(function (msg) { return _this.snackBar.open(msg, _this.btnDismiss, config); });
+        };
+        SnackBarService.ctorParameters = function () { return [
+            { type: material.MatSnackBar },
+            { type: core$1.TranslateService }
+        ]; };
+        SnackBarService = __decorate([
+            core.Injectable(),
+            __metadata("design:paramtypes", [material.MatSnackBar,
+                core$1.TranslateService])
+        ], SnackBarService);
+        return SnackBarService;
     }());
 
     var WebNotificationService = /** @class */ (function () {
@@ -15421,53 +15924,35 @@
     var WebSocketService = /** @class */ (function () {
         /**
         * @constructor
-        * @param {string} defaultAuthorizedKey
         * @param {string} defaultServerWSURL
-        * @param {StoreService} storeService
         */
-        function WebSocketService(defaultAuthorizedKey, defaultServerWSURL, storeService) {
-            this.defaultAuthorizedKey = defaultAuthorizedKey;
+        function WebSocketService(defaultServerWSURL) {
             this.defaultServerWSURL = defaultServerWSURL;
-            this.storeService = storeService;
-            this.webSocketChange = new rxjs.ReplaySubject();
+            this.socketChange = new rxjs.ReplaySubject();
         }
         /**
         * Connect
+        * @param {any} options
         * @return {Observable}
         */
-        WebSocketService.prototype.connect = function () {
+        WebSocketService.prototype.connect = function (options) {
             var _this = this;
+            if (options === void 0) { options = {}; }
             return new rxjs.Observable(function (observer) {
-                var currentUser = _this.storeService.get(_this.defaultAuthorizedKey);
-                if (!currentUser)
-                    return;
-                if (_this.socket) {
-                    _this.webSocketChange.next(_this);
-                    observer.next(_this.socket);
-                    return;
-                }
-                var channelId = currentUser.channel_id;
-                var userId = currentUser.user_id;
-                var userToken = encodeURIComponent(currentUser.user_token);
-                _this.socket = io.connect(_this.defaultServerWSURL, { query: 'channel_id=' + channelId + '&user_id=' + userId + '&token=' + userToken });
+                _this.socket = io.connect(_this.defaultServerWSURL, options);
                 _this.socket.on('connect', function () {
-                    _this.webSocketChange.next(_this.socket);
-                    observer.next(_this.socket);
-                });
-                _this.socket.on('disconnect', function () {
-                    _this.socket = null;
-                    _this.webSocketChange.next(_this.socket);
+                    _this.socketChange.next(_this.socket);
                     observer.next(_this.socket);
                 });
             });
         };
         /**
         * Emit socket
-        * @param {any} _emit
+        * @param {any} event
         * @param {any} data
         * @return {void}
         */
-        WebSocketService.prototype.emit = function (_emit, data) {
+        WebSocketService.prototype.emit = function (event, data) {
             if (!this.socket)
                 return;
             this.socket.emit(event, data);
@@ -15482,9 +15967,7 @@
             return new rxjs.Observable(function (observer) {
                 if (!_this.socket)
                     return;
-                _this.socket.on(event, function (data) {
-                    observer.next(data);
-                });
+                _this.socket.on(event, function (data) { return observer.next(data); });
             });
         };
         /**
@@ -15501,18 +15984,15 @@
         * @return {ReplaySubject}
         */
         WebSocketService.prototype.getSocketChange = function () {
-            return this.webSocketChange;
+            return this.socketChange;
         };
         WebSocketService.ctorParameters = function () { return [
-            { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_AUTHORIZED_KEY,] }] },
-            { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_SERVER_WEBSOCKET_URL,] }] },
-            { type: StoreService }
+            { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [DEFAULT_SERVER_WEBSOCKET_URL,] }] }
         ]; };
         WebSocketService = __decorate([
             core.Injectable(),
-            __param(0, core.Optional()), __param(0, core.Inject(DEFAULT_AUTHORIZED_KEY)),
-            __param(1, core.Optional()), __param(1, core.Inject(DEFAULT_SERVER_WEBSOCKET_URL)),
-            __metadata("design:paramtypes", [String, String, StoreService])
+            __param(0, core.Optional()), __param(0, core.Inject(DEFAULT_SERVER_WEBSOCKET_URL)),
+            __metadata("design:paramtypes", [String])
         ], WebSocketService);
         return WebSocketService;
     }());
@@ -15534,6 +16014,7 @@
                     material.MatProgressBarModule, material.MatDialogModule, material.MatTooltipModule,
                     material.MatSnackBarModule, material.MatTableModule, ngxMatSelectSearch.NgxMatSelectSearchModule,
                     material.MatSortModule, material.MatPaginatorModule,
+                    material.MatBadgeModule, material.MatRippleModule,
                 ],
                 exports: [
                     material.MatCheckboxModule, material.MatButtonModule, material.MatInputModule,
@@ -15547,18 +16028,242 @@
                     material.MatProgressBarModule, material.MatDialogModule, material.MatTooltipModule,
                     material.MatSnackBarModule, material.MatTableModule, ngxMatSelectSearch.NgxMatSelectSearchModule,
                     material.MatSortModule, material.MatPaginatorModule,
+                    material.MatBadgeModule, material.MatRippleModule,
                 ],
             })
         ], MaterialModule);
         return MaterialModule;
     }());
 
+    var ActionButtonComponent = /** @class */ (function () {
+        function ActionButtonComponent() {
+            this.onClick = new core.EventEmitter();
+        }
+        Object.defineProperty(ActionButtonComponent.prototype, "compClass", {
+            /**
+            * Get css class
+            * @return {string}
+            */
+            get: function () {
+                var _compClass = [];
+                if (this.icon)
+                    _compClass.push(this.icon);
+                if (this.color)
+                    _compClass.push('text-' + this.color);
+                return _compClass.join(' ');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], ActionButtonComponent.prototype, "color", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], ActionButtonComponent.prototype, "icon", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], ActionButtonComponent.prototype, "title", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], ActionButtonComponent.prototype, "disabled", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], ActionButtonComponent.prototype, "onClick", void 0);
+        ActionButtonComponent = __decorate([
+            core.Component({
+                selector: 'action-button',
+                template: "<button class=\"action-button\" mat-menu-item (click)=\"onClick?.emit()\" [disabled]=\"disabled\"><div class=\"layout-row layout-align-start-center\"><i class=\"mr-15 font-size-18\" [ngClass]=\"compClass\"></i>{{ title }}</div></button>"
+            })
+        ], ActionButtonComponent);
+        return ActionButtonComponent;
+    }());
+    var ActionBoxComponent = /** @class */ (function () {
+        function ActionBoxComponent() {
+        }
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Boolean)
+        ], ActionBoxComponent.prototype, "disabled", void 0);
+        ActionBoxComponent = __decorate([
+            core.Component({
+                selector: 'action-box',
+                template: "<div class=\"action-box\"><button mat-stroked-button plugin-button-only-icon type=\"button\" [matMenuTriggerFor]=\"__actionMenu\" [disabled]=\"disabled\"><i class=\"fa fa-ellipsis-v\"></i></button><mat-menu #__actionMenu=\"matMenu\"><ng-content></ng-content></mat-menu></div>"
+            })
+        ], ActionBoxComponent);
+        return ActionBoxComponent;
+    }());
+
+    var $$6 = _$;
+    var SideBarItemComponent = /** @class */ (function () {
+        function SideBarItemComponent() {
+        }
+        SideBarItemComponent = __decorate([
+            core.Component({
+                selector: 'sidebar-item',
+                template: '<li><ng-content></ng-content></li>',
+                host: { class: 'sidebar-item' }
+            })
+        ], SideBarItemComponent);
+        return SideBarItemComponent;
+    }());
+    var SideBarComponent = /** @class */ (function () {
+        /**
+        * @constructor
+        * @param {ElementRef} elementRef
+        */
+        function SideBarComponent(elementRef) {
+            this.elementRef = elementRef;
+            this.element = $$6(this.elementRef.nativeElement);
+        }
+        Object.defineProperty(SideBarComponent.prototype, "isShowBtnNext", {
+            /**
+            * Is show button scroll next
+            * @return {boolean}
+            */
+            get: function () {
+                var listElement = this.element.find('.sidebar-list');
+                var listWidth = listElement.outerWidth() || 0;
+                var listScrollWidth = listElement[0].scrollWidth || 0;
+                return listScrollWidth > listWidth
+                    && (listElement.scrollLeft() + listWidth) < listScrollWidth;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SideBarComponent.prototype, "isShowBtnPrev", {
+            /**
+            * Is show button scroll previous
+            * @return {boolean}
+            */
+            get: function () {
+                var listElement = this.element.find('.sidebar-list');
+                return listElement.scrollLeft() > 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+        * Scroll previous
+        * @return {void}
+        */
+        SideBarComponent.prototype.scrollPrev = function () {
+            var listElement = this.element.find('.sidebar-list');
+            listElement.animate({ scrollLeft: listElement.scrollLeft() - (listElement.outerWidth() - 70) }, 300, 'swing');
+        };
+        /**
+        * Scroll previous
+        * @return {void}
+        */
+        SideBarComponent.prototype.scrollNext = function () {
+            var listElement = this.element.find('.sidebar-list');
+            listElement.animate({ scrollLeft: listElement.scrollLeft() + (listElement.outerWidth() - 70) }, 300, 'swing');
+        };
+        SideBarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef }
+        ]; };
+        SideBarComponent = __decorate([
+            core.Component({
+                selector: 'sidebar',
+                template: "<div class=\"sidebar\"><button class=\"sidebar-btn sidebar-btn-prev layout-column layout-align-center-center\" [class.hide]=\"!isShowBtnPrev\" (click)=\"scrollPrev()\"><i class=\"fa fa-angle-left\"></i></button><ul class=\"sidebar-list layout-row\"><ng-content></ng-content></ul><button class=\"sidebar-btn sidebar-btn-next layout-column layout-align-center-center\" [class.hide]=\"!isShowBtnNext\" (click)=\"scrollNext()\"><i class=\"fa fa-angle-right\"></i></button></div>"
+            }),
+            __metadata("design:paramtypes", [core.ElementRef])
+        ], SideBarComponent);
+        return SideBarComponent;
+    }());
+
+    var MaxLessThanDirective = /** @class */ (function () {
+        function MaxLessThanDirective() {
+        }
+        MaxLessThanDirective_1 = MaxLessThanDirective;
+        /**
+        * Validate
+        * @param {FormControl} c
+        * @return {any}
+        */
+        MaxLessThanDirective.prototype.validate = function (c) {
+            var v = c.value;
+            return v >= this.maxLessThan
+                ? { max_less_than: { max: this.maxLessThan, actual: v } }
+                : null;
+        };
+        var MaxLessThanDirective_1;
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], MaxLessThanDirective.prototype, "maxLessThan", void 0);
+        MaxLessThanDirective = MaxLessThanDirective_1 = __decorate([
+            core.Directive({
+                selector: '[maxLessThan][formControlName],[maxLessThan][formControl],[maxLessThan][ngModel]',
+                providers: [{ provide: forms.NG_VALIDATORS, useExisting: MaxLessThanDirective_1, multi: true }],
+            })
+        ], MaxLessThanDirective);
+        return MaxLessThanDirective;
+    }());
+
+    var MinGreaterThanDirective = /** @class */ (function () {
+        function MinGreaterThanDirective() {
+        }
+        MinGreaterThanDirective_1 = MinGreaterThanDirective;
+        /**
+        * Validate
+        * @param {FormControl} c
+        * @return {any}
+        */
+        MinGreaterThanDirective.prototype.validate = function (c) {
+            var v = c.value;
+            return v <= this.minGreaterThan
+                ? { min_greater_than: { min: this.minGreaterThan, actual: v } }
+                : null;
+        };
+        var MinGreaterThanDirective_1;
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Number)
+        ], MinGreaterThanDirective.prototype, "minGreaterThan", void 0);
+        MinGreaterThanDirective = MinGreaterThanDirective_1 = __decorate([
+            core.Directive({
+                selector: '[minGreaterThan][formControlName],[minGreaterThan][formControl],[minGreaterThan][ngModel]',
+                providers: [{ provide: forms.NG_VALIDATORS, useExisting: MinGreaterThanDirective_1, multi: true }],
+            })
+        ], MinGreaterThanDirective);
+        return MinGreaterThanDirective;
+    }());
+
+    var ImagePipe = /** @class */ (function () {
+        function ImagePipe() {
+        }
+        /**
+        * Transform
+        * @param {string} url
+        * @param {string} defaultImage
+        * @return {number}
+        */
+        ImagePipe.prototype.transform = function (url, defaultImage) {
+            return new rxjs.Observable(function (observer) {
+                if (!url) {
+                    observer.next(defaultImage);
+                    observer.complete();
+                    return;
+                }
+                var img = new Image();
+                img.onload = function () { observer.next(url); observer.complete(); };
+                img.onerror = function () { observer.next(defaultImage); observer.complete(); };
+                img.src = url;
+            });
+        };
+        ImagePipe = __decorate([
+            core.Pipe({ name: 'image' })
+        ], ImagePipe);
+        return ImagePipe;
+    }());
+
     /* End Service Inject (Do not remove) */
-    function translateLoader(http) {
-        return new MultiTranslateHttpLoader(http, [
-            { prefix: 'assets/i18n/', suffix: '.json' },
-        ]);
-    }
     _.mixin({
         get: function (obj, key) {
             var type = typeof key;
@@ -15579,6 +16284,12 @@
             return obj;
         },
     });
+    function translateLoader(http) {
+        return new MultiTranslateHttpLoader(http, [
+            { prefix: 'assets/i18n/', suffix: '.json' },
+        ]);
+    }
+    var TOOLTIP_PANEL_CLASS = 'plugin-tooltip';
     var lazyLoadImageModuleForRoot = ngLazyloadImage.LazyLoadImageModule
         .forRoot({ preset: ngLazyloadImage.intersectionObserverPreset });
     var reactiveFormsModuleWithConfig = forms.ReactiveFormsModule
@@ -15597,7 +16308,7 @@
             deps: [http.HttpClient],
         },
     });
-    var ɵ0$1 = appInitializerFactory, ɵ1$1 = { panelClass: 'mat-dialog', disableClose: true }, ɵ2$1 = materialMomentAdapter.MAT_MOMENT_DATE_FORMATS, ɵ3$1 = materialMomentAdapter.MAT_MOMENT_DATE_FORMATS;
+    var ɵ0$1 = appInitializerFactory, ɵ1$1 = { disableClose: true, hasBackdrop: true }, ɵ2$1 = materialMomentAdapter.MAT_MOMENT_DATE_FORMATS, ɵ3$1 = materialMomentAdapter.MAT_MOMENT_DATE_FORMATS;
     var CoreModule = /** @class */ (function () {
         /**
         * @constructor
@@ -15625,26 +16336,29 @@
                     platformBrowser.BrowserModule, forms.FormsModule, http.HttpClientModule,
                     router.RouterModule, animations.BrowserAnimationsModule, saturnDatepicker.SatDatepickerModule,
                     MaterialModule, ngxPerfectScrollbar.PerfectScrollbarModule, lazyLoadImageModuleForRoot,
-                    cookieModuleForRoot, toastrModuleForRoot,
+                    cookieModuleForRoot, toastrModuleForRoot, ng5Slider.Ng5SliderModule,
                     translateModuleForRoot, reactiveFormsModuleWithConfig,
                 ],
                 declarations: [
                     /* Component Inject (Do not remove) */
-                    AutoCompleteComponent, AvatarBoxComponent, AvatarListComponent,
-                    CollapsePaginatorComponent, DialogConfirmComponent, ErrorMessageComponent,
-                    LoadingOverlayComponent, SelectBoxComponent,
+                    ActionBoxComponent, ActionButtonComponent, AutoCompleteComponent,
+                    AvatarBoxComponent, AvatarListComponent, CollapsePaginatorComponent,
+                    DialogConfirmComponent, ErrorMessageComponent, FilterBoxComponent,
+                    LoadingOverlayComponent, SelectBoxComponent, SideBarComponent,
+                    SideBarItemComponent, StatusBoxComponent,
                     /* End Component Inject (Do not remove) */
                     /* Directive Inject (Do not remove) */
-                    AdjustFontsizeDirective, DisableControlDirective, EqualValidatorDirective,
-                    FullscreenDirective, MaxLessThanDirective, MinGreaterThanDirective,
-                    NgInitDirective, OdometerDirective,
+                    AdjustFontsizeDirective, DetectScrollDirective, DisableControlDirective,
+                    EqualValidatorDirective, FullscreenDirective, MaxLessThanDirective,
+                    MinGreaterThanDirective, NgInitDirective, OdometerDirective,
                     PopoverDirective, UploadFileDirective,
                     /* End Directive Inject (Do not remove) */
                     /* Pipe Inject (Do not remove) */
-                    CapitalizeFirstPipe, CommasPipe, FilterPipe,
-                    ItemObjectPipe, KFormatterPipe, MaxPipe,
-                    MinPipe, MomentDateFormatPipe, OrderByPipe,
-                    PadNumberPipe, PartitionPipe, SafeHtmlPipe,
+                    CapitalizeFirstPipe, CommasPipe, FileSizeFormatterPipe,
+                    FilterPipe, ImagePipe, ItemObjectPipe,
+                    KFormatterPipe, MaxPipe, MinPipe,
+                    MomentDateFormatPipe, OrderByPipe, PadNumberPipe,
+                    PartitionPipe, SafeHtmlPipe,
                 ],
                 exports: [
                     platformBrowser.BrowserModule, forms.FormsModule, forms.ReactiveFormsModule,
@@ -15653,21 +16367,24 @@
                     ngLazyloadImage.LazyLoadImageModule, ngxPerfectScrollbar.PerfectScrollbarModule,
                     saturnDatepicker.SatDatepickerModule, MaterialModule,
                     /* Component Inject (Do not remove) */
-                    AutoCompleteComponent, AvatarBoxComponent, AvatarListComponent,
-                    CollapsePaginatorComponent, DialogConfirmComponent, ErrorMessageComponent,
-                    LoadingOverlayComponent, SelectBoxComponent,
+                    ActionBoxComponent, ActionButtonComponent, AutoCompleteComponent,
+                    AvatarBoxComponent, AvatarListComponent, CollapsePaginatorComponent,
+                    DialogConfirmComponent, ErrorMessageComponent, FilterBoxComponent,
+                    LoadingOverlayComponent, SelectBoxComponent, SideBarComponent,
+                    SideBarItemComponent, StatusBoxComponent,
                     /* End Component Inject (Do not remove) */
                     /* Directive Inject (Do not remove) */
-                    AdjustFontsizeDirective, DisableControlDirective, EqualValidatorDirective,
-                    FullscreenDirective, MaxLessThanDirective, MinGreaterThanDirective,
-                    NgInitDirective, OdometerDirective,
+                    AdjustFontsizeDirective, DetectScrollDirective, DisableControlDirective,
+                    EqualValidatorDirective, FullscreenDirective, MaxLessThanDirective,
+                    MinGreaterThanDirective, NgInitDirective, OdometerDirective,
                     PopoverDirective, UploadFileDirective,
                     /* End Directive Inject (Do not remove) */
                     /* Pipe Inject (Do not remove) */
-                    CapitalizeFirstPipe, CommasPipe, FilterPipe,
-                    ItemObjectPipe, KFormatterPipe, MaxPipe,
-                    MinPipe, MomentDateFormatPipe, OrderByPipe,
-                    PadNumberPipe, PartitionPipe, SafeHtmlPipe,
+                    CapitalizeFirstPipe, CommasPipe, FileSizeFormatterPipe,
+                    FilterPipe, ImagePipe, ItemObjectPipe,
+                    KFormatterPipe, MaxPipe, MinPipe,
+                    MomentDateFormatPipe, OrderByPipe, PadNumberPipe,
+                    PartitionPipe, SafeHtmlPipe,
                 ],
                 entryComponents: [
                     /* Entry Component Inject (Do not remove) */
@@ -15677,7 +16394,7 @@
                     {
                         provide: core.APP_INITIALIZER,
                         useFactory: ɵ0$1,
-                        deps: [LocaleService, core.Injector],
+                        deps: [core$1.TranslateService, LocaleService, core.Injector],
                         multi: true,
                     },
                     {
@@ -15693,8 +16410,8 @@
                     ApiService, FormService, LocaleService,
                     LoopService, MediaService, MomentUtcDateAdapter,
                     NumberService, PageService, ServiceWorkerService,
-                    SharedService, StoreService, UtilitiesService,
-                    WebNotificationService, WebSocketService,
+                    SharedService, SnackBarService, StoreService,
+                    UtilitiesService, WebNotificationService, WebSocketService,
                 ],
             }),
             __metadata("design:paramtypes", [])
@@ -15770,6 +16487,7 @@
                     if (!flag)
                         return;
                     flag = UtilitiesService.stripVietnameseSymbol((_.get(data, key) || '')
+                        .toString()
                         .toLowerCase()
                         .replace(/ /g, ''))
                         .indexOf(UtilitiesService.stripVietnameseSymbol((query || '')
@@ -15864,12 +16582,16 @@
     exports.DIALOG_CONFIRM_DEFAULT_OPTIONS = DIALOG_CONFIRM_DEFAULT_OPTIONS;
     exports.DISTRICT_MAP = DISTRICT_MAP;
     exports.DataTableComponent = DataTableComponent;
+    exports.DetectScrollDirective = DetectScrollDirective;
     exports.DialogConfirmComponent = DialogConfirmComponent;
     exports.DisableControlDirective = DisableControlDirective;
     exports.ERROR_MESSAGE_DEFAULT_OPTIONS = ERROR_MESSAGE_DEFAULT_OPTIONS;
     exports.EqualValidatorDirective = EqualValidatorDirective;
     exports.ErrorMessageComponent = ErrorMessageComponent;
     exports.ErrorModule = ErrorModule;
+    exports.FILTER_BOX_DEFAULT_OPTIONS = FILTER_BOX_DEFAULT_OPTIONS;
+    exports.FileSizeFormatterPipe = FileSizeFormatterPipe;
+    exports.FilterBoxComponent = FilterBoxComponent;
     exports.FilterPipe = FilterPipe;
     exports.FormService = FormService;
     exports.FullscreenDirective = FullscreenDirective;
@@ -15881,10 +16603,8 @@
     exports.LocaleService = LocaleService;
     exports.LoopService = LoopService;
     exports.MaterialModule = MaterialModule;
-    exports.MaxLessThanDirective = MaxLessThanDirective;
     exports.MaxPipe = MaxPipe;
     exports.MediaService = MediaService;
-    exports.MinGreaterThanDirective = MinGreaterThanDirective;
     exports.MinPipe = MinPipe;
     exports.MomentDateFormatPipe = MomentDateFormatPipe;
     exports.MomentUtcDateAdapter = MomentUtcDateAdapter;
@@ -15900,10 +16620,13 @@
     exports.PopoverDirective = PopoverDirective;
     exports.REGEXES = REGEXES;
     exports.SELECT_BOX_DEFAULT_OPTIONS = SELECT_BOX_DEFAULT_OPTIONS;
+    exports.STATUS_BOX_DEFAULT_OPTIONS = STATUS_BOX_DEFAULT_OPTIONS;
     exports.SafeHtmlPipe = SafeHtmlPipe;
     exports.SelectBoxComponent = SelectBoxComponent;
     exports.ServiceWorkerService = ServiceWorkerService;
     exports.SharedService = SharedService;
+    exports.SnackBarService = SnackBarService;
+    exports.StatusBoxComponent = StatusBoxComponent;
     exports.StoreService = StoreService;
     exports.UploadFileDirective = UploadFileDirective;
     exports.UtilitiesService = UtilitiesService;
@@ -15920,6 +16643,13 @@
     exports.ɵg = routingProviders;
     exports.ɵh = routing;
     exports.ɵi = ErrorComponent;
+    exports.ɵj = ActionButtonComponent;
+    exports.ɵk = ActionBoxComponent;
+    exports.ɵl = SideBarItemComponent;
+    exports.ɵm = SideBarComponent;
+    exports.ɵn = MaxLessThanDirective;
+    exports.ɵo = MinGreaterThanDirective;
+    exports.ɵp = ImagePipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

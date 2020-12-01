@@ -1,7 +1,6 @@
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { Moment } from 'moment-timezone';
 export declare class MomentUtcDateAdapter extends MomentDateAdapter {
-    timezone: string;
     /**
     * @constructor
     * @param {string} dateLocale

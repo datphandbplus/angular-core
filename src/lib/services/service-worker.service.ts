@@ -5,8 +5,7 @@ import { Observable, Observer } from 'rxjs';
 import _ from 'underscore';
 
 import { ApiService } from './api.service';
-import { StoreService } from './store.service';
-import { DEFAULT_FCM_PUBLIC_KEY, DEFAULT_AUTHORIZED_KEY, DEFAULT_APP_URL } from '../injection-token';
+import { DEFAULT_FCM_PUBLIC_KEY, DEFAULT_APP_URL } from '../injection-token';
 
 declare var window: Window;
 
@@ -16,21 +15,17 @@ export class ServiceWorkerService {
 	/**
 	* @constructor
 	* @param {string} defaultFCMPublicKey
-	* @param {string} defaultAuthorizedKey
 	* @param {string} defaultAppURL
 	* @param {SwPush} swPush
 	* @param {SwUpdate} swUpdate
 	* @param {ApiService} apiService
-	* @param {StoreService} storeService
 	*/
 	constructor(
 		@Optional() @Inject( DEFAULT_FCM_PUBLIC_KEY ) readonly defaultFCMPublicKey: string,
-		@Optional() @Inject( DEFAULT_AUTHORIZED_KEY ) readonly defaultAuthorizedKey: string,
 		@Optional() @Inject( DEFAULT_APP_URL ) readonly defaultAppURL: string,
 		private swPush		: SwPush,
 		private swUpdate	: SwUpdate,
-		private apiService	: ApiService,
-		private storeService: StoreService
+		private apiService	: ApiService
 	) {}
 
 	/**
@@ -91,19 +86,9 @@ export class ServiceWorkerService {
 				return;
 			}
 
-			this.swPush.messages
+			return this.swPush.messages
 			.subscribe(
-				( payload: any ) => {
-					const stored: any = this.storeService.get( this.defaultAuthorizedKey );
-
-					// In case user unauthorized
-					if ( !stored ) {
-						observer.next( null );
-						return;
-					}
-
-					observer.next( payload );
-				},
+				( payload: any ) => observer.next( payload ),
 				( error: any ) => observer.error( error )
 			);
 		} );

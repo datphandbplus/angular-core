@@ -30,8 +30,8 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
 	@Input() public emptyLabel: string;
 	@Input() public floatLabel: string = ( this.defaultOptions || {} ).floatLabel || 'always';
 	@Input() public appearance: string = ( this.defaultOptions || {} ).appearance || 'outline';
-	@Input() public fieldKey: string = 'id';
-	@Input() public fieldName: string = 'name';
+	@Input() public fieldKey: string = ( this.defaultOptions || {} ).fieldKey || 'id';
+	@Input() public fieldName: string = ( this.defaultOptions || {} ).fieldName || 'name';
 	@Input() public data: Array<any> = [];
 	@Input() public formControl: FormControl = new FormControl();
 

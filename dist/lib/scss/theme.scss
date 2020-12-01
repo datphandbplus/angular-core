@@ -1,0 +1,1505 @@
+@import 'src/_variable';
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$mat-app-success: (
+  500: $success,
+  contrast: (
+    500: $light-primary-text,
+  )
+);
+$mat-app-warning: (
+  500: $warning,
+  contrast: (
+    500: $light-primary-text,
+  )
+);
+$mat-app-primary: (
+  500: $primary,
+  contrast: (
+    500: $light-primary-text,
+  )
+);
+$mat-app-accent: (
+  500: $accent,
+  contrast: (
+    500: $light-primary-text,
+  )
+);
+$mat-app-warn: (
+  500: $warn,
+  contrast: (
+    500: $light-primary-text,
+  )
+);
+
+@function mat-light-theme($success, $warning, $primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    success:$success,
+    warning:$warning,
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $mat-light-theme-foreground,
+    background: $mat-light-theme-background,
+  );
+}
+
+@function mat-dark-theme($success, $warning, $primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    success:$success,
+    warning:$warning,
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: true,
+    foreground: $mat-dark-theme-foreground,
+    background: $mat-dark-theme-background,
+  );
+}
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-success: mat-palette($mat-app-success);
+$candy-app-warning: mat-palette($mat-app-warning);
+$candy-app-primary: mat-palette($mat-app-primary);
+$candy-app-accent: mat-palette($mat-app-accent);
+$candy-app-warn: mat-palette($mat-app-warn);
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-success, $candy-app-warning, $candy-app-primary, $candy-app-accent, $candy-app-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@mixin _mat-button-focus-overlay-color($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  &.mat-success .mat-button-focus-overlay {
+    background-color: mat-color($success);
+  }
+
+  &.mat-warning .mat-button-focus-overlay {
+    background-color: mat-color($warning);
+  }
+
+  &.mat-primary .mat-button-focus-overlay {
+    background-color: mat-color($primary);
+  }
+
+  &.mat-accent .mat-button-focus-overlay {
+    background-color: mat-color($accent);
+  }
+
+  &.mat-warn .mat-button-focus-overlay {
+    background-color: mat-color($warn);
+  }
+
+  &[disabled] .mat-button-focus-overlay {
+    background-color: transparent;
+  }
+}
+
+@mixin _mat-button-ripple-color($theme, $hue, $opacity: $_mat-button-ripple-opacity) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  &.mat-success .mat-ripple-element {
+    background-color: mat-color($success, $hue, $opacity);
+  }
+
+  &.mat-warning .mat-ripple-element {
+    background-color: mat-color($warning, $hue, $opacity);
+  }
+
+  &.mat-primary .mat-ripple-element {
+    background-color: mat-color($primary, $hue, $opacity);
+  }
+
+  &.mat-accent .mat-ripple-element {
+    background-color: mat-color($accent, $hue, $opacity);
+  }
+
+  &.mat-warn .mat-ripple-element {
+    background-color: mat-color($warn, $hue, $opacity);
+  }
+}
+
+@mixin _mat-button-theme-property($theme, $property, $hue) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  &.mat-success {
+    #{$property}: mat-color($success, $hue);
+  }
+  &.mat-warning {
+    #{$property}: mat-color($warning, $hue);
+  }
+  &.mat-primary {
+    #{$property}: mat-color($primary, $hue);
+  }
+  &.mat-accent {
+    #{$property}: mat-color($accent, $hue);
+  }
+  &.mat-warn {
+    #{$property}: mat-color($warn, $hue);
+  }
+
+  &.mat-success, &.mat-warning, &.mat-primary, &.mat-accent, &.mat-warn, &[disabled] {
+    &[disabled] {
+      $palette: if($property == 'color', $foreground, $background);
+      #{$property}: mat-color($palette, disabled-button);
+    }
+  }
+}
+
+@mixin mat-option-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-option {
+    color: mat-color($foreground, text);
+
+    &:hover:not(.mat-option-disabled),
+    &:focus:not(.mat-option-disabled) {
+      background: mat-color($background, hover);
+    }
+
+    // In multiple mode there is a checkbox to show that the option is selected.
+    &.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+      background: mat-color($background, hover);
+    }
+
+    &.mat-active {
+      background: mat-color($background, hover);
+      color: mat-color($foreground, text);
+    }
+
+    &.mat-option-disabled {
+      color: mat-color($foreground, hint-text);
+    }
+  }
+
+  .mat-success .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: mat-color($success);
+  }
+
+  .mat-warning .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: mat-color($warning);
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: mat-color($primary);
+  }
+
+  .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: mat-color($accent);
+  }
+
+  .mat-warn .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: mat-color($warn);
+  }
+}
+
+@mixin mat-checkbox-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+
+  // The color of the checkbox's checkmark / mixedmark.
+  $checkbox-mark-color: mat-color($background, background);
+
+  // NOTE(traviskaufman): While the spec calls for translucent blacks/whites for disabled colors,
+  // this does not work well with elements layered on top of one another. To get around this we
+  // blend the colors together based on the base color and the theme background.
+  $white-30pct-opacity-on-dark: #686868;
+  $black-26pct-opacity-on-light: #b0b0b0;
+  $disabled-color: if($is-dark-theme, $white-30pct-opacity-on-dark, $black-26pct-opacity-on-light);
+
+  .mat-checkbox-frame {
+    border-color: mat-color($foreground, secondary-text);
+  }
+
+  .mat-checkbox-checkmark {
+    fill: $checkbox-mark-color;
+  }
+
+  .mat-checkbox-checkmark-path {
+    // !important is needed here because a stroke must be set as an
+    // attribute on the SVG in order for line animation to work properly.
+    stroke: $checkbox-mark-color !important;
+
+    @include cdk-high-contrast(black-on-white) {
+      // Having the one above be !important ends up overriding the browser's automatic
+      // color inversion so we need to re-invert it ourselves for black-on-white.
+      stroke: #000 !important;
+    }
+  }
+
+  .mat-checkbox-mixedmark {
+    background-color: $checkbox-mark-color;
+  }
+
+  .mat-checkbox-indeterminate, .mat-checkbox-checked {
+    &.mat-success .mat-checkbox-background {
+      background-color: mat-color($success);
+    }
+
+    &.mat-warning .mat-checkbox-background {
+      background-color: mat-color($warning);
+    }
+
+    &.mat-primary .mat-checkbox-background {
+      background-color: mat-color($primary);
+    }
+
+    &.mat-accent .mat-checkbox-background {
+      background-color: mat-color($accent);
+    }
+
+    &.mat-warn .mat-checkbox-background {
+      background-color: mat-color($warn);
+    }
+  }
+
+  .mat-checkbox-disabled {
+    &.mat-checkbox-checked,
+    &.mat-checkbox-indeterminate {
+      .mat-checkbox-background {
+        background-color: $disabled-color;
+      }
+    }
+
+    &:not(.mat-checkbox-checked) {
+      .mat-checkbox-frame {
+        border-color: $disabled-color;
+      }
+    }
+
+    .mat-checkbox-label {
+      color: mat-color($foreground, secondary-text);
+    }
+
+    @include cdk-high-contrast {
+      opacity: 0.5;
+    }
+  }
+
+  // This one is moved down here so it can target both
+  // the theme colors and the disabled state.
+  @include cdk-high-contrast {
+    .mat-checkbox-background {
+      // Needs to be removed because it hides the checkbox outline.
+      background: none;
+    }
+  }
+
+  .mat-checkbox:not(.mat-checkbox-disabled) {
+    &.mat-success .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($success);
+    }
+
+    &.mat-warning .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($warning);
+    }
+
+    &.mat-primary .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($primary);
+    }
+
+    &.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($accent);
+    }
+
+    &.mat-warn .mat-checkbox-ripple .mat-ripple-element {
+      background-color: mat-color($warn);
+    }
+  }
+}
+
+@mixin mat-pseudo-checkbox-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+
+  // NOTE(traviskaufman): While the spec calls for translucent blacks/whites for disabled colors,
+  // this does not work well with elements layered on top of one another. To get around this we
+  // blend the colors together based on the base color and the theme background.
+  $white-30pct-opacity-on-dark: #686868;
+  $black-26pct-opacity-on-light: #b0b0b0;
+  $disabled-color: if($is-dark-theme, $white-30pct-opacity-on-dark, $black-26pct-opacity-on-light);
+  $colored-box-selector: '.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate';
+
+  .mat-pseudo-checkbox {
+    color: mat-color(map-get($theme, foreground), secondary-text);
+
+    &::after {
+      color: mat-color($background, background);
+    }
+  }
+
+  .mat-pseudo-checkbox-disabled {
+    color: $disabled-color;
+  }
+
+  // Default to the accent color. Note that the pseudo checkboxes are meant to inherit the
+  // theme from their parent, rather than implementing their own theming, which is why we
+  // don't attach to the `mat-*` classes.
+  .mat-pseudo-checkbox-checked,
+  .mat-pseudo-checkbox-indeterminate,
+  .mat-accent .mat-pseudo-checkbox-checked,
+  .mat-accent .mat-pseudo-checkbox-indeterminate {
+    background: mat-color(map-get($theme, accent));
+  }
+
+  .mat-success .mat-pseudo-checkbox-checked,
+  .mat-success .mat-pseudo-checkbox-indeterminate {
+    background: mat-color(map-get($theme, success));
+  }
+
+  .mat-warning .mat-pseudo-checkbox-checked,
+  .mat-warning .mat-pseudo-checkbox-indeterminate {
+    background: mat-color(map-get($theme, warning));
+  }
+
+  .mat-primary .mat-pseudo-checkbox-checked,
+  .mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: mat-color(map-get($theme, primary));
+  }
+
+  .mat-warn .mat-pseudo-checkbox-checked,
+  .mat-warn .mat-pseudo-checkbox-indeterminate {
+    background: mat-color(map-get($theme, warn));
+  }
+
+  .mat-pseudo-checkbox-checked,
+  .mat-pseudo-checkbox-indeterminate {
+    &.mat-pseudo-checkbox-disabled {
+      background: $disabled-color;
+    }
+  }
+}
+
+@mixin mat-chips-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $unselected-background: mat-color($background, unselected-chip);
+  $unselected-foreground: mat-color($foreground, text);
+
+  .mat-chip.mat-standard-chip {
+    @include mat-chips-color($unselected-foreground, $unselected-background);
+
+    &:not(.mat-chip-disabled) {
+      &:active {
+        @include _mat-theme-elevation(3, $theme);
+      }
+
+      .mat-chip-remove:hover {
+        opacity: 0.54;
+      }
+    }
+
+    &.mat-chip-disabled {
+      opacity: 0.4;
+    }
+
+    &::after {
+      background: map_get($foreground, base);
+    }
+  }
+
+  .mat-chip.mat-standard-chip.mat-chip-selected {
+    &.mat-success {
+      @include mat-chips-theme-color($success);
+    }
+
+    &.mat-warning {
+      @include mat-chips-theme-color($warning);
+    }
+
+    &.mat-primary {
+      @include mat-chips-theme-color($primary);
+    }
+
+    &.mat-warn {
+      @include mat-chips-theme-color($warn);
+    }
+
+    &.mat-accent {
+      @include mat-chips-theme-color($accent);
+    }
+  }
+}
+
+// Include this empty mixin for consistency with the other components.
+@mixin mat-icon-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-icon {
+    &.mat-success {
+      color: mat-color($success);
+    }
+
+    &.mat-warning {
+      color: mat-color($warning);
+    }
+
+    &.mat-primary {
+      color: mat-color($primary);
+    }
+
+    &.mat-accent {
+      color: mat-color($accent);
+    }
+
+    &.mat-warn {
+      color: mat-color($warn);
+    }
+  }
+}
+
+@mixin mat-input-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+
+  .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    color: mat-color($foreground, secondary-text);
+  }
+
+  .mat-input-element:disabled,
+  .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+    color: mat-color($foreground, disabled-text);
+  }
+
+  .mat-input-element {
+    caret-color: mat-color($primary);
+
+    @include input-placeholder {
+      color: _mat-control-placeholder-color($theme);
+    }
+
+    // On dark themes we set the native `select` color to some shade of white,
+    // however the color propagates to all of the `option` elements, which are
+    // always on a white background inside the dropdown, causing them to blend in.
+    // Since we can't change background of the dropdown, we need to explicitly
+    // reset the color of the options to something dark.
+    @if (map-get($theme, is-dark)) {
+      option {
+        color: $dark-primary-text;
+      }
+
+      option:disabled {
+        color: $dark-disabled-text;
+      }
+    }
+  }
+
+  .mat-success .mat-input-element {
+    caret-color: mat-color($success);
+  }
+
+  .mat-warning .mat-input-element {
+    caret-color: mat-color($warning);
+  }
+
+  .mat-accent .mat-input-element {
+    caret-color: mat-color($accent);
+  }
+
+  .mat-warn .mat-input-element,
+  .mat-form-field-invalid .mat-input-element {
+    caret-color: mat-color($warn);
+  }
+
+  .mat-form-field-type-mat-native-select.mat-form-field-invalid .mat-form-field-infix::after {
+    color: mat-color($warn);
+  }
+}
+
+@mixin mat-progress-bar-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-progress-bar-background {
+    fill: mat-color($primary, lighter);
+  }
+
+  .mat-progress-bar-buffer {
+    background-color: mat-color($primary, lighter);
+  }
+
+  .mat-progress-bar-fill::after {
+    background-color: mat-color($primary);
+  }
+
+  .mat-progress-bar.mat-success {
+    .mat-progress-bar-background {
+      fill: mat-color($success, lighter);
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: mat-color($success, lighter);
+    }
+
+    .mat-progress-bar-fill::after {
+      background-color: mat-color($success);
+    }
+  }
+
+  .mat-progress-bar.mat-warning {
+    .mat-progress-bar-background {
+      fill: mat-color($warning, lighter);
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: mat-color($warning, lighter);
+    }
+
+    .mat-progress-bar-fill::after {
+      background-color: mat-color($warning);
+    }
+  }
+
+  .mat-progress-bar.mat-accent {
+    .mat-progress-bar-background {
+      fill: mat-color($accent, lighter);
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: mat-color($accent, lighter);
+    }
+
+    .mat-progress-bar-fill::after {
+      background-color: mat-color($accent);
+    }
+  }
+
+  .mat-progress-bar.mat-warn {
+    .mat-progress-bar-background {
+      fill: mat-color($warn, lighter);
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: mat-color($warn, lighter);
+    }
+
+    .mat-progress-bar-fill::after {
+      background-color: mat-color($warn);
+    }
+  }
+}
+
+@mixin mat-progress-spinner-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-progress-spinner, .mat-spinner {
+    circle {
+      stroke: mat-color($primary);
+    }
+
+    &.mat-success circle {
+      stroke: mat-color($success);
+    }
+
+    &.mat-warning circle {
+      stroke: mat-color($warning);
+    }
+
+    &.mat-accent circle {
+      stroke: mat-color($accent);
+    }
+
+    &.mat-warn circle {
+      stroke: mat-color($warn);
+    }
+  }
+}
+
+@mixin mat-radio-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-radio-outer-circle {
+    border-color: mat-color($foreground, secondary-text);
+  }
+
+  .mat-radio-button {
+    &.mat-success {
+      @include _mat-radio-color($success);
+    }
+
+    &.mat-warning {
+      @include _mat-radio-color($warning);
+    }
+
+    &.mat-primary {
+      @include _mat-radio-color($primary);
+    }
+
+    &.mat-accent {
+      @include _mat-radio-color($accent);
+    }
+
+    &.mat-warn {
+      @include _mat-radio-color($warn);
+    }
+
+    // This needs extra specificity, because the classes above are combined
+    // (e.g. `.mat-radio-button.mat-accent`) which increases their specificity a lot.
+    // TODO: consider making the selectors into descendants (`.mat-primary .mat-radio-button`).
+    &.mat-radio-disabled {
+      &.mat-radio-checked .mat-radio-outer-circle,
+      .mat-radio-outer-circle {
+        border-color: mat-color($foreground, disabled);
+      }
+
+      .mat-radio-ripple .mat-ripple-element,
+      .mat-radio-inner-circle {
+        background-color: mat-color($foreground, disabled);
+      }
+
+      .mat-radio-label-content {
+        color: mat-color($foreground, disabled);
+      }
+    }
+
+    // Switch this to a solid color since we're using `opacity`
+    // to control how opaque the ripple should be.
+    .mat-ripple-element {
+      background-color: map_get($foreground, base);
+    }
+  }
+}
+
+@mixin mat-select-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-select-value {
+    color: mat-color($foreground, text);
+  }
+
+  .mat-select-placeholder {
+    color: _mat-control-placeholder-color($theme);
+  }
+
+  .mat-select-disabled .mat-select-value {
+    color: mat-color($foreground, disabled-text);
+  }
+
+  .mat-select-arrow {
+    color: mat-color($foreground, secondary-text);
+  }
+
+  .mat-select-panel {
+    background: mat-color($background, card);
+    @include _mat-theme-overridable-elevation(4, $theme);
+
+    .mat-option.mat-selected:not(.mat-option-multiple) {
+      background: mat-color($background, hover, 0.12);
+    }
+  }
+
+  .mat-form-field {
+    &.mat-focused {
+      &.mat-success .mat-select-arrow {
+        color: mat-color($success);
+      }
+
+      &.mat-warning .mat-select-arrow {
+        color: mat-color($warning);
+      }
+
+      &.mat-primary .mat-select-arrow {
+        color: mat-color($primary);
+      }
+
+      &.mat-accent .mat-select-arrow {
+        color: mat-color($accent);
+      }
+
+      &.mat-warn .mat-select-arrow {
+        color: mat-color($warn);
+      }
+    }
+
+    .mat-select.mat-select-invalid .mat-select-arrow {
+      color: mat-color($warn);
+    }
+
+    .mat-select.mat-select-disabled .mat-select-arrow {
+      color: mat-color($foreground, disabled-text);
+    }
+  }
+}
+
+@mixin mat-slide-toggle-theme($theme) {
+  $is-dark: map_get($theme, is-dark);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  // Color hues are based on the specs which briefly show the hues that are applied to a switch.
+  // The 2018 specs no longer describe how dark switches should look like. Due to the lack of
+  // information for dark themed switches, we partially keep the old behavior that is based on
+  // the previous specifications. For the checked color we always use the `default` hue because
+  // that follows MDC and also makes it easier for people to create a custom theme without needing
+  // to specify each hue individually.
+  $thumb-unchecked-hue: if($is-dark, 400, 50);
+  $thumb-checked-hue: default;
+
+  $bar-unchecked-color: mat-color($foreground, disabled);
+  $ripple-unchecked-color: mat-color($foreground, base);
+
+  .mat-slide-toggle {
+    @include _mat-slide-toggle-checked($accent, $thumb-checked-hue);
+
+    &.mat-success {
+      @include _mat-slide-toggle-checked($success, $thumb-checked-hue);
+    }
+
+    &.mat-warning {
+      @include _mat-slide-toggle-checked($warning, $thumb-checked-hue);
+    }
+
+    &.mat-primary {
+      @include _mat-slide-toggle-checked($primary, $thumb-checked-hue);
+    }
+
+    &.mat-warn {
+      @include _mat-slide-toggle-checked($warn, $thumb-checked-hue);
+    }
+
+    &:not(.mat-checked) .mat-ripple-element {
+      // Set no opacity for the ripples because the ripple opacity will be adjusted dynamically
+      // based on the type of interaction with the slide-toggle (e.g. for hover, focus)
+      background-color: $ripple-unchecked-color;
+    }
+  }
+
+  .mat-slide-toggle-thumb {
+    @include _mat-theme-elevation(1, $theme);
+    background-color: mat-color($mat-grey, $thumb-unchecked-hue);
+  }
+
+  .mat-slide-toggle-bar {
+    background-color: $bar-unchecked-color;
+  }
+}
+
+@mixin mat-slider-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $mat-slider-off-color: mat-color($foreground, slider-off);
+  $mat-slider-off-focused-color: mat-color($foreground, slider-off-active);
+  $mat-slider-disabled-color: mat-color($foreground, slider-off);
+  $mat-slider-labeled-min-value-thumb-color: mat-color($foreground, slider-min);
+  $mat-slider-labeled-min-value-thumb-label-color: mat-color($foreground, slider-off);
+  $mat-slider-focus-ring-color: mat-color($accent, default, 0.2);
+  $mat-slider-focus-ring-min-value-color: mat-color($foreground, base, 0.12);
+  $mat-slider-tick-color: mat-color($foreground, base, 0.7);
+  $mat-slider-tick-size: 2px;
+
+  .mat-slider-track-background {
+    background-color: $mat-slider-off-color;
+  }
+
+  .mat-success {
+    @include _mat-slider-inner-content-theme($success);
+  }
+
+  .mat-warning {
+    @include _mat-slider-inner-content-theme($warning);
+  }
+
+  .mat-primary {
+    @include _mat-slider-inner-content-theme($primary);
+  }
+
+  .mat-accent {
+    @include _mat-slider-inner-content-theme($accent);
+  }
+
+  .mat-warn {
+    @include _mat-slider-inner-content-theme($warn);
+  }
+
+  .mat-slider-focus-ring {
+    background-color: $mat-slider-focus-ring-color;
+  }
+
+  .mat-slider:hover,
+  .cdk-focused {
+    .mat-slider-track-background {
+      background-color: $mat-slider-off-focused-color;
+    }
+  }
+
+  .mat-slider-disabled {
+    .mat-slider-track-background,
+    .mat-slider-track-fill,
+    .mat-slider-thumb {
+      background-color: $mat-slider-disabled-color;
+    }
+
+    &:hover {
+      .mat-slider-track-background {
+        background-color: $mat-slider-disabled-color;
+      }
+    }
+  }
+
+  .mat-slider-min-value {
+    .mat-slider-focus-ring {
+      background-color: $mat-slider-focus-ring-min-value-color;
+    }
+
+    &.mat-slider-thumb-label-showing {
+      .mat-slider-thumb,
+      .mat-slider-thumb-label {
+        background-color: $mat-slider-labeled-min-value-thumb-color;
+      }
+
+      &.cdk-focused {
+        .mat-slider-thumb,
+        .mat-slider-thumb-label {
+          background-color: $mat-slider-labeled-min-value-thumb-label-color;
+        }
+      }
+    }
+
+    &:not(.mat-slider-thumb-label-showing) {
+      .mat-slider-thumb {
+        border-color: $mat-slider-off-color;
+        background-color: transparent;
+      }
+
+      &:hover,
+      &.cdk-focused {
+        .mat-slider-thumb {
+          border-color: $mat-slider-off-focused-color;
+        }
+
+        &.mat-slider-disabled .mat-slider-thumb {
+          border-color: $mat-slider-disabled-color;
+        }
+      }
+    }
+  }
+
+  .mat-slider-has-ticks .mat-slider-wrapper::after {
+    border-color: $mat-slider-tick-color;
+  }
+
+  .mat-slider-horizontal .mat-slider-ticks {
+    background-image: repeating-linear-gradient(to right, $mat-slider-tick-color,
+        $mat-slider-tick-color $mat-slider-tick-size, transparent 0, transparent);
+    // Firefox doesn't draw the gradient correctly with 'to right'
+    // (see https://bugzilla.mozilla.org/show_bug.cgi?id=1314319).
+    background-image: -moz-repeating-linear-gradient(0.0001deg, $mat-slider-tick-color,
+        $mat-slider-tick-color $mat-slider-tick-size, transparent 0, transparent);
+  }
+
+  .mat-slider-vertical .mat-slider-ticks {
+    background-image: repeating-linear-gradient(to bottom, $mat-slider-tick-color,
+        $mat-slider-tick-color $mat-slider-tick-size, transparent 0, transparent);
+  }
+}
+
+@mixin mat-tabs-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $header-border: 1px solid mat-color($foreground, divider);
+
+  .mat-tab-nav-bar,
+  .mat-tab-header {
+    border-bottom: $header-border;
+  }
+
+  .mat-tab-group-inverted-header {
+    .mat-tab-nav-bar,
+    .mat-tab-header {
+      border-top: $header-border;
+      border-bottom: none;
+    }
+  }
+
+  .mat-tab-label, .mat-tab-link {
+    color: mat-color($foreground, text);
+
+    &.mat-tab-disabled {
+      color: mat-color($foreground, disabled-text);
+    }
+  }
+
+  .mat-tab-header-pagination-chevron {
+    border-color: mat-color($foreground, text);
+  }
+
+  .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+    border-color: mat-color($foreground, disabled-text);
+  }
+
+  // Remove header border when there is a background color
+  .mat-tab-group[class*='mat-background-'] .mat-tab-header,
+  .mat-tab-nav-bar[class*='mat-background-'] {
+    border-bottom: none;
+    border-top: none;
+  }
+
+  .mat-tab-group, .mat-tab-nav-bar {
+    $theme-colors: (
+      success: $success,
+      warning: $warning,
+      primary: $primary,
+      accent: $accent,
+      warn: $warn
+    );
+
+    @each $name, $color in $theme-colors {
+      // Set the foreground color of the tabs
+      &.mat-#{$name} {
+        @include _mat-tab-label-focus($color);
+        @include _mat-ink-bar($color);
+
+        // Override ink bar when background color is the same
+        &.mat-background-#{$name} {
+          @include _mat-ink-bar($color, default-contrast);
+        }
+      }
+    }
+
+    @each $name, $color in $theme-colors {
+      // Set background color of the tabs and override focus color
+      &.mat-background-#{$name} {
+        @include _mat-tab-label-focus($color);
+        @include _mat-tabs-background($color);
+      }
+    }
+  }
+}
+
+@mixin mat-toolbar-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-toolbar {
+    background: mat-color($background, app-bar);
+    color: mat-color($foreground, text);
+
+    &.mat-success {
+      @include _mat-toolbar-color($success);
+    }
+
+    &.mat-warning {
+      @include _mat-toolbar-color($warning);
+    }
+
+    &.mat-primary {
+      @include _mat-toolbar-color($primary);
+    }
+
+    &.mat-accent {
+      @include _mat-toolbar-color($accent);
+    }
+
+    &.mat-warn {
+      @include _mat-toolbar-color($warn);
+    }
+
+    @include _mat-toolbar-form-field-overrides;
+  }
+}
+
+@mixin mat-form-field-outline-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  $label-disabled-color: mat-color($foreground, disabled-text);
+  $outline-color: mat-color($foreground, divider, if($is-dark-theme, 0.3, 0.12));
+  $outline-color-hover: mat-color($foreground, divider, if($is-dark-theme, 1, 0.87));
+  $outline-color-success: mat-color($success);
+  $outline-color-warning: mat-color($warning);
+  $outline-color-primary: mat-color($primary);
+  $outline-color-accent: mat-color($accent);
+  $outline-color-warn: mat-color($warn);
+  $outline-color-disabled: mat-color($foreground, divider, if($is-dark-theme, 0.15, 0.06));
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      color: $outline-color;
+    }
+
+    .mat-form-field-outline-thick {
+      color: $outline-color-hover;
+    }
+
+    &.mat-focused {
+      .mat-form-field-outline-thick {
+        color: $outline-color-primary;
+      }
+
+      &.mat-success .mat-form-field-outline-thick {
+        color: $outline-color-success;
+      }
+
+      &.mat-warning .mat-form-field-outline-thick {
+        color: $outline-color-warning;
+      }
+
+      &.mat-accent .mat-form-field-outline-thick {
+        color: $outline-color-accent;
+      }
+
+      &.mat-warn .mat-form-field-outline-thick {
+        color: $outline-color-warn;
+      }
+    }
+
+    // Class repeated so that rule is specific enough to override focused accent color case.
+    &.mat-form-field-invalid.mat-form-field-invalid {
+      .mat-form-field-outline-thick {
+        color: $outline-color-warn;
+      }
+    }
+
+    &.mat-form-field-disabled {
+      .mat-form-field-label {
+        color: $label-disabled-color;
+      }
+
+      .mat-form-field-outline {
+        color: $outline-color-disabled;
+      }
+    }
+  }
+}
+
+@mixin mat-form-field-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  // Label colors. Required is used for the `*` star shown in the label.
+  $label-color: mat-color($foreground, secondary-text, if($is-dark-theme, 0.7, 0.6));
+  $focused-label-color: mat-color($primary);
+  $required-label-color: mat-color($warn);
+
+  // Underline colors.
+  $underline-color-base: mat-color($foreground, divider, if($is-dark-theme, 1, 0.87));
+  $underline-color-success: mat-color($success);
+  $underline-color-warning: mat-color($warning);
+  $underline-color-accent: mat-color($accent);
+  $underline-color-warn: mat-color($warn);
+  $underline-focused-color: mat-color($primary);
+
+  .mat-form-field-label {
+    color: $label-color;
+  }
+
+  .mat-hint {
+    color: $label-color;
+  }
+
+  .mat-form-field.mat-focused .mat-form-field-label {
+    color: $focused-label-color;
+
+    &.mat-success {
+      color: $underline-color-success;
+    }
+
+    &.mat-warning {
+      color: $underline-color-warning;
+    }
+
+    &.mat-accent {
+      color: $underline-color-accent;
+    }
+
+    &.mat-warn {
+      color: $underline-color-warn;
+    }
+  }
+
+  .mat-form-field-required-marker {
+    color: $required-label-color;
+  }
+
+  .mat-form-field-ripple {
+    background-color: $underline-color-base;
+  }
+
+  .mat-form-field.mat-focused {
+    .mat-form-field-ripple {
+      background-color: $underline-focused-color;
+
+      &.mat-success {
+        background-color: $underline-color-success;
+      }
+
+      &.mat-warning {
+        background-color: $underline-color-warning;
+      }
+
+      &.mat-accent {
+        background-color: $underline-color-accent;
+      }
+
+      &.mat-warn {
+        background-color: $underline-color-warn;
+      }
+    }
+  }
+
+  .mat-form-field-type-mat-native-select.mat-focused:not(.mat-form-field-invalid) {
+    .mat-form-field-infix::after {
+      color: $underline-focused-color;
+    }
+
+    &.mat-success .mat-form-field-infix::after {
+      color: $underline-color-success;
+    }
+
+    &.mat-warning .mat-form-field-infix::after {
+      color: $underline-color-warning;
+    }
+
+    &.mat-accent .mat-form-field-infix::after {
+      color: $underline-color-accent;
+    }
+
+    &.mat-warn .mat-form-field-infix::after {
+      color: $underline-color-warn;
+    }
+  }
+
+  // Styling for the error state of the form field. Note that while the same can be
+  // achieved with the ng-* classes, we use this approach in order to ensure that the same
+  // logic is used to style the error state and to show the error messages.
+  .mat-form-field.mat-form-field-invalid {
+    .mat-form-field-label {
+      color: $underline-color-warn;
+
+      &.mat-success,
+      &.mat-warning,
+      &.mat-accent,
+      .mat-form-field-required-marker {
+        color: $underline-color-warn;
+      }
+    }
+
+    .mat-form-field-ripple,
+    .mat-form-field-ripple.mat-success,
+    .mat-form-field-ripple.mat-warning,
+    .mat-form-field-ripple.mat-accent {
+      background-color: $underline-color-warn;
+    }
+  }
+
+  .mat-error {
+    color: $underline-color-warn;
+  }
+
+  @include mat-form-field-legacy-theme($theme);
+  @include mat-form-field-standard-theme($theme);
+  @include mat-form-field-fill-theme($theme);
+  @include mat-form-field-outline-theme($theme);
+}
+
+@mixin mat-badge-theme($theme) {
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-badge-content {
+    color: mat-color($primary, default-contrast);
+    background: mat-color($primary);
+
+    @include cdk-high-contrast {
+      outline: solid 1px;
+      border-radius: 0;
+    }
+  }
+
+  .mat-badge-success {
+    .mat-badge-content {
+      background: mat-color($success);
+      color: mat-color($success, default-contrast);
+    }
+  }
+
+  .mat-badge-warning {
+    .mat-badge-content {
+      background: mat-color($warning);
+      color: mat-color($warning, default-contrast);
+    }
+  }
+
+  .mat-badge-accent {
+    .mat-badge-content {
+      background: mat-color($accent);
+      color: mat-color($accent, default-contrast);
+    }
+  }
+
+  .mat-badge-warn {
+    .mat-badge-content {
+      color: mat-color($warn, default-contrast);
+      background: mat-color($warn);
+    }
+  }
+
+  .mat-badge {
+    position: relative;
+  }
+
+  .mat-badge-hidden {
+    .mat-badge-content {
+      display: none;
+    }
+  }
+
+  .mat-badge-disabled {
+    .mat-badge-content {
+      $app-background: mat-color($background, 'background');
+      $badge-color: mat-color($foreground, disabled-button);
+
+      // The disabled color usually has some kind of opacity, but because the badge is overlayed
+      // on top of something else, it won't look good if it's opaque. If it is a color *type*,
+      // we convert it into a solid color by taking the opacity from the rgba value and using
+      // the value to determine the percentage of the background to put into foreground when
+      // mixing the colors together.
+      @if (type-of($badge-color) == color and type-of($app-background) == color) {
+        $badge-opacity: opacity($badge-color);
+        background: mix($app-background, rgba($badge-color, 1), (1 - $badge-opacity) * 100%);
+      }
+      @else {
+        background: $badge-color;
+      }
+
+      color: mat-color($foreground, disabled-text);
+    }
+  }
+
+  .mat-badge-content {
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    transition: transform 200ms ease-in-out;
+    transform: scale(0.6);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+
+  // The active class is added after the element is added
+  // so it can animate scale to default
+  .mat-badge-content.mat-badge-active {
+    // Scale to `none` instead of `1` to avoid blurry text in some browsers.
+    transform: none;
+  }
+
+  .mat-badge-small {
+    @include _mat-badge-size($mat-badge-small-size);
+  }
+  .mat-badge-medium {
+    @include _mat-badge-size($mat-badge-default-size);
+  }
+  .mat-badge-large {
+    @include _mat-badge-size($mat-badge-large-size);
+  }
+}
+
+@mixin mat-tooltip-theme($theme) {
+  .mat-tooltip {
+    background: mat-color($mat-grey, 700, 0.9);
+    white-space: pre-line;
+    line-height: 15px;
+  }
+}
+
+@mixin mat-snack-bar-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $success: map-get($theme, success);
+  $warning: map-get($theme, warning);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $primary: map-get($theme, primary);
+
+  .mat-snack-bar-container {
+    // Use the primary text on the dark theme, even though the lighter one uses
+    // a secondary, because the contrast on the light primary text is poor.
+    color: if($is-dark-theme, $dark-primary-text, $light-secondary-text);
+    background: if($is-dark-theme, map-get($mat-grey, 50), #323232);
+
+    @include _mat-theme-elevation(6, $theme);
+
+    &.mat-success {
+      background: mat-color($success);
+      color: mat-color($success, default-contrast);
+
+      .mat-simple-snackbar-action {
+        color: mat-color($success, default-contrast);
+      }
+    }
+
+    &.mat-warning {
+      background: mat-color($warning);
+      color: mat-color($warning, default-contrast);
+
+      .mat-simple-snackbar-action {
+        color: mat-color($warning, default-contrast);
+      }
+    }
+
+    &.mat-primary {
+      background: mat-color($primary);
+      color: mat-color($primary, default-contrast);
+
+      .mat-simple-snackbar-action {
+        color: mat-color($primary, default-contrast);
+      }
+    }
+
+    &.mat-accent {
+      background: mat-color($accent);
+      color: mat-color($accent, default-contrast);
+
+      .mat-simple-snackbar-action {
+        color: mat-color($accent, default-contrast);
+      }
+    }
+
+    &.mat-warn {
+      background: mat-color($warn);
+      color: mat-color($warn, default-contrast);
+
+      .mat-simple-snackbar-action {
+        color: mat-color($warn, default-contrast);
+      }
+    }
+  }
+}
+
+@mixin mat-dialog-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-dialog {
+    overflow: auto;
+  }
+
+  .mat-dialog-container {
+    @include _mat-theme-elevation(24, $theme);
+    background: mat-color($background, dialog);
+    color: mat-color($foreground, text);
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: -8px !important;
+  }
+}
+
+@include angular-material-theme($candy-app-theme);
+@include mat-button-theme($candy-app-theme);

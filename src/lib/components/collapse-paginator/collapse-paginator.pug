@@ -10,6 +10,7 @@
 	mat-paginator(
 		#__paginator,
 		hidePageSize='true',
+		(page)='page?.emit( $event )',
 		[ngClass]='defaultOptions?.paginatorClass',
 		[pageIndex]='pageIndex',
 		[pageSize]='pageSize * 2',

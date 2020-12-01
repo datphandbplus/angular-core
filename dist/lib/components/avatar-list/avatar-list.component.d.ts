@@ -8,6 +8,7 @@ export declare class AvatarListComponent implements OnChanges {
     size: number;
     boardHeight: number;
     maximum: number;
+    rounded: boolean;
     lazy: boolean;
     handledItems: Array<any>;
     /**

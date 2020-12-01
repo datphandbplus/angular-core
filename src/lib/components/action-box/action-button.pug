@@ -1,0 +1,7 @@
+button.action-button(
+	mat-menu-item,
+	(click)='onClick?.emit()',
+	[disabled]='disabled')
+	.layout-row.layout-align-start-center
+		i.mr-15.font-size-18([ngClass]='compClass')
+		| {{ title }}
